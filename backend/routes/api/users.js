@@ -8,6 +8,9 @@ const passport = require("passport");
 const { loginUser, restoreUser } = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
 
+const validateRegisterInput = require("../../validations/register");
+const validateLoginInput = require("../../validations/login");
+
 /* GET users listing. */
 router.get("/current", restoreUser, (req, res) => {
   if (!isProduction) {
@@ -24,7 +27,7 @@ router.get("/current", restoreUser, (req, res) => {
 });
 
 // POST /api/users/register
-router.post("/register", async (req, res, next) => {
+router.post("/register", validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
   // username.
   const user = await User.findOne({
@@ -65,7 +68,7 @@ router.post("/register", async (req, res, next) => {
   });
 });
 
-router.post("/login", async (req, res, next) => {
+router.post("/login", validateLoginInput, async (req, res, next) => {
   passport.authenticate("local", async function (err, user) {
     if (err) return next(err);
     if (!user) {
