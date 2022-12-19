@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-const Trip = mongoose.model("Trip"); //Adding Trip Index for User
+// const Trip = mongoose.model("Trip"); //Adding Trip Index for User
 const passport = require("passport");
 const { loginUser, restoreUser } = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
@@ -78,9 +78,10 @@ router.post("/login", async (req, res, next) => {
   })(req, res, next);
 });
 
+//-----------------------------------------------------------------------//
 //Changes for linking Users to Trips
 
-//user Show Page
+//USER SHOW PAGE
 router.get("/:userId", async (req, res, next) => {
   let user;
   try {
@@ -101,4 +102,18 @@ router.get("/:userId", async (req, res, next) => {
   });
 });
 
+//USER TRIP CREATE
+// router.post("/:userId/trips", requireUser, async (req, res, next) => {
+//   try {
+//     const newTrip = new Trip({
+//       owner: req.params.userId,
+//     });
+
+//     let trip = await newTrip.save();
+//     trip = await trip.populate("author", "_id, username");
+//     return res.json(tweet);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 module.exports = router;
