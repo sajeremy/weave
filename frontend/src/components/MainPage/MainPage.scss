@@ -1,0 +1,88 @@
+@import '../../index.scss';
+
+.main-page {
+    height: 100vh;
+    width: 100%;
+    margin-top: -87px;
+}
+
+.main-content-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.main-content {
+    width: 50%;
+    height: 100%;
+}
+
+.info-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    margin-left: 105px;
+}
+
+.info-container h1 {
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 600;
+    width: 400px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.info-container p {
+    font-size: 20px;
+    line-height: 25px;
+    width: 425px;
+}
+
+.create-trip-button {
+    background-color: $GREEN;
+    color: white;
+    width: 200px;
+    height: 48px;
+    left: 105px;
+    top: 500px;
+    border: none;
+    border-radius: 74px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.create-trip-button:hover {
+    background-color: $HOVERGREEN;
+}
+
+.map-icon {
+    width: 24px;
+    height: 25.85px;
+    margin-right: 9px;
+    margin-left: 15px;
+}
+
+.create-trip-text {
+    font-family: 'futura';
+    font-size: 19px;
+}
+
+.media-section {
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 27px;
+}
+
+.media-picture {
+    width: 100%;
+    height: 100%;
+    // padding:
+}
