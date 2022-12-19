@@ -1,29 +1,101 @@
 import React from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { useState, useMemo } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import "./MapContainer.css";
 
-const MapContainer = () => {
-  const mapStyles = {
-    height: "100vh",
-    width: "100%",
-  };
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
 
-  const defaultCenter = {
-    lat: 41.3851,
-    lng: 2.1734,
-  };
+// import "@reach/combobox/styles.css";
+
+export default function Places() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
+    libraries: ["places"],
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map />;
+}
+
+function Map() {
+  const center = useMemo(() => ({ lat: 41.3851, lng: 2.1734 }), []);
+  const [selected, setSelected] = useState(null);
 
   return (
     <>
       <div>
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>
-          <GoogleMap
-            mapContainerStyle={mapStyles}
-            zoom={13}
-            center={defaultCenter}
-          />
-        </LoadScript>
+        <PlacesAutocomplete setSelected={setSelected} />
       </div>
+      <GoogleMap
+        zoom={10}
+        center={center}
+        mapContainerClassName="map-container"
+      >
+        {selected && <Marker position={selected} />}
+      </GoogleMap>
     </>
   );
+}
+
+const PlacesAutocomplete = ({ setSelected }) => {
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete();
+
+  return (
+    <Combobox>
+      <ComboboxInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        className="search-bar"
+        placeholder="search an address"
+      />
+      <ComboboxPopover>
+        {status === "OK" &&
+          data.map(({ place_id, description }) => (
+            <ComboboxOption key={place_id} value={description} />
+          ))}
+      </ComboboxPopover>
+    </Combobox>
+  );
 };
-export default MapContainer;
+// const MapContainer = () => {
+//   const mapStyles = {
+//     height: "100vh",
+//     width: "100%",
+//   };
+
+//   const defaultCenter = {
+//     lat: 41.3851,
+//     lng: 2.1734,
+//   };
+
+//   return (
+//     <>
+//       <div>
+//         <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>
+//           <GoogleMap
+//             mapContainerStyle={mapStyles}
+//             zoom={13}
+//             center={defaultCenter}
+//           />
+//         </LoadScript>
+//       </div>
+//     </>
+//   );
+// };
