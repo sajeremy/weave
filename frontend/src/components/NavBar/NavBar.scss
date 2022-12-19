@@ -1,0 +1,62 @@
+@import '../../index.scss';
+
+.navbar-container {
+    width: 50%;
+    height: 87px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-wrapper {
+    // width: 146px;
+    // height: 80px;
+    margin-left: 51px;
+    // margin-top: 15px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+
+.logo-wrapper h1 {
+    text-align: center;
+    align-self: flex-end;
+    font-family: 'pacifico';
+    font-size: 50px;
+    color: $GREEN;
+}
+
+.right-nav {
+    margin-right: 34px;
+    // margin-top: 39px;
+}
+
+.nav-signup-link {
+    font-size: 19px;
+    line-height: 24px;
+    text-decoration: none;
+    color: $GREEN;
+}
+
+.nav-login-link {
+    text-decoration: none;
+    width: 89px;
+    padding: 12px 21px;
+    color: $GREEN;
+    height: 48px;
+    background-color: #235251;
+    border-radius: 74px;
+    margin-left: 22px;
+    color: white;
+}
+
+.nav-login-link:hover {
+    background-color: $HOVERGREEN;
+}
+
+// .nav-signup-link:visited {
+//     text-decoration: none;
+// }
+
+// a:visited { text-decoration: none; }

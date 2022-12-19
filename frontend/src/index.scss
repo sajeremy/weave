@@ -1,0 +1,31 @@
+/* TODO Add site wide styles */
+$GREEN: #235251;
+$HOVERGREEN: #378678;
+
+@font-face {
+    font-family: 'futura';
+    src: url('./assets/fonts/FuturaPTLight.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'futura';
+    src: url('./assets/fonts/FuturaPTBook.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'futura';
+    src: url('./assets/fonts/FuturaPTBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: bold;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+body {
+    font-family: 'futura';
+    font-weight: normal;
+}
