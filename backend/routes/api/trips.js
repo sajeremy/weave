@@ -39,26 +39,25 @@ router.post("/", requireUser, async function (req, res, next) {
   }
 });
 
-// //TRIP UPDATE
-// router.put("/:tripId", requireUser, async function (req, res, next) {
+//TRIP UPDATE
+router.put("/:tripId", requireUser, async function (req, res, next) {
+  const startDateObj = new Date(req.body.startDate);
+  const endDateObj = new Date(req.body.endDate);
 
-//   const startDateObj = new Date(req.body.startDate);
-//   const endDateObj = new Date(req.body.endDate);
+  let trip = await Trip.findById(req.params.tripId);
 
-//   let trip = await Trip.findOne(req.params.tripId);
-
-//   if (!trip) {
-//     return res.status(400).send("trip not found");
-//   } else {
-//     (trip.owner = req.user._id),
-//       (trip.startDate = startDateObj),
-//       (trip.endDate = endDateObj),
-//       (trip.name = req.body.name),
-//       (trip.description = req.body.description);
-//     trip.updateOne();
-//     return res.json(trip);
-//   }
-// });
+  if (!trip) {
+    return res.status(400).send("trip not found");
+  } else {
+    (trip.owner = req.user._id),
+      (trip.startDate = startDateObj),
+      (trip.endDate = endDateObj),
+      (trip.name = req.body.name),
+      (trip.description = req.body.description);
+    trip.save();
+    return res.json(trip);
+  }
+});
 
 //TRIP DELETE
 
