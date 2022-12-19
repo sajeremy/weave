@@ -32,7 +32,7 @@ const removeTrip = (tripId) => ({
   tripId,
 });
 
-const clearTripErrors = (errors) => ({
+export const clearTripErrors = (errors) => ({
   type: CLEAR_TRIP_ERRORS,
   errors,
 });

@@ -58,7 +58,7 @@ function SignupForm() {
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Sign Up Form</h2>
+      <h2>Sign Up</h2>
       <div className="errors">{errors?.email}</div>
       <label>
         <span>Email</span>
@@ -70,24 +70,26 @@ function SignupForm() {
         />
       </label>
       {/* <div className="errors">{errors?.username}</div> */}
-      <label>
-        <span>First Name</span>
-        <input
-          type="text"
-          value={firstName}
-          onChange={update("firstName")}
-          placeholder="First Name"
-        />
-      </label>
-      <label>
-        <span>Last Name</span>
-        <input
-          type="text"
-          value={lastName}
-          onChange={update("lastName")}
-          placeholder="Last Name"
-        />
-      </label>
+      <div id="SignUp-Name">
+        <label>
+          <span>First Name</span>
+          <input
+            type="text"
+            value={firstName}
+            onChange={update("firstName")}
+            placeholder="First Name"
+          />
+        </label>
+        <label>
+          <span>Last Name</span>
+          <input
+            type="text"
+            value={lastName}
+            onChange={update("lastName")}
+            placeholder="Last Name"
+          />
+        </label>
+      </div>
       <div className="errors">{errors?.password}</div>
       <label>
         <span>Password</span>
