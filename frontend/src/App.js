@@ -9,7 +9,7 @@ import MainPage from "./components/MainPage/MainPage";
 import LoginForm from "./components/SessionForms/LoginForm";
 import SignupForm from "./components/SessionForms/SignupForm";
 import Profile from "./components/Profile/Profile";
-import MapContainer from "./components/MapContainer/MapContainer";
+import Places from "./components/MapContainer/MapContainer";
 
 import { getCurrentUser } from "./store/session";
 
@@ -30,6 +30,7 @@ function App() {
           <AuthRoute exact path="/signup" component={SignupForm} />
 
           <ProtectedRoute exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/bonnie" component={Places} />
         </Switch>
       </>
     )
