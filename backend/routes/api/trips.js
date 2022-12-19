@@ -60,5 +60,15 @@ router.put("/:tripId", requireUser, async function (req, res, next) {
 });
 
 //TRIP DELETE
+router.delete("/:tripId", requireUser, async function (req, res, next) {
+  let trip = await Trip.findById(req.params.tripId);
+
+  if (!trip) {
+    return res.status(400).send("trip not found");
+  } else {
+    trip.delete();
+    return res.send("trip has been successfully deleted");
+  }
+});
 
 module.exports = router;
