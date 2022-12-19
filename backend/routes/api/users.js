@@ -102,18 +102,4 @@ router.get("/:userId", async (req, res, next) => {
   });
 });
 
-//USER TRIP CREATE
-// router.post("/:userId/trips", requireUser, async (req, res, next) => {
-//   try {
-//     const newTrip = new Trip({
-//       owner: req.params.userId,
-//     });
-
-//     let trip = await newTrip.save();
-//     trip = await trip.populate("author", "_id, username");
-//     return res.json(tweet);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 module.exports = router;
