@@ -15,7 +15,7 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 
-// import "@reach/combobox/styles.css";
+import "@reach/combobox/styles.css";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -41,7 +41,7 @@ function Map() {
         center={center}
         mapContainerClassName="map-container"
       >
-        {selected && <Marker position={selected} />}
+        {selected && <Marker position={selected} label="1" />}
       </GoogleMap>
     </>
   );
@@ -56,8 +56,17 @@ const PlacesAutocomplete = ({ setSelected }) => {
     clearSuggestions,
   } = usePlacesAutocomplete();
 
+  const handleSelect = async (address) => {
+    setValue(address, false);
+    clearSuggestions();
+
+    const results = await getGeocode({ address });
+    const { lat, lng } = await getLatLng(results[0]);
+    setSelected({ lat, lng });
+  };
+
   return (
-    <Combobox>
+    <Combobox onSelect={handleSelect}>
       <ComboboxInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
