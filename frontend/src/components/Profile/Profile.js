@@ -8,6 +8,12 @@ function Profile() {
   const currentUser = useSelector((state) => state.session.user);
   const userTrips = useSelector((state) => Object.values(state.trips.user));
 
+  const current = new Date();
+  const date = `${
+    current.getMonth() + 1
+  }/${current.getDate()}/${current.getFullYear()}`;
+  console.log(date);
+
   useEffect(() => {
     dispatch(fetchUserTrips(currentUser._id));
     return () => dispatch(clearTripErrors());
@@ -28,9 +34,20 @@ function Profile() {
         <div>{currentUser.email}</div>
         <button>Edit Profile </button>
       </div>
-      {userTrips.map((trip) => (
+      {/* {userTrips.map((trip) => (
         <TripsItem key={trip._id} trip={trip} />
-      ))}
+      ))} */}
+      <div>Current Trips</div>
+      {userTrips.filter((trip) => {
+        if (date < trip.endDate)
+          return <TripsItem key={trip._id} trip={trip} />;
+      })}
+
+      <div>Past Trips</div>
+      {userTrips.filter((trip) => {
+        if (date > trip.endDate)
+          return <TripsItem key={trip._id} trip={trip} />;
+      })}
     </>
   );
 }
