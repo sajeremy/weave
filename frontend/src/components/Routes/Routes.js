@@ -12,7 +12,7 @@ export const AuthRoute = ({ component: Component, path, exact }) => {
         !loggedIn ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/trips" /> //  Should redirect to "" if not logged in. Not sure if we want to redirect to user profiel or trips index.
+          <Redirect to="/trips" /> //  Should redirect to splash if not logged in. Not sure if we want to redirect to user profiel or trips index.
         )
       }
     />

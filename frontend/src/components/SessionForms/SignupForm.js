@@ -5,7 +5,8 @@ import { signup, clearSessionErrors } from "../../store/session";
 
 function SignupForm() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const errors = useSelector((state) => state.errors.session);
@@ -21,11 +22,14 @@ function SignupForm() {
     let setState;
 
     switch (field) {
+      case "firstName":
+        setState = setFirstName;
+        break;
+      case "lastName":
+        setState = setLastName;
+        break;
       case "email":
         setState = setEmail;
-        break;
-      case "username":
-        setState = setUsername;
         break;
       case "password":
         setState = setPassword;
@@ -40,11 +44,12 @@ function SignupForm() {
     return (e) => setState(e.currentTarget.value);
   };
 
-  const usernameSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
+      firstName,
+      lastName,
       email,
-      username,
       password,
     };
 
@@ -52,7 +57,7 @@ function SignupForm() {
   };
 
   return (
-    <form className="session-form" onSubmit={usernameSubmit}>
+    <form className="session-form" onSubmit={handleSubmit}>
       <h2>Sign Up Form</h2>
       <div className="errors">{errors?.email}</div>
       <label>
@@ -64,14 +69,23 @@ function SignupForm() {
           placeholder="Email"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      {/* <div className="errors">{errors?.username}</div> */}
       <label>
-        <span>Username</span>
+        <span>First Name</span>
         <input
           type="text"
-          value={username}
-          onChange={update("username")}
-          placeholder="Username"
+          value={firstName}
+          onChange={update("firstName")}
+          placeholder="First Name"
+        />
+      </label>
+      <label>
+        <span>Last Name</span>
+        <input
+          type="text"
+          value={lastName}
+          onChange={update("lastName")}
+          placeholder="Last Name"
         />
       </label>
       <div className="errors">{errors?.password}</div>
@@ -99,7 +113,13 @@ function SignupForm() {
       <input
         type="submit"
         value="Sign Up"
-        disabled={!email || !username || !password || password !== password2}
+        disabled={
+          !email ||
+          !firstName ||
+          !lastName ||
+          !password ||
+          password !== password2
+        }
       />
     </form>
   );
