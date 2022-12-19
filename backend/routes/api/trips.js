@@ -1,5 +1,5 @@
 const express = require("express");
-const app = require("../../../backend/app");
+// const app = require("../../app");
 const router = express.Router();
 
 router.get("/", function (req, res, next) {

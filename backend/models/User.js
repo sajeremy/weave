@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const TripSchema = require("./Trip").schema;
 const Schema = mongoose.Schema;
 
 const userSchema = Schema(
@@ -19,6 +20,8 @@ const userSchema = Schema(
       type: String,
       required: true,
     },
+    availableDates: [Date],
+    trips: [TripSchema],
   },
   {
     timestamps: true,

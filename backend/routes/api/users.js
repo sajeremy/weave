@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const Trip = mongoose.model("Trip"); //Adding Trip Index for User
 const passport = require("passport");
 const { loginUser, restoreUser } = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
@@ -75,6 +76,29 @@ router.post("/login", async (req, res, next) => {
     }
     return res.json(await loginUser(user));
   })(req, res, next);
+});
+
+//Changes for linking Users to Trips
+
+//user Show Page
+router.get("/:userId", async (req, res, next) => {
+  let user;
+  try {
+    user = await User.findById(req.params.userId);
+  } catch (err) {
+    const error = new Error("User not found");
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
+  }
+  return res.json({
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    availableDates: user.availableDates,
+    trips: user.trips,
+  });
 });
 
 module.exports = router;

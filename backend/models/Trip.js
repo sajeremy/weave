@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const UserSchema = require("./User").schema;
-const LocationSchema = require("./Location").schema;
+const PlaceSchema = require("./Place").schema;
 const Schema = mongoose.Schema;
 
 const tripSchema = Schema(
@@ -10,8 +10,8 @@ const tripSchema = Schema(
       ref: "User",
       required: true,
     },
-    members: [UserSchema],
-    locations: [LocationSchema],
+    // members: [UserSchema],
+    locations: [PlaceSchema],
   },
   {
     timestamps: true,
