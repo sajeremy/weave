@@ -12,6 +12,7 @@ import Profile from "./components/Profile/Profile";
 import NewTripForm from "./components/Trips/NewTripForm";
 
 import { getCurrentUser } from "./store/session";
+import TripShowPage from "./components/Trips/TripShowPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,7 @@ function App() {
 
           <ProtectedRoute exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
+          <ProtectedRoute exact path="/trips/:tripId" component={TripShowPage} />
         </Switch>
       </>
     )

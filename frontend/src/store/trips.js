@@ -1,6 +1,7 @@
 import jwtFetch from "./jwt";
 
 const RECEIVE_TRIPS = "trips/RECEIVE_TRIPS";
+const RECEIVE_TRIP = "trips/RECEIVE_TRIP";
 const RECEIVE_USER_TRIPS = "trips/RECEIVE_USER_TRIPS";
 const RECEIVE_NEW_TRIP = "trips/RECEIVE_NEW_TRIP";
 const REMOVE_TRIP = "trips/REMOVE_TRIP";
@@ -10,6 +11,11 @@ const CLEAR_TRIP_ERRORS = "trips/CLEAR_TRIP_ERRORS";
 const receiveTrips = (trips) => ({
   type: RECEIVE_TRIPS,
   trips,
+});
+
+const receiveTrip = (trip) => ({
+  type: RECEIVE_TRIP,
+  trip,
 });
 
 const receiveUserTrips = (trips) => ({
@@ -42,6 +48,19 @@ export const fetchTrips = () => async (dispatch) => {
     const res = await jwtFetch("/api/trips");
     const trips = await res.json();
     dispatch(receiveTrips(trips));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+export const fetchTrip = (tripId) => async (dispatch) => {
+  try {
+    const res = await jwtFetch(`/api/trips/${tripId}`);
+    const trip = await res.json();
+    dispatch(receiveTrip(trip));
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
