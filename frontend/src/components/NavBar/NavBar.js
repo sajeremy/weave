@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import "./NavBar.css";
+import "./NavBar.scss";
 import { logout } from "../../store/session";
 
 function NavBar() {
@@ -25,18 +25,22 @@ function NavBar() {
     } else {
       return (
         <div className="links-auth">
-          <Link to={"/signup"}>Signup</Link>
-          <Link to={"/login"}>Login</Link>
+          <Link to={"/signup"} className="nav-signup-link">Signup</Link>
+          <Link to={"/login"} className="nav-login-link"><button>Login</button></Link>
         </div>
       );
     }
   };
 
   return (
-    <>
-      <h1>Weave</h1>
+    <div className="navbar-container">
+      <div className="logo-wrapper">
+        <h1>weave</h1>
+      </div>
+      <div className="right-nav">
       {getLinks()}
-    </>
+      </div>
+    </div>
   );
 }
 
