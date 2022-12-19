@@ -15,7 +15,6 @@ const MapContainer = () => {
   return (
     <>
       <div>
-        <p> TEST IS THIS WORKING </p>
         <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>
           <GoogleMap
             mapContainerStyle={mapStyles}

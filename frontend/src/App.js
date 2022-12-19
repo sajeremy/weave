@@ -30,7 +30,6 @@ function App() {
           <AuthRoute exact path="/signup" component={SignupForm} />
 
           <ProtectedRoute exact path="/profile" component={Profile} />
-          <ProtectedRoute exact path="/bonnie" component={MapContainer} />
         </Switch>
       </>
     )
