@@ -67,13 +67,8 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 export const getCurrentUser = () => async (dispatch) => {
-  // const res = await jwtFetch("/api/users/current");
-  // const user = await res.json();\
-  //MOCK LOGGEDIN USER CANT USE PREVIOUS CODE BC BAKEND ISNT READY!
-  const user = {
-    email: "cccc@gmail.com",
-    password: "password",
-  };
+  const res = await jwtFetch("/api/users/current");
+  const user = await res.json();
   return dispatch(receiveCurrentUser(user));
 };
 
