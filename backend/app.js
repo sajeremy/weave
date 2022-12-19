@@ -11,6 +11,7 @@ require("./config/passport");
 
 const passport = require("passport");
 const usersRouter = require("./routes/api/users");
+const tripsRouter = require("./routes/api/trips");
 const csrfRouter = require("./routes/api/csrf");
 
 const app = express();
@@ -43,6 +44,7 @@ app.use(
 
 // Attach Express routers
 app.use("/api/users", usersRouter);
+app.use("/api/trips", tripsRouter);
 app.use("/api/csrf", csrfRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
