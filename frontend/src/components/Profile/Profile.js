@@ -6,8 +6,11 @@ import TripsItem from "../Trips/TripsItem";
 function Profile() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
-  const userTrips = useSelector((state) => Object.values(state.trips.user));
+  const userTrips = useSelector((state) =>
+    state.trips.trips ? Object.values(state.trips.trips) : []
+  );
   console.log("testing", userTrips);
+
   const current = new Date();
   const date = `${
     current.getMonth() + 1
@@ -26,6 +29,7 @@ function Profile() {
   //     </>
   //      )
   // } else {
+
   return (
     <>
       <div id="ProfilePage-user-info">
@@ -33,20 +37,20 @@ function Profile() {
         <div>{currentUser.email}</div>
         <button>Edit Profile </button>
       </div>
-      {/* {userTrips.map((trip) => (
+      {userTrips.map((trip) => (
         <TripsItem key={trip._id} trip={trip} />
-      ))} */}
+      ))}
       <div>Current Trips</div>
-      {userTrips.filter((trip) => {
+      {/* {userTrips.filter((trip) => {
         if (date < trip.endDate)
           return <TripsItem key={trip._id} trip={trip} />;
-      })}
+      })} */}
 
       <div>Past Trips</div>
-      {userTrips.filter((trip) => {
+      {/* {userTrips.filter((trip) => {
         if (date > trip.endDate)
           return <TripsItem key={trip._id} trip={trip} />;
-      })}
+      })} */}
     </>
   );
 }

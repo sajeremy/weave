@@ -98,7 +98,6 @@ export const createTrip = (data) => async (dispatch) => {
   }
 };
 
-
 export const deleteTrip = (tripId) => async (dispatch) => {
   try {
     const res = await jwtFetch(`/api/trips/${tripId}`, {
@@ -135,9 +134,9 @@ const tripsReducer = (
     case RECEIVE_TRIPS:
       return { ...state, all: action.trips, new: undefined };
     case RECEIVE_TRIP:
-      return { ...state, trip: action.trip, new: undefined };
+      return { ...state, ...action.trip, new: undefined };
     case RECEIVE_USER_TRIPS:
-      return { ...state, user: action.trips, new: undefined };
+      return { ...state, ...action.trips, new: undefined };
     case RECEIVE_NEW_TRIP:
       return { ...state, new: action.trip };
     //   case RECEIVE_USER_LOGOUT:
