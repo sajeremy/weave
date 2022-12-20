@@ -23,7 +23,12 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    debugger;
     dispatch(login({ email, password }));
+  };
+
+  const handleClick = () => {
+    dispatch(login({ email: "demouser@user.io", password: "password" }));
   };
 
   return (
@@ -52,7 +57,7 @@ function LoginForm() {
         </label>
         <input type="submit" value="Log In" disabled={!email || !password} />
       </form>
-      <button type="submit" onClick={() => login({ email, password })}>
+      <button type="submit" onClick={handleClick}>
         Log In As Demo User
       </button>
     </>
