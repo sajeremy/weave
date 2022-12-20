@@ -15,7 +15,7 @@ router.get("/:tripId", async function (req, res, next) {
     error.errors = { message: "No Trip found with that id" };
     return next(error);
   }
-  return res.json({ test: trip });
+  return res.json({ trip: trip });
 });
 
 //TRIP CREATE
@@ -39,27 +39,60 @@ router.post("/", requireUser, async function (req, res, next) {
   }
 });
 
-// //TRIP UPDATE
-// router.put("/:tripId", requireUser, async function (req, res, next) {
+//TRIP UPDATE
+router.patch("/:tripId", requireUser, async function (req, res, next) {
+  // const startDateObj = new Date(req.body.startDate);
+  // const endDateObj = new Date(req.body.endDate);
 
-//   const startDateObj = new Date(req.body.startDate);
-//   const endDateObj = new Date(req.body.endDate);
+  // let trip = await Trip.findById(req.params.tripId);
 
-//   let trip = await Trip.findOne(req.params.tripId);
+  // if (!trip) {
+  //   return res.status(400).send("trip not found");
+  // } else {
+  //   (trip.owner = req.user._id),
+  //     (trip.startDate = startDateObj),
+  //     (trip.endDate = endDateObj),
+  //     (trip.name = req.body.name),
+  //     (trip.description = req.body.description);
+  //   trip.save();
+  //   return res.json(trip);
+  // }
+  let trip;
+  try {
+    trip = await Trip.findById(req.params.tripId);
 
-//   if (!trip) {
-//     return res.status(400).send("trip not found");
-//   } else {
-//     (trip.owner = req.user._id),
-//       (trip.startDate = startDateObj),
-//       (trip.endDate = endDateObj),
-//       (trip.name = req.body.name),
-//       (trip.description = req.body.description);
-//     trip.updateOne();
-//     return res.json(trip);
-//   }
-// });
+    const startDateObj = new Date(req.body.startDate);
+    const endDateObj = new Date(req.body.endDate);
+
+    trip.owner = req.user._id;
+    trip.startDate = startDateObj;
+    trip.endDate = endDateObj;
+    trip.name = req.body.name;
+    trip.description = req.body.description;
+    trip.save();
+  } catch (err) {
+    next(err);
+  }
+  return res.json(trip);
+});
 
 //TRIP DELETE
+router.delete("/:tripId", requireUser, async function (req, res, next) {
+  // let trip = await Trip.findById(req.params.tripId);
+
+  // if (!trip) {
+  //   return res.status(400).send("trip not found");
+  // } else {
+  //   trip.delete();
+  //   return res.send("trip has been successfully deleted");
+  // }
+  try {
+    let trip = await Trip.findById(req.params.tripId);
+    trip.delete();
+    return res.send("trip has been successfully deleted");
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

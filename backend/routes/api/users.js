@@ -3,10 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-// const Trip = mongoose.model("Trip"); //Adding Trip Index for User
+const Trip = mongoose.model("Trip"); //Adding Trip Index for User
 const passport = require("passport");
 const { loginUser, restoreUser } = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
+// const { db } = require("../../models/User");
+// const Trip = require("../../models/Trip");
 
 const validateRegisterInput = require("../../validations/register");
 const validateLoginInput = require("../../validations/login");
@@ -95,13 +97,14 @@ router.get("/:userId", async (req, res, next) => {
     error.errors = { message: "No user found with that id" };
     return next(error);
   }
+  const userTrips = await Trip.find();
   return res.json({
     _id: user._id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     availableDates: user.availableDates,
-    trips: user.trips,
+    trips: userTrips,
   });
 });
 
