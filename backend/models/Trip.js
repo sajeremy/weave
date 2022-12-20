@@ -10,6 +10,10 @@ const tripSchema = Schema(
       ref: "User",
       required: true,
     },
+    members: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     startDate: {
       type: Date,
       required: true,
@@ -23,7 +27,6 @@ const tripSchema = Schema(
       required: true,
     },
     description: String,
-    // members: [UserSchema],
     locations: [PlaceSchema],
   },
   {
