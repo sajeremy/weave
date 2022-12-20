@@ -7,6 +7,7 @@ const cors = require("cors");
 const csurf = require("csurf");
 const { isProduction } = require("./config/keys");
 require("./models/User");
+require("./models/Trip");
 require("./config/passport");
 
 const passport = require("passport");

@@ -20,16 +20,17 @@ router.get("/:tripId", async function (req, res, next) {
 
 //TRIP CREATE
 router.post("/", requireUser, async function (req, res, next) {
-  const startDateObj = new Date(req.body.startDate);
-  const endDateObj = new Date(req.body.endDate);
-
+  // const startDateObj = new Date(req.body.trip.startDate);
+  // const endDateObj = new Date(req.body.trip.endDate);
   try {
     const newTrip = new Trip({
       owner: req.user._id,
-      startDate: startDateObj,
-      endDate: endDateObj,
-      name: req.body.name,
-      description: req.body.description,
+      // startDate: startDateObj,
+      // endDate: endDateObj,
+      startDate: req.body.trip.startDate,
+      endDate: req.body.trip.endDate,
+      name: req.body.trip.name,
+      description: req.body.trip.description,
     });
 
     let trip = await newTrip.save();
