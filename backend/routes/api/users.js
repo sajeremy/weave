@@ -3,10 +3,15 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-// const Trip = mongoose.model("Trip"); //Adding Trip Index for User
+const Trip = mongoose.model("Trip"); //Adding Trip Index for User
 const passport = require("passport");
 const { loginUser, restoreUser } = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
+// const { db } = require("../../models/User");
+// const Trip = require("../../models/Trip");
+
+const validateRegisterInput = require("../../validations/register");
+const validateLoginInput = require("../../validations/login");
 
 /* GET users listing. */
 router.get("/current", restoreUser, (req, res) => {
@@ -24,7 +29,7 @@ router.get("/current", restoreUser, (req, res) => {
 });
 
 // POST /api/users/register
-router.post("/register", async (req, res, next) => {
+router.post("/register", validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
   // username.
   const user = await User.findOne({
@@ -65,7 +70,7 @@ router.post("/register", async (req, res, next) => {
   });
 });
 
-router.post("/login", async (req, res, next) => {
+router.post("/login", validateLoginInput, async (req, res, next) => {
   passport.authenticate("local", async function (err, user) {
     if (err) return next(err);
     if (!user) {
@@ -92,13 +97,14 @@ router.get("/:userId", async (req, res, next) => {
     error.errors = { message: "No user found with that id" };
     return next(error);
   }
+  const userTrips = await Trip.find();
   return res.json({
     _id: user._id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     availableDates: user.availableDates,
-    trips: user.trips,
+    trips: userTrips,
   });
 });
 
