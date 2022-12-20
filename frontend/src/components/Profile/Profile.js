@@ -7,12 +7,11 @@ function Profile() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
   const userTrips = useSelector((state) => Object.values(state.trips.user));
-
+  console.log("testing", userTrips);
   const current = new Date();
   const date = `${
     current.getMonth() + 1
   }/${current.getDate()}/${current.getFullYear()}`;
-  console.log(date);
 
   useEffect(() => {
     dispatch(fetchUserTrips(currentUser._id));

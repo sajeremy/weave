@@ -69,9 +69,9 @@ export const fetchTrip = (tripId) => async (dispatch) => {
   }
 };
 
-export const fetchUserTrips = (UserId) => async (dispatch) => {
+export const fetchUserTrips = (userId) => async (dispatch) => {
   try {
-    const res = await jwtFetch(`/api/trips/user/${UserId}`);
+    const res = await jwtFetch(`/api/users/${userId}`);
     const trips = await res.json();
     dispatch(receiveUserTrips(trips));
   } catch (err) {
@@ -84,7 +84,7 @@ export const fetchUserTrips = (UserId) => async (dispatch) => {
 
 export const createTrip = (data) => async (dispatch) => {
   try {
-    const res = await jwtFetch("/api/trips/", {
+    const res = await jwtFetch("/api/trips", {
       method: "POST",
       body: JSON.stringify(data),
     });
@@ -98,9 +98,10 @@ export const createTrip = (data) => async (dispatch) => {
   }
 };
 
+
 export const deleteTrip = (tripId) => async (dispatch) => {
   try {
-    const res = await jwtFetch("/api/trips/${tripId}", {
+    const res = await jwtFetch(`/api/trips/${tripId}`, {
       method: "DELETE",
     });
     dispatch(removeTrip(tripId));
@@ -133,6 +134,8 @@ const tripsReducer = (
   switch (action.type) {
     case RECEIVE_TRIPS:
       return { ...state, all: action.trips, new: undefined };
+    case RECEIVE_TRIP:
+      return { ...state, trip: action.trip, new: undefined };
     case RECEIVE_USER_TRIPS:
       return { ...state, user: action.trips, new: undefined };
     case RECEIVE_NEW_TRIP:

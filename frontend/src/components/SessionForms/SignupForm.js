@@ -52,6 +52,7 @@ function SignupForm() {
       email,
       password,
     };
+    // debugger;
 
     dispatch(signup(user));
   };

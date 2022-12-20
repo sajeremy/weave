@@ -11,6 +11,7 @@ function NewTripForm() {
   const dispatch = useDispatch();
   //   const newTrip = useSelector((state) => state.trips.new);
   const errors = useSelector((state) => state.errors.trips);
+  const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
     return () => dispatch(clearTripErrors());
@@ -40,12 +41,14 @@ function NewTripForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const trip = {
       name,
       description,
       startDate,
       endDate,
     };
+
     dispatch(createTrip({ trip }));
   };
   return (
