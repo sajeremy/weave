@@ -132,7 +132,7 @@ const tripsReducer = (
 ) => {
   switch (action.type) {
     case RECEIVE_TRIPS:
-      return { ...state, all: action.trips, new: undefined };
+      return { ...state, ...action.trips, new: undefined };
     case RECEIVE_TRIP:
       return { ...state, ...action.trip, new: undefined };
     case RECEIVE_USER_TRIPS:

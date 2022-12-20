@@ -9,7 +9,6 @@ function TripShowPage() {
   const trip = useSelector((state) =>
     state.trips.trip ? state.trips.trip : {}
   );
-  // console.log(trip);
   useEffect(() => {
     dispatch(fetchTrip(tripId));
     return () => dispatch(clearTripErrors());
