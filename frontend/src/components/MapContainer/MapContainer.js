@@ -17,24 +17,23 @@ import {
 
 import "@reach/combobox/styles.css";
 
-export default function Places() {
+export default function Places({ trip }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries: ["places"],
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  return <Map trip={trip} />;
 }
 
-function Map() {
+function Map({ trip }) {
   const center = useMemo(() => ({ lat: 41.3851, lng: 2.1734 }), []);
   const [selected, setSelected] = useState(null);
-
   return (
     <>
       <div>
-        <PlacesAutocomplete setSelected={setSelected} />
+        <PlacesAutocomplete trip={trip} setSelected={setSelected} />
       </div>
       <GoogleMap
         zoom={10}
@@ -47,7 +46,7 @@ function Map() {
   );
 }
 
-const PlacesAutocomplete = ({ setSelected }) => {
+const PlacesAutocomplete = ({ trip, setSelected }) => {
   const {
     ready,
     value,
@@ -61,6 +60,8 @@ const PlacesAutocomplete = ({ setSelected }) => {
     clearSuggestions();
 
     const results = await getGeocode({ address });
+    console.log(results);
+    console.log(trip);
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
   };
@@ -83,28 +84,3 @@ const PlacesAutocomplete = ({ setSelected }) => {
     </Combobox>
   );
 };
-// const MapContainer = () => {
-//   const mapStyles = {
-//     height: "100vh",
-//     width: "100%",
-//   };
-
-//   const defaultCenter = {
-//     lat: 41.3851,
-//     lng: 2.1734,
-//   };
-
-//   return (
-//     <>
-//       <div>
-//         <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>
-//           <GoogleMap
-//             mapContainerStyle={mapStyles}
-//             zoom={13}
-//             center={defaultCenter}
-//           />
-//         </LoadScript>
-//       </div>
-//     </>
-//   );
-// };

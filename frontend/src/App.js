@@ -34,6 +34,7 @@ function App() {
           <ProtectedRoute exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/bonnie" component={Places} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
+          <ProtectedRoute exact path="/trips/:tripId" />
           <ProtectedRoute
             exact
             path="/trips/:tripId"

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchTrip, clearTripErrors } from "../../store/trips";
+import Places from "../MapContainer/MapContainer";
 
 function TripShowPage() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function TripShowPage() {
   return (
     <>
       <h1>{trip.name}</h1>
+      <Places trip={trip} />
     </>
   );
 }
