@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.scss";
 import { logout } from "../../store/session";
 
-function NavBar() {
+const NavBar = () =>  {
   const loggedIn = useSelector((state) => !!state.session.user);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ function NavBar() {
       return (
         <div className="links-auth">
           <Link to={"/signup"} className="nav-signup-link">Signup</Link>
-          <Link to={"/login"} className="nav-login-link"><button>Login</button></Link>
+          <button className="nav-login-button">Login</button>
         </div>
       );
     }

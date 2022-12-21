@@ -39,16 +39,17 @@
     color: $GREEN;
 }
 
-.nav-login-link {
-    text-decoration: none;
+.nav-login-button {
+    position: absolute;
     width: 89px;
     padding: 12px 21px;
-    color: $GREEN;
     height: 48px;
-    background-color: #235251;
+    background-color: $GREEN;
     border-radius: 74px;
     margin-left: 22px;
     color: white;
+    border: none;
+    cursor: pointer;
 }
 
 .nav-login-link:hover {

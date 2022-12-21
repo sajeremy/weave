@@ -23,7 +23,7 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    debugger;
+    // debugger;
     dispatch(login({ email, password }));
   };
 
