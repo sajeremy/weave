@@ -109,17 +109,3 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     </Combobox>
   );
 };
-
-// let placeDetails;
-
-//   function details() {
-//     const location = new google.maps.LatLng(lat,lng);
-
-//     const map = new google.maps.Map(document.getElementById('map'). {
-//       center:location,
-//       zoom:15
-//     })
-
-//     var callback = function (results, status) "
-//     "
-//   }
