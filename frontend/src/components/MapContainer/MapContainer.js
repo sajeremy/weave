@@ -1,6 +1,11 @@
 import React from "react";
 import { useState, useMemo } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 import useSearchBar, {
   getDetails,
   getGeocode,
@@ -39,7 +44,7 @@ function Map({ trip }) {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(12);
   }, []);
-
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const [selected, setSelected] = useState(null);
   return (
     <>
@@ -58,8 +63,55 @@ function Map({ trip }) {
       >
         {selected &&
           trip.locations.map((location, i) => {
-            return <Marker position={location} label={`${i + 1}`} />;
+            return (
+              <Marker
+                key={location.name}
+                position={location.coordinates}
+                label={{
+                  text: `${i + 1}`,
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+                icon={{
+                  path: `
+              M 1,0
+              L 2,0
+              A 1 1 0 0 1 3,1
+              A 1 1 0 0 1 2,2
+              L 1,2
+              A 1 1 0 0 1 0,1
+              A 1 1 0 0 1 1,0
+              z
+            `,
+                  fillOpacity: 1,
+                  fillColor: "#235251",
+                  strokeColor: "black",
+                  strokeWeight: 1,
+                  scale: 15,
+                  labelOrigin: new window.google.maps.Point(1.5, 1),
+                  anchor: new window.google.maps.Point(1.5, 1),
+                }}
+                onClick={() => {
+                  setSelectedMarker(location);
+                }}
+              />
+            );
           })}
+        {selectedMarker ? (
+          <InfoWindow
+            position={selectedMarker.coordinates}
+            onCloseClick={() => {
+              setSelectedMarker(null);
+            }}
+          >
+            <div>
+              <h1>{selectedMarker.name}</h1>
+              <p>Rating: {selectedMarker.rating}</p>
+              <a href={selectedMarker.website}>{selectedMarker.website}</a>
+              {/* <img src={selectedMarker.photo} alt="help"></img> */}
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </>
   );
@@ -81,11 +133,21 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     const { lat, lng } = await getLatLng(results[0]);
     changeCenter({ lat, lng });
     const placeId = results[0].place_id;
-    // const test = await getDetails(placeId);
-    // console.log(placeId);
-    // console.log(results);
-    // console.log(test);
-    trip.locations.push({ lat, lng });
+    const request = {
+      placeId: placeId,
+      fields: ["name", "opening_hours", "website", "rating"],
+    };
+    const details = await getDetails(request);
+
+    trip.locations.push({
+      name: details.name,
+      coordinates: { lat, lng },
+      hours: details.opening_hours,
+      rating: details.rating,
+      website: details.website,
+      // photo: details.photos[0].getUrl(),
+    });
+    console.log("test", trip.locations[0].photo);
     setSelected({ lat, lng });
   };
 
@@ -109,17 +171,3 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     </Combobox>
   );
 };
-
-// let placeDetails;
-
-//   function details() {
-//     const location = new google.maps.LatLng(lat,lng);
-
-//     const map = new google.maps.Map(document.getElementById('map'). {
-//       center:location,
-//       zoom:15
-//     })
-
-//     var callback = function (results, status) "
-//     "
-//   }
