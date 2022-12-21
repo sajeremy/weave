@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 function PlaceIndexItem({ place }) {
   const [voteCount, setVoteCount] = useState(place.voteCount);
 
@@ -12,7 +14,8 @@ function PlaceIndexItem({ place }) {
   };
   return (
     <>
-      <div>{place.title}</div>
+      <h1>Testing</h1>
+      {/* <div>{place.title}</div>
       <div>{place.category}</div>
       <div>{startDateTime}</div>
       <div>{endDateTime}</div>
@@ -24,7 +27,7 @@ function PlaceIndexItem({ place }) {
         <button onClick={handleSubtract}>
           <i class="fa-solid fa-hand-middle-finger"></i>
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

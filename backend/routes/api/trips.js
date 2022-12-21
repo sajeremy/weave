@@ -82,6 +82,7 @@ router.patch("/:tripId", requireUser, async function (req, res, next) {
     trip.endDate = endDateObj;
     trip.name = req.body.name;
     trip.description = req.body.description;
+    trip.locations = req.body.locations;
     trip.save();
   } catch (err) {
     next(err);

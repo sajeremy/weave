@@ -21,7 +21,9 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 
+import { updateTrip } from "../../store/trips";
 import "@reach/combobox/styles.css";
+import { useDispatch } from "react-redux";
 
 export default function Places({ trip }) {
   const { isLoaded } = useLoadScript({
@@ -48,7 +50,7 @@ function Map({ trip }) {
   const [selected, setSelected] = useState(null);
   return (
     <>
-      <div>
+      <div className="damjustin">
         <SearchBar
           changeCenter={changeCenter}
           trip={trip}
@@ -118,6 +120,7 @@ function Map({ trip }) {
 }
 
 const SearchBar = ({ changeCenter, trip, setSelected }) => {
+  const dispatch = useDispatch();
   const {
     ready,
     value,
@@ -140,15 +143,19 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     const details = await getDetails(request);
 
     trip.locations.push({
-      name: details.name,
+      title: details.name,
       coordinates: { lat, lng },
       hours: details.opening_hours,
       rating: details.rating,
       website: details.website,
       // photo: details.photos[0].getUrl(),
     });
-    console.log("test", trip.locations[0].photo);
     setSelected({ lat, lng });
+  };
+
+  const handleSaveLocations = (e) => {
+    e.preventDefault();
+    dispatch(updateTrip(trip));
   };
 
   return (
@@ -168,6 +175,7 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
             ))}
         </ComboboxList>
       </ComboboxPopover>
+      <button onClick={handleSaveLocations}>Save</button>
     </Combobox>
   );
 };
