@@ -11,7 +11,6 @@ function EditTripForm() {
   const trip = useSelector((state) =>
     state.trips.trip ? state.trips.trip : {}
   );
-  console.log(trip.name);
 
   const [name, setName] = useState(trip.name);
   const [startDate, setStartDate] = useState(
