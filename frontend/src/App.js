@@ -14,6 +14,7 @@ import Places from "./components/MapContainer/MapContainer";
 
 import { getCurrentUser } from "./store/session";
 import TripShowPage from "./components/Trips/TripShowPage";
+import EditTripForm from "./components/Trips/EditTripForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,6 +35,12 @@ function App() {
           <ProtectedRoute exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/bonnie" component={Places} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
+          <ProtectedRoute
+            exact
+            path="/trips/:tripId/edit"
+            component={EditTripForm}
+          />
+
           {/* <ProtectedRoute exact path="/trips/:tripId" /> */}
           <ProtectedRoute
             exact
