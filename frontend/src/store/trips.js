@@ -128,6 +128,7 @@ export const deleteTrip = (tripId) => async (dispatch) => {
   }
 };
 
+
 const nullErrors = null;
 
 export const tripErrorsReducer = (state = nullErrors, action) => {
