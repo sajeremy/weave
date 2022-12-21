@@ -4,7 +4,7 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  infoWindow,
+  InfoWindow,
 } from "@react-google-maps/api";
 import useSearchBar, {
   getDetails,
@@ -44,7 +44,7 @@ function Map({ trip }) {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(12);
   }, []);
-
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const [selected, setSelected] = useState(null);
   return (
     <>
@@ -91,9 +91,27 @@ function Map({ trip }) {
                   labelOrigin: new window.google.maps.Point(1.5, 1),
                   anchor: new window.google.maps.Point(1.5, 1),
                 }}
+                onClick={() => {
+                  setSelectedMarker(location);
+                }}
               />
             );
           })}
+        {selectedMarker ? (
+          <InfoWindow
+            position={selectedMarker.coordinates}
+            onCloseClick={() => {
+              setSelectedMarker(null);
+            }}
+          >
+            <div>
+              <h1>{selectedMarker.name}</h1>
+              <p>Rating: {selectedMarker.rating}</p>
+              <a href={selectedMarker.website}>{selectedMarker.website}</a>
+              {/* <img src={selectedMarker.photo} alt="help"></img> */}
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </>
   );
@@ -120,13 +138,16 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
       fields: ["name", "opening_hours", "website", "rating"],
     };
     const details = await getDetails(request);
+
     trip.locations.push({
       name: details.name,
       coordinates: { lat, lng },
       hours: details.opening_hours,
       rating: details.rating,
       website: details.website,
+      // photo: details.photos[0].getUrl(),
     });
+    console.log("test", trip.locations[0].photo);
     setSelected({ lat, lng });
   };
 
