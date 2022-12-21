@@ -15,6 +15,7 @@ import Places from "./components/MapContainer/MapContainer";
 import { getCurrentUser } from "./store/session";
 import TripShowPage from "./components/Trips/TripShowPage";
 import EditTripForm from "./components/Trips/EditTripForm";
+import InvitationPage from "./components/Invite/InvitationPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +40,11 @@ function App() {
             exact
             path="/trips/:tripId/edit"
             component={EditTripForm}
+          />
+          <ProtectedRoute
+            exact
+            path="/trips/:tripId/invite"
+            component={InvitationPage}
           />
 
           {/* <ProtectedRoute exact path="/trips/:tripId" /> */}

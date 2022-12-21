@@ -7,17 +7,12 @@ const placeSchema = Schema(
       type: String,
       required: true,
     },
-    location: {
-      type: {
-        type: String,
-        enum: ["Point"],
-        required: true,
-      },
-      coordinates: {
-        type: [Number],
-        required: true,
-      },
+
+    coordinates: {
+      type: Object,
+      required: true,
     },
+
     category: String,
     startDateTime: Date,
     endDateTime: Date,
