@@ -19,6 +19,9 @@ const placeSchema = Schema(
       },
     },
     category: String,
+    startDateTime: Date,
+    endDateTime: Date,
+    voteCount: Number,
   },
   {
     timestamps: true,
