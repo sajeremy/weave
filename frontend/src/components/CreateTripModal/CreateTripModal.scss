@@ -1,0 +1,64 @@
+@import '../../index.scss';
+
+.login-modal-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login-modal-container h1 {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.name-label {
+    position: absolute;
+    top: 100px;
+    left: 55px;
+}
+
+.login-name-input {
+    width: 381px;
+    height: 60px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px; 
+}
+
+.date-wrapper {
+    width: 381px;
+    height: 60px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;  
+    margin-bottom: 20px;  
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-wrapper label {
+    color: grey;
+}
+
+.date-wrapper input {
+    width: 160px;
+    height: 45px;
+    border: none;
+}
+
+.date-wrapper input:focus {
+    outline: none;
+}
+
+.login-signup-button {
+    color: $GREEN;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 19px;
+    line-height: 24px;
+}
