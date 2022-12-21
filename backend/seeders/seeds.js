@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require("../config/keys.js");
 const User = require("../models/User");
+const Trip = require("../models/Trip");
 const bcrypt = require("bcryptjs");
 
 // Create users
@@ -30,7 +31,7 @@ mongoose
   });
 
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
+  console.log("Resetting db and seeding users and trips...");
 
   User.collection
     .drop()
