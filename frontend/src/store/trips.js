@@ -98,6 +98,22 @@ export const createTrip = (data) => async (dispatch) => {
   }
 };
 
+export const updateTrip = (trip) => async (dispatch) => {
+  try {
+    const res = await jwtFetch(`/api/trips/${trip._id}`, {
+      method: "PATCH",
+      body: JSON.stringify(trip),
+    });
+    const trip = await res.json();
+    dispatch(receiveTrip(trip));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
 export const deleteTrip = (tripId) => async (dispatch) => {
   try {
     const res = await jwtFetch(`/api/trips/${tripId}`, {
