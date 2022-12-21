@@ -3,6 +3,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserTrips, clearTripErrors, deleteTrip } from "../../store/trips";
 import TripsItem from "../Trips/TripsItem";
+import './Profile.scss';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -33,36 +34,36 @@ function Profile() {
   // } else {
 
   return (
-    <>
-      <div id="ProfilePage-user-info">
-        <div>{currentUser.firstName}</div>
-        <div>{currentUser.email}</div>
-        {/* <button>Edit Profile </button> */}
-      </div>
-
+    <div className="trips-page-container">
       {/* {userTrips.map((trip) => (
         <>
           <TripsItem key={trip._id} trip={trip} />
         </>
       ))} */}
-
-      <div>Current Trips</div>
-      {userTrips &&
-        userTrips
-          .filter((trip) => now.isBefore(trip.endDate))
-          .map((filteredTrip) => (
-            <>
-              <TripsItem key={filteredTrip._id} trip={filteredTrip} />
-            </>
-          ))}
-      <div>Past Trips</div>
-      {userTrips &&
-        userTrips
-          .filter((trip) => now.isAfter(trip.endDate))
-          .map((filteredTrips) => (
-            <TripsItem key={filteredTrips._id} trip={filteredTrips} />
-          ))}
-    </>
+      <div className="trips-container">
+        <h1>Current Trips</h1>
+        {userTrips &&
+          userTrips
+            .filter((trip) => now.isBefore(trip.endDate))
+            .map((filteredTrip) => (
+              <>
+                <TripsItem key={filteredTrip._id} trip={filteredTrip} />
+              </>
+            ))}
+        <h1>Past Trips</h1>
+        {userTrips &&
+          userTrips
+            .filter((trip) => now.isAfter(trip.endDate))
+            .map((filteredTrips) => (
+              <TripsItem key={filteredTrips._id} trip={filteredTrips} />
+            ))}
+      </div>
+      <div id="ProfilePage-user-info">
+        <div>{currentUser.firstName}</div>
+        <div>{currentUser.email}</div>
+        {/* <button>Edit Profile </button> */}
+      </div>
+    </div>
   );
 }
 

@@ -18,6 +18,11 @@ const NavBar = () =>  {
     dispatch(logout());
   };
 
+  const modalFunctions = {
+    setShowLoginModal: (shown) => setShowLoginModal(shown),
+    setShowSignupModal: (shown) => setShowLoginModal(shown)
+  }
+
   const getLinks = () => {
     if (loggedIn) {
       return (
@@ -49,8 +54,8 @@ const NavBar = () =>  {
       {getLinks()}
       </div>
     </div>
-    {showLoginModal && <Modal component={LoginModal} close={(shown) => setShowLoginModal(shown)} />}
-    {showSignupModal && <Modal component={SignupModal} close={(shown) => setShowSignupModal(shown)} />}
+    {showLoginModal && <Modal component={LoginModal} close={(shown) => setShowLoginModal(shown)} modalFunctions={modalFunctions} />}
+    {showSignupModal && <Modal component={SignupModal} close={(shown) => setShowSignupModal(shown)} modalFunctions={modalFunctions} />}
     </>
   );
 }

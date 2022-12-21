@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { deleteTrip } from "../../store/trips";
+import './TripsItem.scss';
 import moment from "moment";
 
 function TripsItem({ trip }) {
@@ -21,15 +22,14 @@ function TripsItem({ trip }) {
   };
 
   return (
-    <>
-      <Link to={`/trips/${trip._id}`} className="Trip-Index-Item">
-        <h1>{trip.name}</h1>
-        <div>{trip.description}</div>
+    <div className="trip-item">
+      <div className="trip-info-wrapper">
+        <Link to={`/trips/${trip._id}`} className="Trip-Index-Item"><h2>{trip.name}</h2></Link>
         <div> {moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
         <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
-      </Link>
-      <button onClick={handleDelete}>Delete</button>
-    </>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
+    </div>
   );
 }
 

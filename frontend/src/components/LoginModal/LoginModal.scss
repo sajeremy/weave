@@ -1,0 +1,53 @@
+@import '../../index.scss';
+
+.session-form h2 {
+    font-size: 25px;
+    line-height: 32px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.login-input {
+    width: 371px;
+    height: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    font-size: 18px;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+.login-password-container {
+    margin-bottom: 20px;
+}
+
+.login-submit-button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 19px;
+    line-height: 24px;
+    width: 154px;
+    height: 48px;
+    background: #235251;
+    border-radius: 74px;
+    margin-bottom: 10px;
+}
+
+.login-submit-button:disabled {
+    background-color: grey;
+    cursor: auto;
+}
+
+.demo-button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 19px;
+    line-height: 24px;
+    width: 154px;
+    height: 48px;
+    background: #235251;
+    border-radius: 74px;
+    margin-bottom: 10px;
+}

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearTripErrors, createTrip } from "../../store/trips";
 
-const CreateTripModal = () => {
+const CreateTripModal = ({close}) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -52,6 +52,7 @@ const CreateTripModal = () => {
         };
     
         dispatch(createTrip({ trip }));
+        close();
       };
 
     return (

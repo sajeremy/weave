@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./SignupModal.scss";    
 import { signup, clearSessionErrors } from "../../store/session";
 
-function SignupModal({close}) {
+function SignupModal({close, modalFunctions}) {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -50,9 +50,14 @@ function SignupModal({close}) {
     };
 
     dispatch(signup(user));
-    close(false);
+    if(!errors.email && !errors.password) close(false);
 
   };
+
+  const handleSwitchLogin = () => {
+    close(false);
+    modalFunctions.setShowLoginModal(true);
+  }
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
@@ -111,7 +116,7 @@ function SignupModal({close}) {
         />
         <div className="login-switch-container">
             <span>Already have an account?</span>
-            <button className="switch-loginmodal-button">Log In</button>
+            <button onClick={handleSwitchLogin} className="switch-loginmodal-button">Log In</button>
         </div>
     </form>
   );
