@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import usePlacesAutocomplete, {
+import useSearchBar, {
+  getDetails,
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
@@ -17,51 +18,74 @@ import {
 
 import "@reach/combobox/styles.css";
 
-export default function Places() {
+export default function Places({ trip }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries: ["places"],
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  return <Map trip={trip} />;
 }
 
-function Map() {
-  const center = useMemo(() => ({ lat: 41.3851, lng: 2.1734 }), []);
-  const [selected, setSelected] = useState(null);
+function Map({ trip }) {
+  const center = useMemo(() => ({ lat: 40.7128, lng: -74.006 }), []);
+  const mapRef = React.useRef();
+  const setMapRef = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
 
+  const changeCenter = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(12);
+  }, []);
+
+  const [selected, setSelected] = useState(null);
   return (
     <>
       <div>
-        <PlacesAutocomplete setSelected={setSelected} />
+        <SearchBar
+          changeCenter={changeCenter}
+          trip={trip}
+          setSelected={setSelected}
+        />
       </div>
       <GoogleMap
         zoom={10}
         center={center}
         mapContainerClassName="map-container"
+        onLoad={setMapRef}
       >
-        {selected && <Marker position={selected} label="1" />}
+        {selected &&
+          trip.locations.map((location, i) => {
+            return <Marker position={location} label={`${i + 1}`} />;
+          })}
       </GoogleMap>
     </>
   );
 }
 
-const PlacesAutocomplete = ({ setSelected }) => {
+const SearchBar = ({ changeCenter, trip, setSelected }) => {
   const {
     ready,
     value,
     setValue,
     suggestions: { status, data },
     clearSuggestions,
-  } = usePlacesAutocomplete();
+  } = useSearchBar();
 
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
-
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
+    changeCenter({ lat, lng });
+    const placeId = results[0].place_id;
+    // const test = await getDetails(placeId);
+    // console.log(placeId);
+    // console.log(results);
+    // console.log(test);
+    trip.locations.push({ lat, lng });
     setSelected({ lat, lng });
   };
 
@@ -75,36 +99,27 @@ const PlacesAutocomplete = ({ setSelected }) => {
         placeholder="search an address"
       />
       <ComboboxPopover>
-        {status === "OK" &&
-          data.map(({ place_id, description }) => (
-            <ComboboxOption key={place_id} value={description} />
-          ))}
+        <ComboboxList>
+          {status === "OK" &&
+            data.map(({ place_id, description }) => (
+              <ComboboxOption key={place_id} value={description} />
+            ))}
+        </ComboboxList>
       </ComboboxPopover>
     </Combobox>
   );
 };
-// const MapContainer = () => {
-//   const mapStyles = {
-//     height: "100vh",
-//     width: "100%",
-//   };
 
-//   const defaultCenter = {
-//     lat: 41.3851,
-//     lng: 2.1734,
-//   };
+// let placeDetails;
 
-//   return (
-//     <>
-//       <div>
-//         <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>
-//           <GoogleMap
-//             mapContainerStyle={mapStyles}
-//             zoom={13}
-//             center={defaultCenter}
-//           />
-//         </LoadScript>
-//       </div>
-//     </>
-//   );
-// };
+//   function details() {
+//     const location = new google.maps.LatLng(lat,lng);
+
+//     const map = new google.maps.Map(document.getElementById('map'). {
+//       center:location,
+//       zoom:15
+//     })
+
+//     var callback = function (results, status) "
+//     "
+//   }

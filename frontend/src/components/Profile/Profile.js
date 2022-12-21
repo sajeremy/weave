@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserTrips, clearTripErrors } from "../../store/trips";
+import { fetchUserTrips, clearTripErrors, deleteTrip } from "../../store/trips";
 import TripsItem from "../Trips/TripsItem";
 
 function Profile() {
@@ -9,17 +10,18 @@ function Profile() {
   const userTrips = useSelector((state) =>
     state.trips.trips ? Object.values(state.trips.trips) : []
   );
-  console.log("testing", userTrips);
+  // console.log("testing", userTrips); commented out for render
 
   const current = new Date();
   const date = `${
     current.getMonth() + 1
   }/${current.getDate()}/${current.getFullYear()}`;
+  const now = moment();
 
   useEffect(() => {
     dispatch(fetchUserTrips(currentUser._id));
     return () => dispatch(clearTripErrors());
-  }, [currentUser, dispatch]);
+  }, []);
 
   // if (userTrips.length === 0) {
   //   return (
@@ -35,22 +37,31 @@ function Profile() {
       <div id="ProfilePage-user-info">
         <div>{currentUser.firstName}</div>
         <div>{currentUser.email}</div>
-        <button>Edit Profile </button>
+        {/* <button>Edit Profile </button> */}
       </div>
-      {userTrips.map((trip) => (
-        <TripsItem key={trip._id} trip={trip} />
-      ))}
-      <div>Current Trips</div>
-      {/* {userTrips.filter((trip) => {
-        if (date < trip.endDate)
-          return <TripsItem key={trip._id} trip={trip} />;
-      })} */}
 
+      {/* {userTrips.map((trip) => (
+        <>
+          <TripsItem key={trip._id} trip={trip} />
+        </>
+      ))} */}
+
+      <div>Current Trips</div>
+      {userTrips &&
+        userTrips
+          .filter((trip) => now.isBefore(trip.endDate))
+          .map((filteredTrip) => (
+            <>
+              <TripsItem key={filteredTrip._id} trip={filteredTrip} />
+            </>
+          ))}
       <div>Past Trips</div>
-      {/* {userTrips.filter((trip) => {
-        if (date > trip.endDate)
-          return <TripsItem key={trip._id} trip={trip} />;
-      })} */}
+      {userTrips &&
+        userTrips
+          .filter((trip) => now.isAfter(trip.endDate))
+          .map((filteredTrips) => (
+            <TripsItem key={filteredTrips._id} trip={filteredTrips} />
+          ))}
     </>
   );
 }

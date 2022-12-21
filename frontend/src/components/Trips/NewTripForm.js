@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { clearTripErrors, createTrip } from "../../store/trips";
 
 function NewTripForm() {
@@ -8,7 +9,10 @@ function NewTripForm() {
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
   const dispatch = useDispatch();
+  const history = useHistory();
+
   //   const newTrip = useSelector((state) => state.trips.new);
   const errors = useSelector((state) => state.errors.trips);
   const currentUser = useSelector((state) => state.session.user);
@@ -48,9 +52,10 @@ function NewTripForm() {
       startDate,
       endDate,
     };
-
     dispatch(createTrip({ trip }));
+    history.replace("/profile");
   };
+
   return (
     <>
       <form className="NewTripForm" onSubmit={handleSubmit}>
