@@ -1,0 +1,146 @@
+@import '../../index.scss';
+
+.session-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    margin-top: 20px;
+}
+
+.session-form h1 {
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.signup-name-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #888888;
+}
+
+.signup-lastname-wrapper {
+    position: relative;
+}
+
+.signup-email-container {
+    margin-bottom: 20px;
+}
+
+.signup-name {
+    height: 40px;
+    width: 170px;   
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.signup-input {
+    font-size: 18px;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+.signup-firstname {
+    margin-right: 15px;
+}
+
+.signup-email {
+    width: 371px;
+    height: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.signup-password {
+    height: 40px;
+    width: 371px;  
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.login-name-input {
+    width: 381px;
+    height: 60px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px; 
+}
+
+// .date-wrapper {
+//     width: 381px;
+//     height: 60px;
+//     border: 1px solid #DDDDDD;
+//     border-radius: 10px;  
+//     margin-bottom: 20px;  
+//     padding: 4px;
+//     display: flex;
+//     justify-content: space-between;
+// }
+
+// .date-wrapper label {
+//     color: grey;
+// }
+
+// .date-wrapper input {
+//     width: 160px;
+//     height: 45px;
+//     border: none;
+// }
+
+// .date-wrapper input:focus {
+//     outline: none;
+// }
+
+.signup-password-container {
+    margin-bottom: 20px;
+}
+
+.signup-submit-button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 19px;
+    line-height: 24px;
+    width: 154px;
+    height: 48px;
+    background: #235251;
+    border-radius: 74px;
+    margin-bottom: 10px;
+}
+
+.signup-submit-button:disabled {
+    background-color: grey;
+    cursor: auto;
+}
+
+.login-switch-container > * {
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.login-switch-container > span {
+    margin-right: 5px;
+}
+
+.switch-loginmodal-button {
+    color: $GREEN;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    // font-size: 19px;
+    // font-weight: 500;
+}

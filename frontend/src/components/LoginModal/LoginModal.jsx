@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./SessionForm.css";
 import { login, clearSessionErrors } from "../../store/session";
+import "./LoginModal.scss";
 
-function LoginForm() {
+function LoginModal({close}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((state) => state.errors.session);
@@ -22,12 +22,13 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // debugger;
     dispatch(login({ email, password }));
+    close(false);
   };
 
   const handleClick = () => {
     dispatch(login({ email: "demouser@user.io", password: "password" }));
+    close(false);
   };
 
   return (
@@ -63,4 +64,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginModal;

@@ -9,11 +9,11 @@ export const AuthRoute = ({ component: Component, path, exact }) => {
       path={path}
       exact={exact}
       render={(props) =>
-        !loggedIn ? (
+        // !loggedIn ? (
           <Component {...props} />
-        ) : (
-          <Redirect to="/trips" /> //  Should redirect to splash if not logged in. Not sure if we want to redirect to user profiel or trips index.
-        )
+        // ) : (
+        //   <Redirect to="/trips" /> //  Should redirect to splash if not logged in. Not sure if we want to redirect to user profiel or trips index.
+        // )
       }
     />
   );

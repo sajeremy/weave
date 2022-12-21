@@ -6,6 +6,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.home-logo-link {
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .logo-wrapper {
@@ -32,15 +40,40 @@
     // margin-top: 39px;
 }
 
-.nav-signup-link {
+.links-auth {
+    // position: absolute;
+    left: 500px;
+}
+
+.links-nav {
+    // position: absolute;
+    left: 570px;
+}
+
+.trips-button {
+    width: 89px;
+    padding: 12px 21px;
+    height: 48px;
+    background-color: $GREEN;
+    border-radius: 74px;
+    margin-left: 22px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-signup-button {
     font-size: 19px;
     line-height: 24px;
     text-decoration: none;
     color: $GREEN;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .nav-login-button {
-    position: absolute;
     width: 89px;
     padding: 12px 21px;
     height: 48px;
