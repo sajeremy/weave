@@ -9,7 +9,6 @@ import MainPage from "./components/MainPage/MainPage";
 import LoginForm from "./components/SessionForms/LoginForm";
 import SignupForm from "./components/SessionForms/SignupForm";
 import Profile from "./components/Profile/Profile";
-import EditProfileForm from "./components/Profile/EditProfileForm";
 import NewTripForm from "./components/Trips/NewTripForm";
 import Places from "./components/MapContainer/MapContainer";
 
@@ -35,11 +34,6 @@ function App() {
           <ProtectedRoute exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/bonnie" component={Places} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
-          <ProtectedRoute
-            exact
-            path="/trips/edit"
-            component={EditProfileForm}
-          />
 
           <ProtectedRoute
             exact

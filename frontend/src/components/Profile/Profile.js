@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserTrips, clearTripErrors, deleteTrip } from "../../store/trips";
 import TripsItem from "../Trips/TripsItem";
@@ -14,6 +15,7 @@ function Profile() {
   const date = `${
     current.getMonth() + 1
   }/${current.getDate()}/${current.getFullYear()}`;
+  const now = moment();
 
   useEffect(() => {
     dispatch(fetchUserTrips(currentUser._id));
@@ -34,25 +36,31 @@ function Profile() {
       <div id="ProfilePage-user-info">
         <div>{currentUser.firstName}</div>
         <div>{currentUser.email}</div>
-        <button>Edit Profile </button>
+        {/* <button>Edit Profile </button> */}
       </div>
-      {userTrips.map((trip) => (
+
+      {/* {userTrips.map((trip) => (
         <>
           <TripsItem key={trip._id} trip={trip} />
-          {/* <button onClick={dispatch(deleteTrip(trip._id))}>Delete</button> */}
         </>
-      ))}
-      <div>Current Trips</div>
-      {/* {userTrips.filter((trip) => {
-        if (date < trip.endDate)
-          return <TripsItem key={trip._id} trip={trip} />;
-      })} */}
+      ))} */}
 
+      <div>Current Trips</div>
+      {userTrips &&
+        userTrips
+          .filter((trip) => now.isBefore(trip.endDate))
+          .map((filteredTrip) => (
+            <>
+              <TripsItem key={filteredTrip._id} trip={filteredTrip} />
+            </>
+          ))}
       <div>Past Trips</div>
-      {/* {userTrips.filter((trip) => {
-        if (date > trip.endDate)
-          return <TripsItem key={trip._id} trip={trip} />;
-      })} */}
+      {userTrips &&
+        userTrips
+          .filter((trip) => now.isAfter(trip.endDate))
+          .map((filteredTrips) => (
+            <TripsItem key={filteredTrips._id} trip={filteredTrips} />
+          ))}
     </>
   );
 }
