@@ -9,7 +9,7 @@ function Profile() {
   const userTrips = useSelector((state) =>
     state.trips.trips ? Object.values(state.trips.trips) : []
   );
-  console.log("testing", userTrips);
+  // console.log("testing", userTrips); commented out for render
 
   const current = new Date();
   const date = `${
