@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const User = mongoose.model("User");
 const Trip = mongoose.model("Trip");
 const { requireUser } = require("../../config/passport");
 
@@ -63,6 +64,18 @@ router.post("/", requireUser, async function (req, res, next) {
 
     let trip = await newTrip.save();
     return res.json(trip);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//TRIP INVITE
+router.post("/:tripId/invite", requireUser, async function (req, res, next) {
+  try {
+    const email = req.body.email;
+    const user = await User.findOne({
+      $or: [{ email: req.body.email }],
+    });
   } catch (err) {
     next(err);
   }
