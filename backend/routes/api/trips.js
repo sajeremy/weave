@@ -78,9 +78,10 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   let newTripMembers = [];
   let checkUser;
   let trip = await Trip.findById(req.params.tripId);
+  let tripOwner = await User.findById(trip.owner);
   let tripMemberEmails = [];
 
-  //Filter emails that are not Weaver Users
+  //Filter emails that are not Weave Users
   for (let i = 0; i < users.length; i++) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
@@ -93,50 +94,62 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   for (let i = 0; i < trip.members.length; i++) {
     tripMemberEmails.push(trip.members[i].email);
   }
-  //Filter Weaver Users that are not in Trip
+  //Filter Weave Users that are not in Trip
   weaveUsers.forEach((user) => {
     if (!tripMemberEmails.includes(user.email)) {
       newTripMembers.push(user);
     }
   });
+  //Send Email to new trip members
+  newTripMembers.forEach((newMember) => {
+    let tripDetails = {
+      newMemberId: newMember._id,
+      newMemberEmail: newMember.email,
+      newMemberFirstName: newMember.firstName,
+      ownerName: tripOwner.firstName,
+      tripName: trip.name,
+      tripId: trip._id,
+    };
+    sendEmail(tripDetails);
+  });
 
-  return res.json(newTripMembers);
+  return res.json("emails sent");
 });
 
 //TRIP INVITE MEMBER
-router.post("/:tripId/invite", requireUser, async function (req, res, next) {
-  let user;
-  let userInfo = {};
-  let trip;
-  try {
-    trip = await Trip.findById(req.params.tripId);
-    const email = req.body.email;
-    invitedUser = await User.findOne({
-      $or: [{ email: req.body.email }],
-    });
-    userInfo._id = invitedUser._id;
-    userInfo.firstName = invitedUser.firstName;
-    userInfo.lastName = invitedUser.lastName;
-    userInfo.email = invitedUser.email;
-    userInfo.trips = invitedUser.trips;
-    userInfo.owner = req.user.firstName;
-    userInfo.tripName = trip.name;
-    userInfo.tripId = trip._id;
-    userInfo.tripInfo = trip;
-  } catch (err) {
-    next(err);
-  }
-  const tripDetails = {
-    invitedUserId: userInfo._id,
-    invitedUserEmail: userInfo.email,
-    invitedUserName: userInfo.firstName,
-    ownerName: userInfo.owner,
-    tripName: userInfo.tripId,
-    tripId: userInfo.tripInfo._id,
-  };
-  sendEmail(tripDetails);
-  return res.json(userInfo);
-});
+// router.post("/:tripId/invite", requireUser, async function (req, res, next) {
+//   let user;
+//   let userInfo = {};
+//   let trip;
+//   try {
+//     trip = await Trip.findById(req.params.tripId);
+//     const email = req.body.email;
+//     invitedUser = await User.findOne({
+//       $or: [{ email: req.body.email }],
+//     });
+//     userInfo._id = invitedUser._id;
+//     userInfo.firstName = invitedUser.firstName;
+//     userInfo.lastName = invitedUser.lastName;
+//     userInfo.email = invitedUser.email;
+//     userInfo.trips = invitedUser.trips;
+//     userInfo.owner = req.user.firstName;
+//     userInfo.tripName = trip.name;
+//     userInfo.tripId = trip._id;
+//     userInfo.tripInfo = trip;
+//   } catch (err) {
+//     next(err);
+//   }
+//   const tripDetails = {
+//     invitedUserId: userInfo._id,
+//     invitedUserEmail: userInfo.email,
+//     invitedUserName: userInfo.firstName,
+//     ownerName: userInfo.owner,
+//     tripName: userInfo.tripId,
+//     tripId: userInfo.tripInfo._id,
+//   };
+//   sendEmail(tripDetails);
+//   return res.json(userInfo);
+// });
 
 //TRIP UPDATE
 router.patch("/:tripId", requireUser, async function (req, res, next) {

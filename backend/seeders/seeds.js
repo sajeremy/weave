@@ -32,6 +32,31 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
   );
 }
 
+users.push(
+  new User({
+    firstName: "Jeremy",
+    lastName: "Demo",
+    email: "9jsantiago4@gmail.com",
+    hashedPassword: bcrypt.hashSync("password", 10),
+  })
+);
+users.push(
+  new User({
+    firstName: "Bonnie",
+    lastName: "Demo",
+    email: "bonnieli51@gmail.com",
+    hashedPassword: bcrypt.hashSync("password", 10),
+  })
+);
+users.push(
+  new User({
+    firstName: "Gleb",
+    lastName: "Demo",
+    email: "gmirzayev@gmail.com",
+    hashedPassword: bcrypt.hashSync("password", 10),
+  })
+);
+
 // Create trips
 const trips = [];
 

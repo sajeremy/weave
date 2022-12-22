@@ -16,9 +16,9 @@ module.exports = function (tripDetails) {
 
   let details = {
     from: username,
-    to: tripDetails.invitedUserEmail,
+    to: tripDetails.newMemberEmail,
     subject: `Weaver Trip Invitation: ${tripDetails.ownerName}'s ${tripDetails.tripName} `,
-    text: `Hi ${tripDetails.invitedUserName},\n ${tripDetails.ownerName} will like to invite you to their upcoming trip: ${tripDetails.tripName}.  If you wish to participate please accept your invitation below: \n https://weave.onrender.com/trips/${tripDetails.tripdId}/invite`,
+    text: `Hi ${tripDetails.newMemberFirstName},\n ${tripDetails.ownerName} will like to invite you to their upcoming trip: ${tripDetails.tripName}.  If you wish to participate please accept your invitation below: \n https://weave.onrender.com/trips/${tripDetails.tripId}/invite`,
   };
 
   mailTransporter.sendMail(details, (err) => {
