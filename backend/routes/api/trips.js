@@ -101,8 +101,9 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     }
   });
   //Send Email to new trip members
+  let tripDetails;
   newTripMembers.forEach((newMember) => {
-    let tripDetails = {
+    tripDetails = {
       newMemberId: newMember._id,
       newMemberEmail: newMember.email,
       newMemberFirstName: newMember.firstName,
@@ -113,7 +114,7 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     sendEmail(tripDetails);
   });
 
-  return res.json("emails sent");
+  return res.json(`${newTripMembers.length} email invitations have sent`);
 });
 
 //TRIP INVITE MEMBER
