@@ -1,4 +1,18 @@
 .map-container {
-    width: 100%;
+    width: 50%;
     height: 100vh;
+}
+
+.infowindow-title{
+    font-size: 1.15rem;
+}
+.infowindow-rating{
+    font-size: 1rem;
+}
+.infowindow-img {
+    width: 18rem;
+    height: 18rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    border-radius: 4%;
 }

@@ -32,7 +32,6 @@ function TripShowPage() {
       <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
       <button onClick={toEditPage}>Edit Trip</button>
       <Places trip={trip} />
-   
     </>
   );
 }
