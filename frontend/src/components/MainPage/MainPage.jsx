@@ -21,7 +21,7 @@ const MainPage = () => {
             </div>
           </div>
           <div className="media-section">
-            <img id="slide-1" className="media-picture" src={require('../../assets/canyon.png')}/>
+            <img id="slide-1 active" className="media-picture" src={require('../../assets/canyon.png')}/>
             <img id="slide-2" className="media-picture" src={require('../../assets/mountain.png')}/>
             <img id="slide-3" className="media-picture" src={require('../../assets/valley.png')}/>
           </div>
