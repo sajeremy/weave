@@ -165,13 +165,21 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     const placeId = results[0].place_id;
     const request = {
       placeId: placeId,
-      fields: ["name", "opening_hours", "website", "rating", "photos"],
+      fields: [
+        "name",
+        "formatted_address",
+        "opening_hours",
+        "website",
+        "rating",
+        "photos",
+      ],
     };
     const details = await getDetails(request);
     console.log(details);
     if (details.opening_hours) {
       trip.locations.push({
         title: details.name,
+        address: details.formatted_address,
         coordinates: { lat, lng },
         hours: details.opening_hours.weekday_text,
         rating: details.rating,
