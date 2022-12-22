@@ -160,7 +160,6 @@ router.patch("/:tripId", requireUser, async function (req, res, next) {
     const startDateObj = new Date(req.body.startDate);
     const endDateObj = new Date(req.body.endDate);
 
-    trip.owner = req.user._id;
     trip.startDate = startDateObj;
     trip.endDate = endDateObj;
     trip.name = req.body.name;
