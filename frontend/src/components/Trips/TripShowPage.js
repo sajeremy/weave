@@ -6,6 +6,7 @@ import { fetchTrip, clearTripErrors } from "../../store/trips";
 import "./TripShowPage.css";
 import Places from "../MapContainer/MapContainer";
 import PlaceIndex from "../Places/PlaceIndex";
+import MemberIndex from "../Members/MembersIndex";
 
 function TripShowPage() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function TripShowPage() {
       <div>{moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
       <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
       <button onClick={toEditPage}>Edit Trip</button>
+      <MemberIndex trip={trip} />
       <Places trip={trip} />
       <PlaceIndex trip={trip} />
     </>
