@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchTrip, updateTrip } from "../../store/trips";
+import "./InvitationPage.css";
 
 function InvitationPage() {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ function InvitationPage() {
   );
 
   const handleAccept = () => {
-    const members = trip.members.push(currentUser);
+    trip.members.push(currentUser);
+    const members = trip.members;
     const data = {
       ...trip,
       members,
@@ -30,10 +32,10 @@ function InvitationPage() {
   }, [dispatch, tripId]);
 
   return (
-    <>
+    <div id="buttons">
       <button onClick={handleAccept}>Accept </button>
       <button onClick={handleDecline}>Decline </button>
-    </>
+    </div>
   );
 }
 export default InvitationPage;
