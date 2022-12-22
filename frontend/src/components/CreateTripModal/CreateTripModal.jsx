@@ -3,7 +3,7 @@ import React from "react";
 // import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearTripErrors, createTrip } from "../../store/trips";
+import { clearTripErrors, createTrip, inviteTripMember } from "../../store/trips";
 import { useHistory } from 'react-router-dom';
 
 const CreateTripModal = ({close}) => {
@@ -12,8 +12,10 @@ const CreateTripModal = ({close}) => {
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [membersInput, setMembersInput] = useState("");
+    const [emailError, setEmailError] = useState("")
     const dispatch = useDispatch();
-    //   const newTrip = useSelector((state) => state.trips.new);
+    const newTrip = useSelector((state) => state.trips.new);
     const errors = useSelector((state) => state.errors.trips);
     const currentUser = useSelector((state) => state.session.user);
 
@@ -37,27 +39,50 @@ const CreateTripModal = ({close}) => {
           case "endDate":
             setState = setEndDate;
             break;
+          case "membersInput":
+            setState = setMembersInput;
+            break;
           default:
             throw Error("Unknown field in Create Trip Form");
         }
         return (e) => setState(e.currentTarget.value);
       };
     
-      const handleSubmit = (e) => {
-        e.preventDefault();
-    
-        const trip = {
-          name,
-          description,
-          startDate,
-          endDate,
-        };
-        
-        dispatch(createTrip({ trip }));
-        // history.push(`/trips/${}`);
-        // /trips/:tripId
-        // close();
-      };
+    const handleSubmit = (e) => {
+      e.preventDefault();  
+      const members = membersInput.split(", ")
+      if (members.every(validateEmail)){
+  
+      const trip = {
+        name,
+        description,
+        startDate,
+        endDate,
+      };      
+      dispatch(createTrip({ trip }));
+        } else {
+          setEmailError("Invalid Email(s)")
+        }
+    };
+            
+    if (newTrip){
+      const members = membersInput.split(", ")
+      const tripId = newTrip._id
+      const data = {
+        tripId, 
+        members,
+      }
+      dispatch(inviteTripMember(data))
+      history.push(`/trips/${newTrip._id}`)
+    }
+
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
 
     return (
         <form className="create-trip-form" onSubmit={handleSubmit}>
@@ -90,6 +115,14 @@ const CreateTripModal = ({close}) => {
                 </div>
             </div>
             <div className="errors">{errors && errors.name}</div>
+            <label> Invite Your Tripmates
+              <input type="text" 
+                onChange={update("membersInput")}
+                value={membersInput}>
+              </input>
+            </label>
+            <div className="errors">{emailError && emailError}</div>
+
             {!currentUser && <button className="login-signup-button" to="#">Log in or Sign up to Invite Tripmates</button>}
             <button type="submit" 
                 className="create-trip-button"
@@ -97,7 +130,9 @@ const CreateTripModal = ({close}) => {
                 <img className="map-icon" src={require('../../assets/mapicon.png')}></img>
                 <span className="create-trip-text">Create New Trip</span>
             </button>
+        
         </form>
+
     )
 }
 
