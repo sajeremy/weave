@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateTrip } from "../../store/trips";
@@ -7,8 +7,6 @@ function PlaceIndexItem({ place, index }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const trip = useSelector((state) => state.trips.trip);
-  console.log("trip", trip.locations);
-  console.log("index", index);
 
   const [voteCount, setVoteCount] = useState(0);
   const handleAdd = (e) => {

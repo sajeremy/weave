@@ -82,6 +82,7 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   let tripMemberEmails = [];
 
   //Filter emails that are not Weave Users
+  
   for (let i = 0; i < users.length; i++) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
