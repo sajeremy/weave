@@ -1,33 +1,46 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { updateTrip } from "../../store/trips";
 
-function PlaceIndexItem({ place }) {
-  const [voteCount, setVoteCount] = useState(place.voteCount);
+function PlaceIndexItem({ place, index }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const trip = useSelector((state) => state.trips.trip);
+  console.log("trip", trip.locations);
+  console.log("index", index);
 
+  const [voteCount, setVoteCount] = useState(0);
   const handleAdd = (e) => {
     setVoteCount(voteCount + 1);
-    e.currentTarget.disabled = true;
+    // e.currentTarget.disabled = true;
   };
 
   const handleSubtract = (e) => {
     setVoteCount(voteCount - 1);
-    e.currentTarget.disabled = true;
+    // e.currentTarget.disabled = true;
   };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    trip.locations.splice(index, 1);
+    dispatch(updateTrip(trip));
+    history.go(0);
+    // this.setstate
+  };
+
   return (
     <>
-      <h1>Testing</h1>
-      {/* <div>{place.title}</div>
-      <div>{place.category}</div>
-      <div>{startDateTime}</div>
-      <div>{endDateTime}</div>
+      <div>{place.title}</div>
+
+      {/* <div>{startDateTime}</div>
+      <div>{endDateTime}</div> */}
       <div>
         <div>{voteCount}</div>
-        <button onClick={handleAdd}>
-          <i class="fa-solid fa-thumbs-up"></i>
-        </button>
-        <button onClick={handleSubtract}>
-          <i class="fa-solid fa-hand-middle-finger"></i>
-        </button>
-      </div> */}
+        <button onClick={handleAdd}>+</button>
+        <button onClick={handleSubtract}>-</button>
+      </div>
+      <button onClick={handleDelete}>Delete Place</button>
     </>
   );
 }
