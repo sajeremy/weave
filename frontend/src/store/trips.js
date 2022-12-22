@@ -71,7 +71,7 @@ export const fetchTrip = (tripId) => async (dispatch) => {
 
 export const fetchUserTrips = (userId) => async (dispatch) => {
   try {
-    const res = await jwtFetch(`/api/users/${userId}`);
+    const res = await jwtFetch(`/api/trips/users/${userId}`);
     const trips = await res.json();
     dispatch(receiveUserTrips(trips));
   } catch (err) {
@@ -126,6 +126,21 @@ export const deleteTrip = (tripId) => async (dispatch) => {
       return dispatch(receiveErrors(resBody.errors));
     }
   }
+};
+
+export const inviteTripMember = (data) => async (dispatch) => {
+  const res = await jwtFetch(`/api/trips/${data.tripId}/invite`, {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  //   const trip = await res.json();
+  //   dispatch(receiveNewTrip(trip));
+  // } catch (err) {
+  //   const resBody = await err.json();
+  //   if (resBody.statusCode === 400) {
+  //     return dispatch(receiveErrors(resBody.errors));
+  //   }
+  // }
 };
 
 const nullErrors = null;
