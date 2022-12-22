@@ -3,7 +3,6 @@
 .main-page {
     height: 100vh;
     width: 100%;
-    margin-top: -87px;
 }
 
 .main-content-container {
@@ -75,15 +74,16 @@
 
 .media-section {
     width: 50%;
-    height: 100%;
-    box-sizing: border-box;
-    padding-right: 30px;
-    padding-top: 30px;
-    padding-bottom: 27px;
+    margin-left: 200px;
 }
 
 .media-picture {
-    width: 100%;
+    width: auto;
     height: 100%;
-    // padding:
+    position: absolute;
+    top: 0;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 27px;
+    box-sizing: border-box;
 }

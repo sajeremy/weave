@@ -25,8 +25,11 @@ function TripsItem({ trip }) {
     <div className="trip-item">
       <div className="trip-info-wrapper">
         <Link to={`/trips/${trip._id}`} className="Trip-Index-Item"><h2>{trip.name}</h2></Link>
-        <div> {moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
-        <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
+        <div className="profile-date-wrapper">
+          <div className="start-date"> {moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
+          <span>-</span>
+          <div className="end-date">{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
+        </div>
         <button onClick={handleDelete}>Delete</button>
       </div>
     </div>
