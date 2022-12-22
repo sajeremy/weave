@@ -23,15 +23,19 @@ router.get("/", async function (req, res, next) {
 //USER TRIP INDEX
 router.get("/users/:userId", async function (req, res, next) {
   let trips;
+  let userTrips;
   try {
     trips = await Trip.find();
+    userTrips = trips.filter((trip) => {
+      return trip.owner == req.params.userId;
+    });
   } catch (err) {
     const error = new Error("Trip not found");
     error.statusCode = 404;
     error.errors = { message: "No Trip found with that id" };
     return next(error);
   }
-  return res.json({ trips: trips });
+  return res.json({ trips: userTrips });
 });
 
 //TRIP SHOW
@@ -82,6 +86,7 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   let tripMemberEmails = [];
 
   //Filter emails that are not Weave Users
+  
   for (let i = 0; i < users.length; i++) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
@@ -101,8 +106,9 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     }
   });
   //Send Email to new trip members
+  let tripDetails;
   newTripMembers.forEach((newMember) => {
-    let tripDetails = {
+    tripDetails = {
       newMemberId: newMember._id,
       newMemberEmail: newMember.email,
       newMemberFirstName: newMember.firstName,
@@ -113,7 +119,7 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     sendEmail(tripDetails);
   });
 
-  return res.json("emails sent");
+  return res.json(`${newTripMembers.length} email invitations have sent`);
 });
 
 //TRIP INVITE MEMBER

@@ -60,6 +60,7 @@ function Profile() {
       </div>
       <div id="ProfilePage-user-info">
         <div>{currentUser.firstName}</div>
+        <div>{currentUser.lastName}</div>
         <div>{currentUser.email}</div>
         {/* <button>Edit Profile </button> */}
       </div>

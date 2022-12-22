@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateTrip } from "../../store/trips";
@@ -7,8 +7,6 @@ function PlaceIndexItem({ place, index }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const trip = useSelector((state) => state.trips.trip);
-  console.log("trip", trip.locations);
-  console.log("index", index);
 
   const [voteCount, setVoteCount] = useState(0);
   const handleAdd = (e) => {
@@ -31,15 +29,20 @@ function PlaceIndexItem({ place, index }) {
 
   return (
     <>
-      <div>{place.title}</div>
-
+      <a
+        href={place.website}
+      >
+        <div>{place.title}</div>
+        <div>Rating: {place.rating} stars</div>
+        <div>Hours: {place.hours}</div>
+      </a>
       {/* <div>{startDateTime}</div>
       <div>{endDateTime}</div> */}
-      <div>
+      {/* <div>
         <div>{voteCount}</div>
         <button onClick={handleAdd}>+</button>
         <button onClick={handleSubtract}>-</button>
-      </div>
+      </div> */}
       <button onClick={handleDelete}>Delete Place</button>
     </>
   );
