@@ -1,5 +1,9 @@
 import React from "react";
 import { useState, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { updateTrip } from "../../store/trips";
+import "@reach/combobox/styles.css";
+import mapStyles from "./MapStyles";
 import {
   GoogleMap,
   useLoadScript,
@@ -21,10 +25,6 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 
-import { updateTrip } from "../../store/trips";
-import "@reach/combobox/styles.css";
-import { useDispatch } from "react-redux";
-
 export default function Places({ trip }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
@@ -36,7 +36,18 @@ export default function Places({ trip }) {
 }
 
 function Map({ trip }) {
+  // console.log(trip);
+  // const center =
+  //   trip.locations.length !== 0 && Object.keys(trip).length !== 0
+  //     ? trip.locations[trip.locations.length - 1].coordinates
+  //     : { lat: 40.7128, lng: -74.006 };
+
   const center = useMemo(() => ({ lat: 40.7128, lng: -74.006 }), []);
+  const options = {
+    styles: mapStyles,
+    disableDefaultUI: true,
+    clickableIcons: false,
+  };
   const mapRef = React.useRef();
   const setMapRef = React.useCallback((map) => {
     mapRef.current = map;
@@ -62,12 +73,13 @@ function Map({ trip }) {
         center={center}
         mapContainerClassName="map-container"
         onLoad={setMapRef}
+        options={options}
       >
-        {selected &&
+        {trip.locations &&
           trip.locations.map((location, i) => {
             return (
               <Marker
-                key={location.name}
+                key={location.title}
                 position={location.coordinates}
                 label={{
                   text: `${i + 1}`,
@@ -106,11 +118,26 @@ function Map({ trip }) {
               setSelectedMarker(null);
             }}
           >
-            <div>
-              <h1>{selectedMarker.name}</h1>
-              <p>Rating: {selectedMarker.rating}</p>
-              <a href={selectedMarker.website}>{selectedMarker.website}</a>
-              {/* <img src={selectedMarker.photo} alt="help"></img> */}
+            <div className="infowindow-container">
+              <div>
+                <h1 className="infowindow-title">{selectedMarker.title}</h1>
+                <p className="infowindow-rating">
+                  Rating: {selectedMarker.rating}
+                </p>
+                <img
+                  className="infowindow-img"
+                  src={selectedMarker.photo}
+                  alt="No Photos Available"
+                ></img>
+                {selectedMarker.hours && (
+                  <ul>
+                    {selectedMarker.hours.map((dayHours) => {
+                      return <li>{dayHours}</li>;
+                    })}
+                  </ul>
+                )}
+              </div>
+              <a href={selectedMarker.website}>Click for more info</a>
             </div>
           </InfoWindow>
         ) : null}
@@ -138,18 +165,29 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     const placeId = results[0].place_id;
     const request = {
       placeId: placeId,
-      fields: ["name", "opening_hours", "website", "rating"],
+      fields: ["name", "opening_hours", "website", "rating", "photos"],
     };
     const details = await getDetails(request);
-
-    trip.locations.push({
-      title: details.name,
-      coordinates: { lat, lng },
-      hours: details.opening_hours,
-      rating: details.rating,
-      website: details.website,
-      // photo: details.photos[0].getUrl(),
-    });
+    console.log(details);
+    if (details.opening_hours) {
+      trip.locations.push({
+        title: details.name,
+        coordinates: { lat, lng },
+        hours: details.opening_hours.weekday_text,
+        rating: details.rating,
+        website: details.website,
+        photo: details.photos[0].getUrl(),
+      });
+    } else {
+      trip.locations.push({
+        title: details.name,
+        coordinates: { lat, lng },
+        rating: details.rating,
+        website: details.website,
+        photo: details.photos[0].getUrl(),
+      });
+    }
+    console.log(trip);
     setSelected({ lat, lng });
   };
 
