@@ -11,8 +11,7 @@ const tripSchema = Schema(
       required: true,
     },
     members: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: Array,
     },
     startDate: {
       type: Date,
@@ -26,8 +25,7 @@ const tripSchema = Schema(
       type: String,
       required: true,
     },
-    description: String,
-    locations: [PlaceSchema],
+    locations: Array,
   },
   {
     timestamps: true,

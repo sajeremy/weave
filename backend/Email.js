@@ -2,7 +2,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const { email, emailPswd } = require("./index.js");
 
-module.exports = function () {
+module.exports = function (tripDetails) {
   const username = email;
   const pswd = emailPswd;
 
@@ -16,9 +16,9 @@ module.exports = function () {
 
   let details = {
     from: username,
-    to: username,
-    subject: "test test",
-    text: "www.google.com LETS GOOOOOOOOOO",
+    to: tripDetails.invitedUserEmail,
+    subject: `Weaver Trip Invitation: ${tripDetails.ownerName}'s ${tripDetails.tripName} `,
+    text: `Hi ${tripDetails.invitedUserName},\n ${tripDetails.ownerName} will like to invite you to their upcoming trip: ${tripDetails.tripName}.  If you wish to participate please accept your invitation below: \n https://weave.onrender.com/trips/${tripDetails.tripdId}/users/${tripDetails.invitedUserId}/add`,
   };
 
   mailTransporter.sendMail(details, (err) => {
