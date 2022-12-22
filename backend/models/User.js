@@ -21,7 +21,7 @@ const userSchema = Schema(
       required: true,
     },
     availableDates: [Date],
-    trips: [TripSchema],
+    trips: Array,
   },
   {
     timestamps: true,

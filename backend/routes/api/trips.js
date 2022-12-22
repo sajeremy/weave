@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const User = mongoose.model("User");
 const Trip = mongoose.model("Trip");
 const { requireUser } = require("../../config/passport");
+const sendEmail = require("../../Email");
 
 //TRIP INDEX
 router.get("/", async function (req, res, next) {
@@ -68,6 +70,53 @@ router.post("/", requireUser, async function (req, res, next) {
   }
 });
 
+//TRIP INVITE MEMBER
+router.post("/:tripId/invite", requireUser, async function (req, res, next) {
+  let user;
+  let userInfo = {};
+  let trip;
+  try {
+    trip = await Trip.findById(req.params.tripId);
+    const email = req.body.email;
+    invitedUser = await User.findOne({
+      $or: [{ email: req.body.email }],
+    });
+    userInfo._id = invitedUser._id;
+    userInfo.firstName = invitedUser.firstName;
+    userInfo.lastName = invitedUser.lastName;
+    userInfo.email = invitedUser.email;
+    userInfo.trips = invitedUser.trips;
+    userInfo.owner = req.user.firstName;
+    userInfo.tripName = trip.name;
+    userInfo.tripId = trip._id;
+    userInfo.tripInfo = trip;
+  } catch (err) {
+    next(err);
+  }
+  const tripDetails = {
+    invitedUserId: userInfo._id,
+    invitedUserEmail: userInfo.email,
+    invitedUserName: userInfo.firstName,
+    ownerName: userInfo.owner,
+    tripName: userInfo.tripId,
+    tripId: userInfo.tripInfo._id,
+  };
+  sendEmail(tripDetails);
+  return res.json(userInfo);
+});
+
+// //TRIP ADD MEMBER
+// router.post("/:tripId/addMember", requireUser, async function (req, res, next) {
+//   try {
+//     const email = req.body.email;
+//     const user = await User.findOne({
+//       $or: [{ email: req.body.email }],
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 //TRIP UPDATE
 router.patch("/:tripId", requireUser, async function (req, res, next) {
   let trip;
@@ -81,8 +130,8 @@ router.patch("/:tripId", requireUser, async function (req, res, next) {
     trip.startDate = startDateObj;
     trip.endDate = endDateObj;
     trip.name = req.body.name;
-    trip.description = req.body.description;
     trip.locations = req.body.locations;
+    trip.members = req.body.members;
     trip.save();
   } catch (err) {
     next(err);
