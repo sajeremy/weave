@@ -12,6 +12,24 @@
 .trip-info-wrapper {
     margin-left: 30px;
     margin-top: 24px;
-
 }
 
+.trip-info-wrapper a {
+    text-decoration: none;
+}
+
+.trip-info-wrapper a:visited {
+    color: black;
+}
+
+.trip-info-wrapper h2 {
+    width: 202px;
+    height: 32px;
+    font-size: 25px;
+    line-height: 32px;
+    
+}
+
+.profile-date-wrapper {
+    display: flex;
+}

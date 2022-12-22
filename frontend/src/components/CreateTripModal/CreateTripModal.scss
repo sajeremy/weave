@@ -1,6 +1,6 @@
 @import '../../index.scss';
 
-.login-modal-container {
+.create-trip-form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -9,24 +9,32 @@
     margin-top: 20px;
 }
 
-.login-modal-container h1 {
+.create-trip-form h1 {
     font-weight: 500;
     font-size: 25px;
 }
 
 .name-label {
     position: absolute;
-    top: 100px;
-    left: 55px;
+    top: 35px;
+    left: 10px;
+    color: grey;
 }
 
 .login-name-input {
-    width: 381px;
-    height: 60px;
+    width: 371px;
+    height: 40px;
     border: 1px solid #DDDDDD;
     border-radius: 10px;
     margin-top: 30px;
     margin-bottom: 20px; 
+    padding-left: 10px;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.name-input-wrapper {
+    position: relative;
 }
 
 .date-wrapper {

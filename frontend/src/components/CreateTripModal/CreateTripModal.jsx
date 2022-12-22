@@ -4,8 +4,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearTripErrors, createTrip } from "../../store/trips";
+import { useHistory } from 'react-router-dom';
 
 const CreateTripModal = ({close}) => {
+    const history = useHistory();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -50,9 +52,11 @@ const CreateTripModal = ({close}) => {
           startDate,
           endDate,
         };
-    
+        
         dispatch(createTrip({ trip }));
-        close();
+        // history.push(`/trips/${}`);
+        // /trips/:tripId
+        // close();
       };
 
     return (
@@ -86,7 +90,7 @@ const CreateTripModal = ({close}) => {
                 </div>
             </div>
             <div className="errors">{errors && errors.name}</div>
-            <button className="login-signup-button" to="#">Log in or Sign up to Invite Tripmates</button>
+            {!currentUser && <button className="login-signup-button" to="#">Log in or Sign up to Invite Tripmates</button>}
             <button type="submit" 
                 className="create-trip-button"
                 disabled={!name || !startDate || !endDate}>
