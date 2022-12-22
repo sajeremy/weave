@@ -12,7 +12,7 @@ const placeSchema = Schema(
       type: Object,
       required: true,
     },
-
+    address: String,
     category: String,
     startDateTime: Date,
     endDateTime: Date,
