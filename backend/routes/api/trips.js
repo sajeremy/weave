@@ -50,9 +50,10 @@ router.get("/:tripId", async function (req, res, next) {
 
 //TRIP CREATE
 router.post("/", requireUser, async function (req, res, next) {
-  const startDateObj = new Date(req.body.trip.startDate);
-  const endDateObj = new Date(req.body.trip.endDate);
   try {
+    const startDateObj = new Date(req.body.trip.startDate);
+    const endDateObj = new Date(req.body.trip.endDate);
+
     const newTrip = new Trip({
       owner: req.user._id,
       startDate: startDateObj,
@@ -70,51 +71,84 @@ router.post("/", requireUser, async function (req, res, next) {
   }
 });
 
-//TRIP INVITE MEMBER
+//TRIP ADD MULTIPLE MEMBERS
 router.post("/:tripId/invite", requireUser, async function (req, res, next) {
-  let user;
-  let userInfo = {};
-  let trip;
-  try {
-    trip = await Trip.findById(req.params.tripId);
-    const email = req.body.email;
-    invitedUser = await User.findOne({
-      $or: [{ email: req.body.email }],
+  let users = req.body.members;
+  let weaveUsers = [];
+  let newTripMembers = [];
+  let checkUser;
+  let trip = await Trip.findById(req.params.tripId);
+  let tripOwner = await User.findById(trip.owner);
+  let tripMemberEmails = [];
+
+  //Filter emails that are not Weave Users
+  for (let i = 0; i < users.length; i++) {
+    checkUser = await User.findOne({
+      $or: [{ email: req.body.members[i] }],
     });
-    userInfo._id = invitedUser._id;
-    userInfo.firstName = invitedUser.firstName;
-    userInfo.lastName = invitedUser.lastName;
-    userInfo.email = invitedUser.email;
-    userInfo.trips = invitedUser.trips;
-    userInfo.owner = req.user.firstName;
-    userInfo.tripName = trip.name;
-    userInfo.tripId = trip._id;
-    userInfo.tripInfo = trip;
-  } catch (err) {
-    next(err);
+    if (checkUser) {
+      weaveUsers.push(checkUser);
+    }
   }
-  const tripDetails = {
-    invitedUserId: userInfo._id,
-    invitedUserEmail: userInfo.email,
-    invitedUserName: userInfo.firstName,
-    ownerName: userInfo.owner,
-    tripName: userInfo.tripId,
-    tripId: userInfo.tripInfo._id,
-  };
-  sendEmail(tripDetails);
-  return res.json(userInfo);
+  //Accumulate array of emails in Trip
+  for (let i = 0; i < trip.members.length; i++) {
+    tripMemberEmails.push(trip.members[i].email);
+  }
+  //Filter Weave Users that are not in Trip
+  weaveUsers.forEach((user) => {
+    if (!tripMemberEmails.includes(user.email)) {
+      newTripMembers.push(user);
+    }
+  });
+  //Send Email to new trip members
+  newTripMembers.forEach((newMember) => {
+    let tripDetails = {
+      newMemberId: newMember._id,
+      newMemberEmail: newMember.email,
+      newMemberFirstName: newMember.firstName,
+      ownerName: tripOwner.firstName,
+      tripName: trip.name,
+      tripId: trip._id,
+    };
+    sendEmail(tripDetails);
+  });
+
+  return res.json("emails sent");
 });
 
-// //TRIP ADD MEMBER
-// router.post("/:tripId/addMember", requireUser, async function (req, res, next) {
+//TRIP INVITE MEMBER
+// router.post("/:tripId/invite", requireUser, async function (req, res, next) {
+//   let user;
+//   let userInfo = {};
+//   let trip;
 //   try {
+//     trip = await Trip.findById(req.params.tripId);
 //     const email = req.body.email;
-//     const user = await User.findOne({
+//     invitedUser = await User.findOne({
 //       $or: [{ email: req.body.email }],
 //     });
+//     userInfo._id = invitedUser._id;
+//     userInfo.firstName = invitedUser.firstName;
+//     userInfo.lastName = invitedUser.lastName;
+//     userInfo.email = invitedUser.email;
+//     userInfo.trips = invitedUser.trips;
+//     userInfo.owner = req.user.firstName;
+//     userInfo.tripName = trip.name;
+//     userInfo.tripId = trip._id;
+//     userInfo.tripInfo = trip;
 //   } catch (err) {
 //     next(err);
 //   }
+//   const tripDetails = {
+//     invitedUserId: userInfo._id,
+//     invitedUserEmail: userInfo.email,
+//     invitedUserName: userInfo.firstName,
+//     ownerName: userInfo.owner,
+//     tripName: userInfo.tripId,
+//     tripId: userInfo.tripInfo._id,
+//   };
+//   sendEmail(tripDetails);
+//   return res.json(userInfo);
 // });
 
 //TRIP UPDATE
