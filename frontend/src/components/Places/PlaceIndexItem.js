@@ -29,15 +29,20 @@ function PlaceIndexItem({ place, index }) {
 
   return (
     <>
-      <div>{place.title}</div>
-
+      <a
+        href={place.website}
+      >
+        <div>{place.title}</div>
+        <div>Rating: {place.rating} stars</div>
+        <div>Hours: {place.hours}</div>
+      </a>
       {/* <div>{startDateTime}</div>
       <div>{endDateTime}</div> */}
-      <div>
+      {/* <div>
         <div>{voteCount}</div>
         <button onClick={handleAdd}>+</button>
         <button onClick={handleSubtract}>-</button>
-      </div>
+      </div> */}
       <button onClick={handleDelete}>Delete Place</button>
     </>
   );

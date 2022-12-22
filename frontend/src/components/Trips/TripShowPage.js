@@ -31,9 +31,9 @@ function TripShowPage() {
       <div>{moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
       <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
       <button onClick={toEditPage}>Edit Trip</button>
+      <MemberIndex trip={trip} />
       <Places trip={trip} />
       <PlaceIndex trip={trip} />
-      <MemberIndex trip={trip} />
     </>
   );
 }
