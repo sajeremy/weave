@@ -50,9 +50,10 @@ router.get("/:tripId", async function (req, res, next) {
 
 //TRIP CREATE
 router.post("/", requireUser, async function (req, res, next) {
-  const startDateObj = new Date(req.body.trip.startDate);
-  const endDateObj = new Date(req.body.trip.endDate);
   try {
+    const startDateObj = new Date(req.body.trip.startDate);
+    const endDateObj = new Date(req.body.trip.endDate);
+
     const newTrip = new Trip({
       owner: req.user._id,
       startDate: startDateObj,
@@ -68,6 +69,38 @@ router.post("/", requireUser, async function (req, res, next) {
   } catch (err) {
     next(err);
   }
+});
+
+//TRIP ADD MULTIPLE MEMBERS
+router.post("/:tripId/invite", requireUser, async function (req, res, next) {
+  let users = req.body.members;
+  let weaveUsers = [];
+  let newTripMembers = [];
+  let checkUser;
+  let trip = await Trip.findById(req.params.tripId);
+  let tripMemberEmails = [];
+
+  //Filter emails that are not Weaver Users
+  for (let i = 0; i < users.length; i++) {
+    checkUser = await User.findOne({
+      $or: [{ email: req.body.members[i] }],
+    });
+    if (checkUser) {
+      weaveUsers.push(checkUser);
+    }
+  }
+  //Accumulate array of emails in Trip
+  for (let i = 0; i < trip.members.length; i++) {
+    tripMemberEmails.push(trip.members[i].email);
+  }
+  //Filter Weaver Users that are not in Trip
+  weaveUsers.forEach((user) => {
+    if (!tripMemberEmails.includes(user.email)) {
+      newTripMembers.push(user);
+    }
+  });
+
+  return res.json(newTripMembers);
 });
 
 //TRIP INVITE MEMBER
@@ -104,18 +137,6 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   sendEmail(tripDetails);
   return res.json(userInfo);
 });
-
-// //TRIP ADD MEMBER
-// router.post("/:tripId/addMember", requireUser, async function (req, res, next) {
-//   try {
-//     const email = req.body.email;
-//     const user = await User.findOne({
-//       $or: [{ email: req.body.email }],
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 //TRIP UPDATE
 router.patch("/:tripId", requireUser, async function (req, res, next) {

@@ -45,15 +45,15 @@ trips.push(
     locations: [
       {
         title: "Parque de Bombas",
-        coordinates: { lat: 18.012, lon: -66.614 },
+        coordinates: { lat: 18.012, lng: -66.614 },
       },
       {
         title: "La Cueva del Indio",
-        coordinates: { lat: 18.493, lon: -66.642 },
+        coordinates: { lat: 18.493, lng: -66.642 },
       },
       {
         title: "Puente de Piedra",
-        coordinates: { lat: 17.934, lon: -67.196 },
+        coordinates: { lat: 17.934, lng: -67.196 },
       },
     ],
   })
@@ -68,15 +68,15 @@ trips.push(
     locations: [
       {
         title: "Campus Martius Park",
-        coordinates: { lat: 42.332, lon: -83.047 },
+        coordinates: { lat: 42.332, lng: -83.047 },
       },
       {
         title: "Fowling Warehouse Hamtramck",
-        coordinates: { lat: 42.393, lon: -83.044 },
+        coordinates: { lat: 42.393, lng: -83.044 },
       },
       {
         title: "University of Michigan Transportation Research Institute",
-        coordinates: { lat: 42.298, lon: -83.703 },
+        coordinates: { lat: 42.298, lng: -83.703 },
       },
     ],
   })
@@ -91,15 +91,15 @@ trips.push(
     locations: [
       {
         title: "Little Five Points",
-        coordinates: { lat: 33.764, lon: -84.349 },
+        coordinates: { lat: 33.764, lng: -84.349 },
       },
       {
         title: "Ponce City Market",
-        coordinates: { lat: 33.774, lon: -84.366 },
+        coordinates: { lat: 33.774, lng: -84.366 },
       },
       {
         title: "Piedmont Park",
-        coordinates: { lat: 33.787, lon: -84.376 },
+        coordinates: { lat: 33.787, lng: -84.376 },
       },
     ],
   })
