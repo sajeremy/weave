@@ -36,13 +36,17 @@ export default function Places({ trip }) {
 }
 
 function Map({ trip }) {
-  // console.log(trip);
-  // const center =
-  //   trip.locations.length !== 0 && Object.keys(trip).length !== 0
-  //     ? trip.locations[trip.locations.length - 1].coordinates
-  //     : { lat: 40.7128, lng: -74.006 };
+  // console.log("test", trip);
+  let center;
 
-  const center = useMemo(() => ({ lat: 40.7128, lng: -74.006 }), []);
+  if (trip && trip.locations?.length) {
+    center = trip.locations[trip.locations.length - 1]?.coordinates;
+  } else {
+    center = { lat: 40.7128, lng: -74.006 };
+  }
+  console.log("center", center);
+
+  // const center = useMemo(() => ({ lat: 40.7128, lng: -74.006 }), []);
   const options = {
     styles: mapStyles,
     disableDefaultUI: true,
