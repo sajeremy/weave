@@ -1,5 +1,5 @@
 .map {
-    width: 50vw;
+    width: 45vw;
     height: 90vh;
     margin-top: 25px;
     margin-right: 50px;
@@ -25,4 +25,37 @@
     padding-top: .25rem;
     padding-bottom: .25rem;
     border-radius: 4%;
+}
+
+.combo-search-bar-container {
+    position: absolute;
+    top: 1rem;
+    z-index: 10;
+}
+
+.combo-search-bar-container input {
+    padding: .5rem;
+    font-size: 1rem;
+    width: 60%;
+    margin-right: 1rem;
+}
+
+.combo-search-bar-container input:focus {
+    outline: none;
+    border: 1px solid #235251;
+    border-color: #235251;
+    box-shadow: 0 0 5px #235251;
+}
+
+.save-button {
+    width: 89px;
+    padding: 12px 21px;
+    height: 48px;
+    background-color: #235251;
+    border-radius: 74px;
+    margin-left: 22px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
 }
