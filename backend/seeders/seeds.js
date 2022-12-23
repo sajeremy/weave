@@ -63,7 +63,7 @@ const trips = [];
 trips.push(
   new Trip({
     owner: users[0]._id,
-    members: [users[1], users[2], users[3], users[4]],
+    members: [users[0], users[1], users[2], users[3], users[4]],
     startDate: "2023-01-17",
     endDate: "2023-01-24",
     name: "Vacation in Puerto Rico",
@@ -86,7 +86,7 @@ trips.push(
 trips.push(
   new Trip({
     owner: users[0]._id,
-    members: [users[5], users[6], users[7]],
+    members: [users[0], users[5], users[6], users[7]],
     startDate: "2023-02-06",
     endDate: "2023-02-09",
     name: "Autonomous Vehicles Conference in Detroit",
@@ -109,7 +109,7 @@ trips.push(
 trips.push(
   new Trip({
     owner: users[8]._id,
-    members: [users[0], users[2], users[3], users[7]],
+    members: [users[0], users[2], users[3], users[7], users[8]],
     startDate: "2023-03-02",
     endDate: "2023-03-09",
     name: "Atlanta Salsa Bachata Festival",
