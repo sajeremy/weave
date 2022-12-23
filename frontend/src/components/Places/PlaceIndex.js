@@ -15,7 +15,7 @@ function PlaceIndex({ trip }) {
   return (
     <>
       <h1 className="places-header">Places to Go</h1>
-
+      <div className="place-index-container">
       {trip.locations &&
         trip.locations.map((place, index) => (
           <>
@@ -23,6 +23,7 @@ function PlaceIndex({ trip }) {
             <PlaceIndexItem key={place._id} place={place} index={index} />
           </>
         ))}
+      </div>
     </>
   );
 }

@@ -12,7 +12,7 @@ function Profile() {
     state.trips.trips ? Object.values(state.trips.trips) : []
   );
   // console.log("testing", userTrips); commented out for render
-
+  const modalFunctions = {};
   const current = new Date();
   const date = `${
     current.getMonth() + 1
@@ -34,6 +34,7 @@ function Profile() {
   // } else {
 
   return (
+    
     <div className="trips-page-container">
       {/* {userTrips.map((trip) => (
         <>
@@ -58,13 +59,14 @@ function Profile() {
               <TripsItem key={filteredTrips._id} trip={filteredTrips} />
             ))}
       </div>
-      <div id="ProfilePage-user-info">
-        <div>{currentUser.firstName}</div>
-        <div>{currentUser.lastName}</div>
+      <div className="user-profile-info">
+        <div className="letter-portrait"><span>{currentUser.firstName.split('')[0]}</span></div>
+        <div className="name-wrapper">{currentUser.firstName} {currentUser.lastName}</div>
         <div>{currentUser.email}</div>
         {/* <button>Edit Profile </button> */}
       </div>
     </div>
+    
   );
 }
 

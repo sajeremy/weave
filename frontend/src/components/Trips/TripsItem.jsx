@@ -30,7 +30,7 @@ function TripsItem({ trip }) {
           <span>-</span>
           <div className="end-date">{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
         </div>
-        <button onClick={handleDelete}>Delete</button>
+        <button className="delete-trip-button" onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );
