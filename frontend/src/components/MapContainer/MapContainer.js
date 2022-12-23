@@ -64,7 +64,7 @@ function Map({ trip }) {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [selected, setSelected] = useState(null);
   return (
-    <>
+    <div className="map">
       <div className="damjustin">
         <SearchBar
           changeCenter={changeCenter}
@@ -146,7 +146,7 @@ function Map({ trip }) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-    </>
+    </div>
   );
 }
 

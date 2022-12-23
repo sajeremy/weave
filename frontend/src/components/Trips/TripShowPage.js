@@ -3,7 +3,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchTrip, clearTripErrors } from "../../store/trips";
-import "./TripShowPage.css";
+import "./TripShowPage.scss";
 import Places from "../MapContainer/MapContainer";
 import PlaceIndex from "../Places/PlaceIndex";
 import MemberIndex from "../Members/MembersIndex";
@@ -25,16 +25,20 @@ function TripShowPage() {
     history.replace(`/trips/${tripId}/edit`);
   };
   return (
-    <>
-      <h1>{trip.name}</h1>
-      <div>{trip.description}</div>
-      <div>{moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
-      <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
-      <button onClick={toEditPage}>Edit Trip</button>
-      <MemberIndex trip={trip} />
-      <Places trip={trip} />
-      <PlaceIndex trip={trip} />
-    </>
+    <div className="showpage-container">
+      <div className="left-info">
+        <h1>{trip.name}</h1>
+        <div>{trip.description}</div>
+        <div>{moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
+        <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
+        <button onClick={toEditPage}>Edit Trip</button>
+        <MemberIndex trip={trip} />
+        <PlaceIndex trip={trip} />
+      </div>
+      <div className="right-map">
+        <Places trip={trip} />
+      </div>
+    </div>
   );
 }
 
