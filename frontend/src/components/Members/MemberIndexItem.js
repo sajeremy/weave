@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateTrip } from "../../store/trips";
+import './MemberIndexItem.scss';
 
 function MemberIndexItem({ member, index }) {
   const dispatch = useDispatch();
@@ -17,10 +18,8 @@ function MemberIndexItem({ member, index }) {
 
   return (
     <>
-      <div>{member.firstName}</div>
-      <div>{member.lastName}</div>
-      {/* { if(trip.owner === currentUserId)  */}
-      <button onClick={handleDelete}>Remove </button>
+      <div className="name-wrapper">{member.firstName} {member.lastName}</div>
+      <button className="delete-member" onClick={handleDelete}>X</button>
       {/* } */}
     </>
   );

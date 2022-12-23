@@ -16,21 +16,22 @@ function PlaceIndexItem({ place, index }) {
     history.go(0);
     // this.setstate
   };
-  console.log(place.hours);
+
   return (
     <div className="place-container">
       <div className="marker-number">
-        1
+        {index+1}
       </div>
       <div className="picture-wrapper">
-        Test
+        <img className="place-photo" src={place.photo}/>
       </div>
       <div className="info-wrapper">
-        <a href={place.website}>
-          <div>{place.title}</div>
-          <div>Rating: {place.rating} stars</div>
-          <div>Hours: {place.hours && place.hours[0]}</div>
-        </a>
+        { place.website && <a className="website-link" href={place.website} target="_blank"> 
+          <div>{place.title && place.title}</div>
+        </a> }
+          { place.rating  && <div className="place-rating">Rating: { place.rating } stars</div> }
+          { place.hours && <div>Hours:  { place.hours[4]}</div> }
+        
       
       {/* <div>{startDateTime}</div>
       <div>{endDateTime}</div> */}

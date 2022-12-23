@@ -20,6 +20,11 @@
     margin-left: 10px;
 }
 
+.marker-number {
+    margin-left: 7px;
+    margin-top: 7px;
+}
+
 .info-wrapper {
     display: flex;
     flex-direction: column;
@@ -32,4 +37,18 @@
     position: absolute;
     right: 25px;
     top: 20px;
+    cursor: pointer;
+}
+
+.place-photo {
+    width: 100%;
+    height: 100%;
+}
+
+.website-link {
+    margin-bottom: 3px;
+}
+
+.place-rating {
+    margin-bottom: 3px;
 }

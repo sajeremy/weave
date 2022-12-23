@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import PlaceIndexItem from "./PlaceIndexItem";
+import './PlaceIndex.scss';
 
 function PlaceIndex({ trip }) {
   // const places = useSelector((state) =>
@@ -13,7 +14,7 @@ function PlaceIndex({ trip }) {
 
   return (
     <>
-      <div>Places to Go</div>
+      <h1 className="places-header">Places to Go</h1>
 
       {trip.locations &&
         trip.locations.map((place, index) => (

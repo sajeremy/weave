@@ -1,0 +1,17 @@
+.member-container {
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.errors {
+    margin-top: 5px;
+}
+
+.invite-button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}

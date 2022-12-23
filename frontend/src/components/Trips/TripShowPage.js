@@ -15,7 +15,7 @@ function TripShowPage() {
   const trip = useSelector((state) =>
     state.trips.trip ? state.trips.trip : {}
   );
-
+  // debugger
   useEffect(() => {
     dispatch(fetchTrip(tripId));
     return () => dispatch(clearTripErrors());
@@ -24,14 +24,30 @@ function TripShowPage() {
   const toEditPage = () => {
     history.replace(`/trips/${tripId}/edit`);
   };
+
+  const formatDate = (dateString) => {
+    dateString = new Date();
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    };
+    return dateString.toLocaleDateString('default', options)
+  }
+
   return (
     <div className="showpage-container">
       <div className="left-info">
-        <h1>{trip.name}</h1>
-        <div>{trip.description}</div>
-        <div>{moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
-        <div>{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
-        <button onClick={toEditPage}>Edit Trip</button>
+        <div className="top-row-info">
+          <h1 className="trip-name-header">{trip.name}</h1>
+          <button className="edit-button" onClick={toEditPage}><img src={require('../../assets/edit.png')}/></button>
+        </div>
+        <div className="date-container">
+          <div className="start-date date-field">{formatDate(trip.startDate)}</div>
+          <span className="date-seperator">-</span>
+          <div className="end-date date-field">{formatDate(trip.startDate)}</div>
+        </div>
+        
         <MemberIndex trip={trip} />
         <PlaceIndex trip={trip} />
       </div>
