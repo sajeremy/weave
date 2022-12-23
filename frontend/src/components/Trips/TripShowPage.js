@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -7,11 +7,15 @@ import "./TripShowPage.scss";
 import Places from "../MapContainer/MapContainer";
 import PlaceIndex from "../Places/PlaceIndex";
 import MemberIndex from "../Members/MembersIndex";
+import Modal from '../Modal/Modal';
+import EditTripModal from "../EditTripModal/EditTripModal";
 
 function TripShowPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { tripId } = useParams();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [updateTrip, setUpdateTrip] = useState(false);
   const trip = useSelector((state) =>
     state.trips.trip ? state.trips.trip : {}
   );
@@ -19,11 +23,13 @@ function TripShowPage() {
   useEffect(() => {
     dispatch(fetchTrip(tripId));
     return () => dispatch(clearTripErrors());
-  }, [dispatch, tripId]);
+  }, [dispatch, tripId, updateTrip]);
 
-  const toEditPage = () => {
-    history.replace(`/trips/${tripId}/edit`);
-  };
+  const modalFunctions = {tripId: tripId, setUpdateTrip: (shown) => setUpdateTrip(shown)};
+
+  // const toEditPage = () => {
+  //   history.replace(`/trips/${tripId}/edit`);
+  // };
 
   const formatDate = (dateString) => {
     dateString = new Date();
@@ -36,11 +42,12 @@ function TripShowPage() {
   }
 
   return (
+    <>
     <div className="showpage-container">
       <div className="left-info">
         <div className="top-row-info">
           <h1 className="trip-name-header">{trip.name}</h1>
-          <button className="edit-button" onClick={toEditPage}><img src={require('../../assets/edit.png')}/></button>
+          <button className="edit-button" onClick={()=>setShowEditModal(true)}><img src={require('../../assets/edit.png')}/></button>
         </div>
         <div className="date-container">
           <div className="start-date date-field">{formatDate(trip.startDate)}</div>
@@ -55,6 +62,8 @@ function TripShowPage() {
         <Places trip={trip} />
       </div>
     </div>
+    {showEditModal && <Modal component={EditTripModal} close={(shown) => setShowEditModal(shown)} modalFunctions={modalFunctions} />}
+    </>
   );
 }
 

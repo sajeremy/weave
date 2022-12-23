@@ -129,6 +129,7 @@ export const deleteTrip = (tripId) => async (dispatch) => {
 };
 
 export const inviteTripMember = (data) => async (dispatch) => {
+  console.log("email sent");
   const res = await jwtFetch(`/api/trips/${data.tripId}/invite`, {
     method: "POST",
     body: JSON.stringify(data),

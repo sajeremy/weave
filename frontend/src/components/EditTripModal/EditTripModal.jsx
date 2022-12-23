@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTrip, clearTripErrors, updateTrip } from "../../store/trips";
+import './EditTripModal.scss';
 
-function EditTripForm() {
+function EditTripModal({close, modalFunctions}) {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const { tripId } = useParams();
   const trip = useSelector((state) =>
     state.trips.trip ? state.trips.trip : {}
   );
+  console.log("modalfunctions", modalFunctions);
+  const tripId = modalFunctions.tripId;
 
   const [name, setName] = useState(trip.name);
   const [startDate, setStartDate] = useState(
@@ -52,41 +52,53 @@ function EditTripForm() {
       endDate,
     };
     dispatch(updateTrip(data));
-
-    history.replace(`/trips/${tripId}`);
+    modalFunctions.setUpdateTrip(true);
+    close(false);
   };
   return (
     <>
-      <h1>Edit Trip Details</h1>
       {trip.name && (
-        <form>
-          <label>
-            Name
-            <input type="text" onChange={update("name")} value={name}></input>
-          </label>
-
-          <label>
-            Start Date:
-            <input
-              type="date"
-              onChange={update("startDate")}
-              value={startDate}
-            ></input>
-          </label>
-
-          <label>
-            End Date:
-            <input
-              type="date"
-              onChange={update("endDate")}
-              value={endDate}
-            ></input>
-          </label>
-          <button onClick={handleSubmit}> Update Trip</button>
+        // <form className="create-trip-form" onSubmit={handleSubmit}>
+        // <h1>Plan a new trip</h1>
+        // <div className="name-input-wrapper">
+        //     <label className="name-label">Name</label>
+        //     <input type="text"
+        //         onChange={update("name")}   
+        //         value={name}
+        //         className="login-name-input">
+        //     </input>
+        // </div>
+        <form className="edit-trip-form">
+          <h1>Edit Trip Details</h1>
+          <div className="name-input-wrapper">
+            <label className="name-label">Name</label>
+              <input type="text" className="login-name-input" onChange={update("name")} value={name}></input>
+          </div>
+          <div className="date-wrapper">
+          <div className="start-date-wrapper">
+            <label>Start Date:</label>
+              <input
+                type="date"
+                onChange={update("startDate")}
+                value={startDate}
+                className="start-date"
+              ></input>
+              </div>
+              <div className="end-date-wrapper">
+                <label>End Date:</label>
+              <input
+                type="date"
+                onChange={update("endDate")}
+                value={endDate}
+                className="end-date"
+              ></input>
+            </div>
+          </div>
+          <button className="update-trip-button" onClick={handleSubmit}> Update Trip</button>
         </form>
       )}
-    </>
+      </>
   );
 }
 
-export default EditTripForm;
+export default EditTripModal;

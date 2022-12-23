@@ -1,0 +1,76 @@
+@import '../../index.scss';
+
+.edit-trip-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    margin-top: 20px;
+}
+
+.edit-trip-form h1 {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.name-label {
+    position: absolute;
+    top: 35px;
+    left: 10px;
+    color: grey;
+}
+
+.login-name-input {
+    width: 371px;
+    height: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px; 
+    padding-left: 10px;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.name-input-wrapper {
+    position: relative;
+}
+
+.date-wrapper {
+    width: 381px;
+    height: 60px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;  
+    margin-bottom: 20px;  
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-wrapper label {
+    color: grey;
+}
+
+.date-wrapper input {
+    width: 160px;
+    height: 45px;
+    border: none;
+}
+
+.date-wrapper input:focus {
+    outline: none;
+}
+
+.update-trip-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 19px;
+    line-height: 24px;  
+    background: #235251;
+    border-radius: 74px;
+    color: white;
+    width: 158px;
+    height: 48px;
+}
