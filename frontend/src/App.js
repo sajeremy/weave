@@ -11,6 +11,7 @@ import SignupForm from "./components/SessionForms/SignupForm";
 import Profile from "./components/Profile/Profile";
 import NewTripForm from "./components/Trips/NewTripForm";
 import Places from "./components/MapContainer/MapContainer";
+import AboutPage from "./components/About/About";
 
 import { getCurrentUser } from "./store/session";
 import TripShowPage from "./components/Trips/TripShowPage";
@@ -34,7 +35,7 @@ function App() {
           <AuthRoute exact path="/signup" component={SignupForm} />
 
           <ProtectedRoute exact path="/profile" component={Profile} />
-          <ProtectedRoute exact path="/bonnie" component={Places} />
+          <ProtectedRoute exact path="/bonnie" component={AboutPage} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
           <ProtectedRoute
             exact
