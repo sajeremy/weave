@@ -9,6 +9,7 @@ import MainPage from "./components/MainPage/MainPage";
 import Profile from "./components/Profile/Profile";
 import NewTripForm from "./components/Trips/NewTripForm";
 import Places from "./components/MapContainer/MapContainer";
+import AboutPage from "./components/About/About";
 
 import { getCurrentUser } from "./store/session";
 import TripShowPage from "./components/Trips/TripShowPage";
@@ -30,7 +31,8 @@ function App() {
           <AuthRoute exact path="/" component={MainPage} />
 
           <ProtectedRoute exact path="/profile" component={Profile} />
-          <ProtectedRoute exact path="/bonnie" component={Places} />
+          {/* <ProtectedRoute exact path="/bonnie" component={Places} /> */}
+          <AuthRoute exact path="/bonnie" component={AboutPage} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
           <ProtectedRoute
             exact
@@ -49,7 +51,9 @@ function App() {
             path="/trips/:tripId"
             component={TripShowPage}
           />
-          <Route path="*"><Redirect to="/"/></Route>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
         </Switch>
       </>
     )
