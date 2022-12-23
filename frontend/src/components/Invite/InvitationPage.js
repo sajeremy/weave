@@ -39,10 +39,10 @@ function InvitationPage() {
 
   return (
     <div id="Invitation-Page">
-      <div>You're Invited to:</div>
-      <div>
+      <div>You're Invited to A Trip</div>
+      {/* <div>
         {owner && owner.firstName} {owner && owner.lastName}'s Trip
-      </div>
+      </div> */}
       <div>{trip.name}</div>
       <div> From {moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
       <div> To {moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
