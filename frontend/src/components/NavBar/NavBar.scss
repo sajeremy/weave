@@ -63,6 +63,10 @@
     text-decoration: none;
 }
 
+.trips-button:hover {
+    background-color: $HOVERGREEN;
+}
+
 .nav-signup-button {
     font-size: 19px;
     line-height: 24px;
@@ -71,6 +75,10 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+}
+
+.nav-signup-button:hover {
+    color: $HOVERGREEN;
 }
 
 .nav-login-button {
@@ -83,6 +91,10 @@
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.nav-login-button {
+    background-color: $HOVERGREEN;
 }
 
 .nav-login-link:hover {
@@ -98,6 +110,10 @@
     background-color: transparent;
     cursor: pointer;
     padding-left: 24px;
+}
+
+.nav-logout-button:hover {
+    color: $HOVERGREEN;
 }
 
 // .nav-signup-link:visited {

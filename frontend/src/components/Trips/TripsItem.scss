@@ -10,12 +10,13 @@
 }
 
 .trip-info-wrapper {
-    // margin-left: 30px;
+    margin-left: 30px;
     margin-top: 24px;
 }
 
 .trip-info-wrapper a {
     text-decoration: none;
+    // margin-bottom: 10px;
 }
 
 .trip-info-wrapper a:visited {
@@ -23,13 +24,27 @@
 }
 
 .trip-info-wrapper h2 {
-    width: 202px;
+    width: 100%;
     height: 32px;
     font-size: 25px;
     line-height: 32px;
+    margin-bottom: 7px;
     
 }
 
 .profile-date-wrapper {
     display: flex;
+}
+
+.delete-trip-button {
+    margin-top: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 24px;
+    width: 77px;
+    height: 24px;
+    background: #235251;
+    border-radius: 74px;
 }
