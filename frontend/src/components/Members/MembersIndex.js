@@ -2,6 +2,7 @@ import MemberIndexItem from "./MemberIndexItem";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { inviteTripMember } from "../../store/trips";
+import './MembersIndex.scss';
 
 function MemberIndex({ trip }) {
   const dispatch = useDispatch();
@@ -35,27 +36,24 @@ function MemberIndex({ trip }) {
 
   return (
     <>
-      <div>Members</div>
+      <div className="member-container">
+        {trip.members &&
+        trip.members.map((member, index) => {
+          if(member._id !== trip.owner) return <MemberIndexItem key={member._id} member={member} index={index} />
+        })}
+      </div>
       <form>
         <label>
-          Invite more
           <input
             type="text"
             onChange={(e) => setMembersInput(e.target.value)}
             value={membersInput}
+            placeholder="Enter email to invite"
           ></input>
         </label>
+        <button className="invite-button" onClick={handleInvite}>+</button>
         <div className="errors">{emailError && emailError}</div>
-        <button onClick={handleInvite}>+</button>
       </form>
-
-      {trip.members &&
-        trip.members.map((member, index) => (
-          <>
-            <div></div>
-            <MemberIndexItem key={member._id} member={member} index={index} />
-          </>
-        ))}
     </>
   );
 }

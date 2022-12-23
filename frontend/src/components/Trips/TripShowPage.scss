@@ -9,9 +9,38 @@
 
 .left-info {
   margin-top: 100px;
-  margin-left: 25px;
+  margin-left: 51px;
   width: 100%;
   overflow: scroll;
+}
+
+.trip-name-header {
+  font-size: 35px;
+  width: 560px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DDDDDD;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.edit-button {
+  background-color: transparent;
+  border: none;
+  margin-left: -40px;
+  cursor: pointer;
+}
+
+.date-container {
+  margin-bottom: 13px;
+}
+
+.date-field {
+  display: inline-block
+}
+
+.date-seperator {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .right-map {
