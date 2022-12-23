@@ -61,6 +61,27 @@
 .date-wrapper input:focus {
     outline: none;
 }
+.invitation-label {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: grey;
+}
+
+.invitation-input {
+    width: 371px;
+    height: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+
+    padding-left: 10px;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.invitation-wrapper {
+    position: relative;
+}
 
 .login-signup-button {
     color: $GREEN;
@@ -69,4 +90,8 @@
     cursor: pointer;
     font-size: 19px;
     line-height: 24px;
+}
+
+.errors{
+    color: red
 }

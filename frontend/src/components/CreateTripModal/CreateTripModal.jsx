@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearTripErrors, createTrip, inviteTripMember } from "../../store/trips";
 import { useHistory } from 'react-router-dom';
 
-const CreateTripModal = ({close}) => {
+const CreateTripModal = ({close, modalFunctions}) => {
     const history = useHistory();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -84,6 +84,11 @@ const CreateTripModal = ({close}) => {
         );
     };
 
+    const handleSwitchSignup = () => {
+      close(false);
+      modalFunctions.setShowSignupModal(true);
+    }
+
     return (
         <form className="create-trip-form" onSubmit={handleSubmit}>
             <h1>Plan a new trip</h1>
@@ -115,15 +120,18 @@ const CreateTripModal = ({close}) => {
                 </div>
             </div>
             <div className="errors">{errors && errors.name}</div>
-            <label> Invite Your Tripmates
-              <input type="text" 
-                onChange={update("membersInput")}
-                value={membersInput}>
-              </input>
-            </label>
+            <div className="invitation-wrapper">
+              <label className="invitation-label"> Invite Your Tripmates </label>
+                <input type="text" 
+                  className='invitation-input'
+                  onChange={update("membersInput")}
+                  value={membersInput}>
+               </input>
+            </div>
+
             <div className="errors">{emailError && emailError}</div>
 
-            {!currentUser && <button className="login-signup-button" to="#">Log in or Sign up to Invite Tripmates</button>}
+            {!currentUser && <button className="login-signup-button" onClick={handleSwitchSignup}>Log in or Sign up to Invite Tripmates</button>}
             <button type="submit" 
                 className="create-trip-button"
                 disabled={!name || !startDate || !endDate}>
