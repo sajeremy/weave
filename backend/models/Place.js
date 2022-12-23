@@ -3,16 +3,18 @@ const Schema = mongoose.Schema;
 
 const placeSchema = Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
-
     coordinates: {
       type: Object,
       required: true,
     },
-    pictureUrl: String,
+    hours: Array,
+    photo: String,
+    rating: Number,
+    title: {
+      type: String,
+      required: true,
+    },
+    website: String,
     address: String,
     category: String,
     startDateTime: Date,

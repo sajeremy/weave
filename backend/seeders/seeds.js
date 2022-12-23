@@ -69,16 +69,56 @@ trips.push(
     name: "Vacation in Puerto Rico",
     locations: [
       {
-        title: "Parque de Bombas",
         coordinates: { lat: 18.012, lng: -66.614 },
+        hours: [
+          "Monday: 9:30 AM - 5:00 PM",
+          "Tuesday: 9:30 AM - 5:00 PM",
+          "Wednesday: 9:30 AM - 5:00 PM",
+          "Thursday: 9:30 AM - 5:00 PM",
+          "Friday: 9:30 AM - 5:00 PM",
+          "Saturday: 9:30 AM - 5:00 PM",
+          "Sunday: 9:30 AM - 5:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/105988571914224840772",
+        rating: 4.7,
+        title: "Parque de Bombas",
+        website: "",
+        address: "296P+QG6 Plaza Las Delicias, Ponce, 00731, Puerto Rico",
       },
       {
-        title: "La Cueva del Indio",
         coordinates: { lat: 18.493, lng: -66.642 },
+        hours: [
+          "Monday: 9:30 AM - 5:00 PM",
+          "Tuesday: 9:30 AM - 5:00 PM",
+          "Wednesday: 9:30 AM - 5:00 PM",
+          "Thursday: 9:30 AM - 5:00 PM",
+          "Friday: 9:30 AM - 5:00 PM",
+          "Saturday: 9:30 AM - 5:00 PM",
+          "Sunday: 9:30 AM - 5:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/110915644480179389748",
+        rating: 4.6,
+        title: "Reserva Marina La Cueva del Indio",
+        website:
+          "https://www.discoverpuertorico.com/profile/cueva-del-indio-arecibo/8721",
+        address: "",
       },
       {
-        title: "Puente de Piedra",
         coordinates: { lat: 17.934, lng: -67.196 },
+        hours: [
+          "Monday: 9:30 AM - 5:00 PM",
+          "Tuesday: 9:30 AM - 5:00 PM",
+          "Wednesday: 9:30 AM - 5:00 PM",
+          "Thursday: 9:30 AM - 5:00 PM",
+          "Friday: 9:30 AM - 5:00 PM",
+          "Saturday: 9:30 AM - 5:00 PM",
+          "Sunday: 9:30 AM - 5:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/112788636437282198896",
+        rating: 4.5,
+        title: "Puente de Piedra",
+        website: "",
+        address: "WRM3+GPX, Cabo Rojo, Puerto Rico",
       },
     ],
   })
@@ -92,16 +132,55 @@ trips.push(
     name: "Autonomous Vehicles Conference in Detroit",
     locations: [
       {
-        title: "Campus Martius Park",
         coordinates: { lat: 42.332, lng: -83.047 },
+        hours: [
+          "Monday: 9:30 AM - 5:00 PM",
+          "Tuesday: 9:30 AM - 5:00 PM",
+          "Wednesday: 9:30 AM - 5:00 PM",
+          "Thursday: 9:30 AM - 5:00 PM",
+          "Friday: 9:30 AM - 5:00 PM",
+          "Saturday: 9:30 AM - 5:00 PM",
+          "Sunday: 9:30 AM - 5:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/106338701735648905646",
+        rating: 4.7,
+        title: "Campus Martius Park",
+        website: "https://downtowndetroitparks.com/parks/campus-martius/",
+        address: "",
       },
       {
-        title: "Fowling Warehouse Hamtramck",
         coordinates: { lat: 42.393, lng: -83.044 },
+        hours: [
+          "Monday: Closed",
+          "Tuesday: 5:00 - 11:00 PM",
+          "Wednesday: 5:00 - 11:00 PM",
+          "Thursday: 5:00 - 11:00 PM",
+          "Friday: 5:00 PM - 12:00 AM",
+          "Saturday: 2:00 PM - 12:00 AM",
+          "Sunday: 12:00 - 6:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/1054…869014169318270",
+        rating: 4.6,
+        title: "Fowling Warehouse Hamtramck",
+        website: "https://fowlingwarehouse.com/hamtramck",
+        address: "",
       },
       {
-        title: "University of Michigan Transportation Research Institute",
         coordinates: { lat: 42.298, lng: -83.703 },
+        hours: [
+          "Monday: 9:30 AM - 5:00 PM",
+          "Tuesday: 9:30 AM - 5:00 PM",
+          "Wednesday: 9:30 AM - 5:00 PM",
+          "Thursday: 9:30 AM - 5:00 PM",
+          "Friday: 9:30 AM - 5:00 PM",
+          "Saturday: 9:30 AM - 5:00 PM",
+          "Sunday: 9:30 AM - 5:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/102378542986728774417",
+        rating: 3.8,
+        title: "University of Michigan Transportation Research Institute",
+        website: "http://www.umtri.umich.edu/",
+        address: "",
       },
     ],
   })
@@ -115,18 +194,40 @@ trips.push(
     name: "Atlanta Salsa Bachata Festival",
     locations: [
       {
-        title: "Little Five Points",
         coordinates: { lat: 33.764, lng: -84.349 },
+        hours: [
+          "Monday: 9:30 AM - 5:00 PM",
+          "Tuesday: 9:30 AM - 5:00 PM",
+          "Wednesday: 9:30 AM - 5:00 PM",
+          "Thursday: 9:30 AM - 5:00 PM",
+          "Friday: 9:30 AM - 5:00 PM",
+          "Saturday: 9:30 AM - 5:00 PM",
+          "Sunday: 9:30 AM - 5:00 PM",
+        ],
+        photo: "https://maps.google.com/maps/contrib/117847082933568165218",
+        rating: 3.8,
+        title: "Little Five Points",
+        website: "",
+        address: "",
       },
-      {
-        title: "Ponce City Market",
-        coordinates: { lat: 33.774, lng: -84.366 },
-      },
-      {
-        title: "Piedmont Park",
-        coordinates: { lat: 33.787, lng: -84.376 },
-      },
+      // {
+      //   title: "Ponce City Market",
+      //   coordinates: { lat: 33.774, lng: -84.366 },
+      // },
+      // {
+      //   title: "Piedmont Park",
+      //   coordinates: { lat: 33.787, lng: -84.376 },
+      // },
     ],
+  })
+);
+trips.push(
+  new Trip({
+    owner: users[0]._id,
+    members: [users[0], users[2], users[3], users[7], users[8]],
+    startDate: "2023-04-02",
+    endDate: "2023-04-09",
+    name: "Trip to NY",
   })
 );
 
