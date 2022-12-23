@@ -31,7 +31,7 @@ const NavBar = () =>  {
           <Link to={"/profile"}>Profile</Link>
           <Link to={"/trips/new"}>Make a Trip</Link> */}
           <Link className="trips-button" to={"/profile"}>My Trips</Link>
-          <button onClick={logoutUser}>Logout</button>
+          <button className="nav-logout-button" onClick={logoutUser}>Logout</button>
         </div>
       ); 
     } else {

@@ -201,23 +201,27 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        className="search-bar"
-        placeholder="search an address"
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === "OK" &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-      <button onClick={handleSaveLocations}>Save</button>
-    </Combobox>
+    <div className="combo-search-bar-container">
+      <Combobox onSelect={handleSelect}>
+        <ComboboxInput
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+          className="combo-search-bar"
+          placeholder="search a destination"
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === "OK" &&
+              data.map(({ place_id, description }) => (
+                <ComboboxOption key={place_id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+        <button className="save-button" onClick={handleSaveLocations}>
+          Save
+        </button>
+      </Combobox>
+    </div>
   );
 };
