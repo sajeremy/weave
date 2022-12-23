@@ -13,11 +13,7 @@ const AboutPage = () => {
           <div className="developer-container-middle">
             <h2 className="about-name"> Bonnie Li</h2>
             <div className="social-container">
-              <a
-                className="social-media-links"
-                href="http://www.build18.org/garage/profile/bonniel1/"
-                target="_blank"
-              >
+              <a className="social-media-links">
                 <i class="fa-brands fa-linkedin"></i>
               </a>
               <a

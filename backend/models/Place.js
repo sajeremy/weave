@@ -12,6 +12,7 @@ const placeSchema = Schema(
       type: Object,
       required: true,
     },
+    pictureUrl: String,
     address: String,
     category: String,
     startDateTime: Date,
