@@ -51,7 +51,7 @@ const CreateTripModal = ({close}) => {
     const handleSubmit = (e) => {
       e.preventDefault();  
       const members = membersInput.split(", ")
-      if (members.every(validateEmail)){
+      if (members.every(validateEmail)|| membersInput === ''){
   
       const trip = {
         name,

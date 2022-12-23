@@ -57,7 +57,7 @@ function LoginModal({close, modalFunctions}) {
         </div>
         <input type="submit" value="Log In" className="login-submit-button" disabled={!email || !password} />
         <button onClick={handleClick} className="demo-button">
-          Log In As Demo User
+          Demo User
         </button>
       </form>
     </>

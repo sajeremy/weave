@@ -89,6 +89,17 @@
     background-color: $HOVERGREEN;
 }
 
+.nav-logout-button {
+    font-size: 19px;
+    line-height: 24px;
+    text-decoration: none;
+    color: $GREEN;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding-left: 24px;
+}
+
 // .nav-signup-link:visited {
 //     text-decoration: none;
 // }
