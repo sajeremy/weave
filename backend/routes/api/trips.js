@@ -23,11 +23,25 @@ router.get("/", async function (req, res, next) {
 //USER TRIP INDEX
 router.get("/users/:userId", async function (req, res, next) {
   let trips;
-  let userTrips;
+  let ownerTrips;
+  let memberTrips = [];
+
   try {
     trips = await Trip.find();
-    userTrips = trips.filter((trip) => {
+    ownerTrips = trips.filter((trip) => {
       return trip.owner == req.params.userId;
+    });
+
+    trips.forEach((trip) => {
+      let tripMember = false;
+      trip.members.forEach((member) => {
+        if (member._id == req.params.userId) {
+          tripMember = true;
+        }
+      });
+      if (tripMember) {
+        memberTrips.push(trip);
+      }
     });
   } catch (err) {
     const error = new Error("Trip not found");
@@ -35,7 +49,8 @@ router.get("/users/:userId", async function (req, res, next) {
     error.errors = { message: "No Trip found with that id" };
     return next(error);
   }
-  return res.json({ trips: userTrips });
+  // return res.json({ trips: ownerTrips });
+  return res.json({ trips: memberTrips });
 });
 
 //TRIP SHOW
@@ -60,12 +75,10 @@ router.post("/", requireUser, async function (req, res, next) {
 
     const newTrip = new Trip({
       owner: req.user._id,
+      members: req.user,
       startDate: startDateObj,
       endDate: endDateObj,
-      startDate: req.body.trip.startDate,
-      endDate: req.body.trip.endDate,
       name: req.body.trip.name,
-      description: req.body.trip.description,
     });
 
     let trip = await newTrip.save();
@@ -86,7 +99,7 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   let tripMemberEmails = [];
 
   //Filter emails that are not Weave Users
-  
+
   for (let i = 0; i < users.length; i++) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
@@ -166,7 +179,6 @@ router.patch("/:tripId", requireUser, async function (req, res, next) {
     const startDateObj = new Date(req.body.startDate);
     const endDateObj = new Date(req.body.endDate);
 
-    trip.owner = req.user._id;
     trip.startDate = startDateObj;
     trip.endDate = endDateObj;
     trip.name = req.body.name;

@@ -1,0 +1,29 @@
+@import "../../index.scss";
+#Invitation-Page {
+  margin-top: 300px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+#invitation-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+#invitation-buttons > * {
+  cursor: pointer;
+  padding: 12px 21px;
+  font-size: 20px;
+  border-radius: 74px;
+  
+  border: 0px;
+}
+
+#invitation-buttons #accept {
+  background-color: $GREEN;
+  color: white
+}
