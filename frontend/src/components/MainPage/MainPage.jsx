@@ -1,10 +1,40 @@
 import './MainPage.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateTripModal from '../CreateTripModal/CreateTripModal';
 import Modal from '../Modal/Modal';
 
 const MainPage = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [counter, setCounter] = useState(0);
+
+  const slides = document.getElementsByClassName("media-picture");
+  // const timer = setInterval(() => {
+  //   slides[slide].classList.remove("active");
+  //   slide++;
+  //   if (slide >= 2) slide = 0;
+  //   slides[slide].classList.add("active");
+  // },3000);
+  let counter = 0;
+  useEffect(() => {
+  const timer = setInterval(() => {
+    // debugger
+    slides[counter].classList.remove("active");
+    counter++;
+    if (counter >= 2) counter = 0;
+    slides[counter].classList.add("active");
+  },3000);
+
+  return () => clearInterval(timer);
+  },[]);
+  
+
+    // return () => clearInterval(timer);
+
+  // }, [])
+  // console.log(slides);
+  // slides.each((slide) => {
+  //   console.log(slide);
+  // })
 
   return (
     <>
@@ -21,7 +51,7 @@ const MainPage = () => {
             </div>
           </div>
           <div className="media-section">
-            <img id="slide-1" className="media-picture" src={require('../../assets/canyon.png')}/>
+            <img id="slide-1" className="media-picture active" src={require('../../assets/canyon.png')}/>
             <img id="slide-2" className="media-picture" src={require('../../assets/mountain.png')}/>
             <img id="slide-3" className="media-picture" src={require('../../assets/valley.png')}/>
           </div>

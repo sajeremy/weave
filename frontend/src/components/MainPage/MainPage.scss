@@ -86,4 +86,11 @@
     padding-top: 30px;
     padding-bottom: 27px;
     box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.active {
+    opacity: 1;
+    // transition: all 1s;
 }

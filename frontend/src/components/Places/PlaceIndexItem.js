@@ -2,22 +2,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateTrip } from "../../store/trips";
+import './PlaceIndexItem.scss';
 
 function PlaceIndexItem({ place, index }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const trip = useSelector((state) => state.trips.trip);
-
-  const [voteCount, setVoteCount] = useState(0);
-  const handleAdd = (e) => {
-    setVoteCount(voteCount + 1);
-    // e.currentTarget.disabled = true;
-  };
-
-  const handleSubtract = (e) => {
-    setVoteCount(voteCount - 1);
-    // e.currentTarget.disabled = true;
-  };
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -26,16 +16,22 @@ function PlaceIndexItem({ place, index }) {
     history.go(0);
     // this.setstate
   };
-
+  console.log(place.hours);
   return (
-    <>
-      <a
-        href={place.website}
-      >
-        <div>{place.title}</div>
-        <div>Rating: {place.rating} stars</div>
-        <div>Hours: {place.hours}</div>
-      </a>
+    <div className="place-container">
+      <div className="marker-number">
+        1
+      </div>
+      <div className="picture-wrapper">
+        Test
+      </div>
+      <div className="info-wrapper">
+        <a href={place.website}>
+          <div>{place.title}</div>
+          <div>Rating: {place.rating} stars</div>
+          <div>Hours: {place.hours && place.hours[0]}</div>
+        </a>
+      
       {/* <div>{startDateTime}</div>
       <div>{endDateTime}</div> */}
       {/* <div>
@@ -43,8 +39,9 @@ function PlaceIndexItem({ place, index }) {
         <button onClick={handleAdd}>+</button>
         <button onClick={handleSubtract}>-</button>
       </div> */}
-      <button onClick={handleDelete}>Delete Place</button>
-    </>
+      <img onClick={handleDelete} className="delete-button" src={require('../../assets/CloseModal.png')}/>
+    </div>
+    </div>
   );
 }
 
