@@ -24,6 +24,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
+import { useHistory } from "react-router-dom";
 
 export default function Places({ trip }) {
   const { isLoaded } = useLoadScript({
@@ -152,6 +153,7 @@ function Map({ trip }) {
 
 const SearchBar = ({ changeCenter, trip, setSelected }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     ready,
     value,
@@ -198,6 +200,7 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
   const handleSaveLocations = (e) => {
     e.preventDefault();
     dispatch(updateTrip(trip));
+    history.go(0);
   };
 
   return (
