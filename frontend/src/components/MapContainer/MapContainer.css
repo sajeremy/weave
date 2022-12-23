@@ -61,7 +61,11 @@
   text-decoration: none;
   position: absolute;
   z-index: 1;
-  bottom: 35px;
-  right: 55px;
+  bottom: 25px;
+  right: 65px;
 
+}
+
+.save-button:hover {
+  background-color: #378678;
 }
