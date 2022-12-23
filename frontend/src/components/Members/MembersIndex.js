@@ -11,6 +11,7 @@ function MemberIndex({ trip }) {
   const handleInvite = (e) => {
     e.preventDefault();
     const members = membersInput.split(", ");
+
     if (members.every(validateEmail)) {
       const tripId = trip._id;
       const data = {
@@ -18,6 +19,7 @@ function MemberIndex({ trip }) {
         members,
       };
       dispatch(inviteTripMember(data));
+      setMembersInput("");
     } else {
       setEmailError("Invalid Email(s)");
     }
