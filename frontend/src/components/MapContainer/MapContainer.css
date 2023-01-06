@@ -39,6 +39,8 @@
   font-size: 1rem;
   width: 60%;
   margin-right: 1rem;
+  border: 1px solid #235251;
+  border-radius: 4px;
 }
 
 .combo-search-bar-container input:focus {

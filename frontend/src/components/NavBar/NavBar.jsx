@@ -25,6 +25,12 @@ const NavBar = () =>  {
 
   const getLinks = () => {
     if (loggedIn) {
+      if(showSignupModal) {
+        setShowSignupModal(false);
+      }
+      if(showLoginModal) {
+        setShowLoginModal(false);
+      }
       return (
         <div className="links-nav">
           {/* <Link to={"/trips"}>All Trips</Link>

@@ -23,7 +23,6 @@ function LoginModal({close, modalFunctions}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password }));
-    if(!errors.email && !errors.password) close(false);
   };
 
   const handleClick = () => {

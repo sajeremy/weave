@@ -21,14 +21,24 @@ function TripsItem({ trip }) {
     dispatch(deleteTrip(trip._id));
   };
 
+  const formatDate = (dateString) => {
+    let setDate = new Date(dateString);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return setDate.toLocaleDateString("default", options);
+  };
+
   return (
     <div className="trip-item">
       <div className="trip-info-wrapper">
         <Link to={`/trips/${trip._id}`} className="Trip-Index-Item"><h2>{trip.name}</h2></Link>
         <div className="profile-date-wrapper">
-          <div className="start-date"> {moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
+          <div className="start-date"> {formatDate(trip.startDate)}</div>
           <span>-</span>
-          <div className="end-date">{moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
+          <div className="end-date">{formatDate(trip.endDate)}</div>
         </div>
         <button className="delete-trip-button" onClick={handleDelete}>Delete</button>
       </div>

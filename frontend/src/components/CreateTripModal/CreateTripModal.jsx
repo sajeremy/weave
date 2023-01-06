@@ -84,11 +84,6 @@ const CreateTripModal = ({close, modalFunctions}) => {
         );
     };
 
-    const handleSwitchSignup = () => {
-      close(false);
-      modalFunctions.setShowSignupModal(true);
-    }
-
     return (
         <form className="create-trip-form" onSubmit={handleSubmit}>
             <h1>Plan a new trip</h1>
@@ -120,18 +115,17 @@ const CreateTripModal = ({close, modalFunctions}) => {
                 </div>
             </div>
             <div className="errors">{errors && errors.name}</div>
-            <div className="invitation-wrapper">
+            {currentUser && <div className="invitation-wrapper">
               <label className="invitation-label"> Invite Your Tripmates </label>
                 <input type="text" 
                   className='invitation-input'
                   onChange={update("membersInput")}
                   value={membersInput}>
                </input>
-            </div>
+            </div>}
 
             <div className="errors">{emailError && emailError}</div>
 
-            {!currentUser && <button className="login-signup-button" onClick={handleSwitchSignup}>Log in or Sign up to Invite Tripmates</button>}
             <button type="submit" 
                 className="create-trip-button"
                 disabled={!name || !startDate || !endDate}>

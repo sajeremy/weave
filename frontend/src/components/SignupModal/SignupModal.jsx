@@ -48,10 +48,7 @@ function SignupModal({close, modalFunctions}) {
       email,
       password,
     };
-
     dispatch(signup(user));
-    if(!errors.email && !errors.password) close(false);
-
   };
 
   const handleSwitchLogin = () => {

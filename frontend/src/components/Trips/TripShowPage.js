@@ -35,13 +35,13 @@ function TripShowPage() {
   // };
 
   const formatDate = (dateString) => {
-    dateString = new Date();
+    let setDate = new Date(dateString);
     const options = {
       year: "numeric",
       month: "long",
       day: "numeric",
     };
-    return dateString.toLocaleDateString("default", options);
+    return setDate.toLocaleDateString("default", options);
   };
 
   return (
