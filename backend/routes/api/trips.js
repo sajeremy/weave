@@ -5,6 +5,7 @@ const User = mongoose.model("User");
 const Trip = mongoose.model("Trip");
 const { requireUser } = require("../../config/passport");
 const sendEmail = require("../../Email");
+const validateTripInput = require("../../validations/trips");
 
 //TRIP INDEX
 router.get("/", async function (req, res, next) {
@@ -67,25 +68,49 @@ router.get("/:tripId", async function (req, res, next) {
   return res.json({ trip: trip });
 });
 
-//TRIP CREATE
+// //TRIP CREATE
+// router.post("/", requireUser, async function (req, res, next) {
+//   try {
+//     const startDateObj = new Date(req.body.trip.startDate);
+//     const endDateObj = new Date(req.body.trip.endDate);
+
+//     const newTrip = new Trip({
+//       owner: req.user._id,
+//       members: req.user,
+//       startDate: startDateObj,
+//       endDate: endDateObj,
+//       name: req.body.trip.name,
+//     });
+
+//     let trip = await newTrip.save();
+//     return res.json(trip);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+//TRIP CREATE - V2 w/ error handling
 router.post("/", requireUser, async function (req, res, next) {
-  try {
-    const startDateObj = new Date(req.body.trip.startDate);
-    const endDateObj = new Date(req.body.trip.endDate);
+  const startDateObj = new Date(req.body.trip.startDate);
+  const endDateObj = new Date(req.body.trip.endDate);
 
-    const newTrip = new Trip({
-      owner: req.user._id,
-      members: req.user,
-      startDate: startDateObj,
-      endDate: endDateObj,
-      name: req.body.trip.name,
-    });
-
-    let trip = await newTrip.save();
-    return res.json(trip);
-  } catch (err) {
-    next(err);
+  if (startDateObj.getTime() >= endDateObj.getTime()) {
+    const err = new Error("Validation Error");
+    err.statusCode = 400;
+    const errors = {};
+    errors.dates = "Start date and time must occur before end date and time";
+    err.errors = errors;
+    return next(err);
   }
+  const newTrip = new Trip({
+    owner: req.user._id,
+    members: req.user,
+    startDate: startDateObj,
+    endDate: endDateObj,
+    name: req.body.trip.name,
+  });
+  let trip = await newTrip.save();
+  return res.json(trip);
 });
 
 //TRIP ADD MULTIPLE MEMBERS

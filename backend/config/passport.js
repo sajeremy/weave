@@ -32,7 +32,8 @@ exports.loginUser = async function (user) {
     // username: user.username, REMOVE LATER
     email: user.email,
   };
-  const token = await jwt.sign(userInfo, secretOrKey, { expiresIn: 3600 });
+  // const token = await jwt.sign(userInfo, secretOrKey, { expiresIn: 3600 });
+  const token = await jwt.sign(userInfo, secretOrKey);
   return {
     user: userInfo,
     token,
