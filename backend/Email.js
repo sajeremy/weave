@@ -18,7 +18,7 @@ module.exports = function (tripDetails) {
     from: username,
     to: tripDetails.newMemberEmail,
     subject: `Weaver Trip Invitation: ${tripDetails.ownerName}'s ${tripDetails.tripName} `,
-    text: `Hi ${tripDetails.newMemberFirstName},\n ${tripDetails.ownerName} will like to invite you to their upcoming trip: ${tripDetails.tripName}.  If you wish to participate please accept your invitation below: \n http://localhost:3000/trips/${tripDetails.tripId}/invite`,
+    text: `Hi ${tripDetails.newMemberFirstName},\n ${tripDetails.ownerName} will like to invite you to their upcoming trip: ${tripDetails.tripName}.  If you wish to participate please accept your invitation below: \n https://weave.onrender.com/trips/${tripDetails.tripId}/invite`,
   };
 
   mailTransporter.sendMail(details, (err) => {
