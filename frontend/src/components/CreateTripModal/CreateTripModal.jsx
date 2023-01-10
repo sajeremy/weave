@@ -95,9 +95,10 @@ const CreateTripModal = ({close, modalFunctions}) => {
                     value={name}
                     className="login-name-input">
                 </input>
-                <div className="errors">{errors?.name}</div>
-
             </div>
+            <div className="name-errors">{errors?.name}</div>
+
+
             <div className="date-wrapper">
                 <div className="start-date-wrapper">
                     <label className="start-label">Start Date</label>

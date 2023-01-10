@@ -26,10 +26,9 @@
     height: 40px;
     border: 1px solid #DDDDDD;
     border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 20px; 
+    // margin-top: 30px;
+    // margin-bottom: 20px; 
     padding-left: 10px;
-    padding-top: 20px;
     font-size: 18px;
 }
 
@@ -37,12 +36,18 @@
     position: relative;
 }
 
+.name-errors{
+    color: red;
+    margin-top: -15px;
+}
+
 .date-wrapper {
     width: 381px;
     height: 60px;
     border: 1px solid #DDDDDD;
     border-radius: 10px;  
-    margin-bottom: 20px;  
+    // margin-bottom: 20px;  
+    margin-top: 20px;
     padding: 4px;
     display: flex;
     justify-content: space-between;
@@ -55,7 +60,7 @@
 .date-wrapper input {
     width: 160px;
     height: 45px;
-    border: none;
+    border: none;   
 }
 
 .date-wrapper input:focus {
