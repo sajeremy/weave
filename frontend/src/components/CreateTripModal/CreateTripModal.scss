@@ -95,3 +95,8 @@
 .errors{
     color: red
 }
+
+.create-trip-button:disabled {
+    background-color: grey;
+    cursor: auto;
+}

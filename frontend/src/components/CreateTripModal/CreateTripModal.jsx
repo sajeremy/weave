@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearTripErrors, createTrip, inviteTripMember } from "../../store/trips";
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 
 const CreateTripModal = ({close, modalFunctions}) => {
     const history = useHistory();
@@ -101,6 +102,7 @@ const CreateTripModal = ({close, modalFunctions}) => {
                     <input type="date" 
                         onChange={update("startDate")}
                         value={startDate}
+                        min={moment().format("YYYY-MM-DD")}
                         className="start-date">
                     </input>
                 </div>
