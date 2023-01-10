@@ -95,6 +95,8 @@ const CreateTripModal = ({close, modalFunctions}) => {
                     value={name}
                     className="login-name-input">
                 </input>
+                <div className="errors">{errors?.name}</div>
+
             </div>
             <div className="date-wrapper">
                 <div className="start-date-wrapper">
@@ -103,6 +105,8 @@ const CreateTripModal = ({close, modalFunctions}) => {
                         onChange={update("startDate")}
                         value={startDate}
                         min={moment().format("YYYY-MM-DD")}
+                        max={"2099-12-31"}
+                        onKeyDown={(e) => e.preventDefault()}
                         className="start-date">
                     </input>
                 </div>
@@ -111,12 +115,15 @@ const CreateTripModal = ({close, modalFunctions}) => {
                         <input type="date" 
                             className="end-date"
                             onChange={update("endDate")}
+                            min={startDate}
+                            max={"2099-12-31"}
+                            onKeyDown={(e) => e.preventDefault()}
                             value={endDate}>
                         </input>
                     </label>
                 </div>
             </div>
-            <div className="errors">{errors && errors.name}</div>
+            <div className="errors">{errors?.dates}</div>
             {currentUser && <div className="invitation-wrapper">
               <label className="invitation-label"> Invite Your Tripmates </label>
                 <input type="text" 
@@ -125,8 +132,8 @@ const CreateTripModal = ({close, modalFunctions}) => {
                   value={membersInput}>
                </input>
             </div>}
-
-            <div className="errors">{emailError && emailError}</div>
+            <div className="errors">{emailError}</div>
+            <div className="errors">{errors?.emails}</div>
 
             <button type="submit" 
                 className="create-trip-button"
