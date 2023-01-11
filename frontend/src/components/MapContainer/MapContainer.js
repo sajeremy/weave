@@ -195,13 +195,14 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
     }
     console.log(trip);
     setSelected({ lat, lng });
+    dispatch(updateTrip(trip));
   };
 
-  const handleSaveLocations = (e) => {
-    e.preventDefault();
-    dispatch(updateTrip(trip));
-    history.go(0);
-  };
+  // const handleSaveLocations = (e) => {
+  //   e.preventDefault();
+  //   dispatch(updateTrip(trip));
+  //   history.go(0);
+  // };
 
   return (
     <div className="combo-search-bar-container">
@@ -221,9 +222,9 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
               ))}
           </ComboboxList>
         </ComboboxPopover>
-        <button className="save-button" onClick={handleSaveLocations}>
+        {/* <button className="save-button" onClick={handleSaveLocations}>
           Save
-        </button>
+        </button> */}
       </Combobox>
     </div>
   );
