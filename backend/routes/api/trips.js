@@ -104,7 +104,6 @@ router.post("/", requireUser, async function (req, res, next) {
   }
 
   const tripName = req.body.trip.name;
-  const count = 0;
   const charArr = tripName.split(" ");
 
   if (charArr.every((char) => char === "")) {
@@ -116,13 +115,13 @@ router.post("/", requireUser, async function (req, res, next) {
     return next(err);
   }
 
-  const newCharArr = charArr.filter((char) => char !== "");
+  const newCharArr = tripName.split("").filter((char) => char !== " ");
 
   if (newCharArr.length < 3) {
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
-    errors.name = "Trip name must have 3 characters";
+    errors.name = "Trip name must be at least 3 characters";
     err.errors = errors;
     return next(err);
   }
@@ -223,6 +222,30 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
 //TRIP UPDATE
 router.patch("/:tripId", requireUser, async function (req, res, next) {
   let trip;
+
+  const tripName = req.body.name;
+  const charArr = tripName.split(" ");
+
+  if (charArr.every((char) => char === "")) {
+    const err = new Error("Validation Error");
+    err.statusCode = 400;
+    const errors = {};
+    errors.name = "Trip name cannot be blank";
+    err.errors = errors;
+    return next(err);
+  }
+
+  const newCharArr = tripName.split("").filter((char) => char !== " ");
+
+  if (newCharArr.length < 3) {
+    const err = new Error("Validation Error");
+    err.statusCode = 400;
+    const errors = {};
+    errors.name = "Trip name must be at least 3 characters";
+    err.errors = errors;
+    return next(err);
+  }
+
   try {
     trip = await Trip.findById(req.params.tripId);
 
