@@ -272,6 +272,8 @@ router.patch("/:tripId", requireUser, async function (req, res, next) {
     trip.name = req.body.name;
     trip.locations = req.body.locations;
     trip.members = req.body.members;
+    //Prevent Backend error during creating a trip
+    if (req.body.invitedUsers) trip.invitedUsers = req.body.invitedUsers;
     trip.save();
   } catch (err) {
     next(err);

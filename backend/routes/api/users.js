@@ -5,7 +5,11 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const Trip = mongoose.model("Trip"); //Adding Trip Index for User
 const passport = require("passport");
-const { loginUser, restoreUser } = require("../../config/passport");
+const {
+  loginUser,
+  restoreUser,
+  requireUser,
+} = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
 // const { db } = require("../../models/User");
 // const Trip = require("../../models/Trip");
@@ -106,6 +110,26 @@ router.get("/:userId", async (req, res, next) => {
     invitedTrips: user.invitedTrips,
     trips: userTrips,
   });
+});
+
+//USER INVITED TRIP PATCH
+router.patch("/:userId", requireUser, async (req, res, next) => {
+  let user;
+  try {
+    user = await User.findById(req.params.userId);
+  } catch (err) {
+    const error = new Error("User not found");
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
+  }
+  try {
+    user.invitedTrips = req.body.invitedTrips;
+    user.save();
+  } catch {
+    next(err);
+  }
+  return res.json(user);
 });
 
 module.exports = router;
