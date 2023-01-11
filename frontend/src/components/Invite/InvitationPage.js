@@ -17,13 +17,14 @@ function InvitationPage() {
   const owner = useSelector((state) =>
     state.users.user ? state.users.user : {}
   );
-
   const handleAccept = () => {
     trip.members.push(currentUser);
     const members = trip.members;
+    const invitedUsers = trip.invitedUsers.delete[currentUser._id];
     const data = {
       ...trip,
       members,
+      invitedUsers,
     };
     dispatch(updateTrip(data));
     history.replace(`/trips/${tripId}`);
