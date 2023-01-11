@@ -17,10 +17,12 @@ function InvitationPage() {
   const owner = useSelector((state) =>
     state.users.user ? state.users.user : {}
   );
+
+  console.log(parseInt(currentUser._id));
   const handleAccept = () => {
     trip.members.push(currentUser);
     const members = trip.members;
-    const invitedUsers = trip.invitedUsers.delete[currentUser._id];
+    const invitedUsers = delete trip.invitedUsers.currentUser._id;
     const data = {
       ...trip,
       members,
