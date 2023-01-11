@@ -19,7 +19,7 @@ const PlaceIndex = () => {
   };
 
   const createDateRange = (startDate, end) => {
-    let dateRangeArray = ["Places to Go"];
+    let dateRangeArray = ["none"];
     let currentDate = new Date(startDate);
     let endDate = new Date(end);
     while(currentDate <= endDate) {
@@ -33,14 +33,22 @@ const PlaceIndex = () => {
     // let filterDay = dateRangeArray.includes(day) ? day : "Places to Go";
     return (
       <div key={day}>
-        <h1>{filterDay}</h1>
+        <h1>{day === "none" ? "Places to Go" : day}</h1>
         <div className="place-index-container">
           {trips.trip && trips.trip.locations &&
-            trips.trip.locations.filter(place => place.date === filterDay).map((place, index) => (
-              <>
-                <PlaceIndexItem key={place._id} place={place} index={index} dateRange={createDateRange(trips.trip.startDate, trips.trip.endDate)}/>
-              </>
-            )
+            trips.trip.locations.map((place, index) => {
+              if(!place.date) {
+                place.date = "none";
+              }
+              if(place.date === day) {
+                return (
+                  <>
+                    <PlaceIndexItem key={place._id} place={place} index={index} dateRange={createDateRange(trips.trip.startDate, trips.trip.endDate)}/>
+                  </>
+                )
+              }
+            }
+            
           )}
         </div>
       </div>

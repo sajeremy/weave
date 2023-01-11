@@ -182,6 +182,7 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
         hours: details.opening_hours.weekday_text,
         rating: details.rating,
         website: details.website,
+        date: "none",
         photo: details.photos[0].getUrl(),
       });
     } else {
@@ -190,6 +191,7 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
         coordinates: { lat, lng },
         rating: details.rating,
         website: details.website,
+        date: "none",
         photo: details.photos[0].getUrl(),
       });
     }

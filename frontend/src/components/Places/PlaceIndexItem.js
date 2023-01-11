@@ -37,7 +37,7 @@ function PlaceIndexItem({ place, index, dateRange }) {
           { place.rating  && <div className="place-rating">Rating: { place.rating } stars</div> }
           { place.hours && <div>Hours:  { place.hours[4]}</div> }
           <select 
-            // value={state.selectValue} 
+            value={place.date} 
             onChange={handleDateSelect} 
           >
             <option value="None">Select day</option>
