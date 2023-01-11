@@ -6,6 +6,7 @@ import './EditTripModal.scss';
 
 function EditTripModal({close, modalFunctions}) {
   const dispatch = useDispatch();
+  const errors = useSelector((state) => state.errors.trips);
   const trip = useSelector((state) =>
     state.trips.trip ? state.trips.trip : {}
   );
@@ -22,6 +23,7 @@ function EditTripModal({close, modalFunctions}) {
 
   useEffect(() => {
     dispatch(fetchTrip(tripId));
+    dispatch(clearTripErrors());
   }, [dispatch, tripId]);
 
   const update = (field) => {
@@ -74,6 +76,8 @@ function EditTripModal({close, modalFunctions}) {
             <label className="name-label">Name</label>
               <input type="text" className="login-name-input" onChange={update("name")} value={name}></input>
           </div>
+          <div className="name-errors">{errors?.name}</div>
+
           <div className="date-wrapper">
           <div className="start-date-wrapper">
             <label>Start Date:</label>
@@ -81,6 +85,9 @@ function EditTripModal({close, modalFunctions}) {
                 type="date"
                 onChange={update("startDate")}
                 value={startDate}
+                min={moment().format("YYYY-MM-DD")}
+                max={"2099-12-31"}
+                onKeyDown={(e) => e.preventDefault()}
                 className="start-date"
               ></input>
               </div>
@@ -90,6 +97,9 @@ function EditTripModal({close, modalFunctions}) {
                 type="date"
                 onChange={update("endDate")}
                 value={endDate}
+                min={startDate}
+                max={"2099-12-31"}
+                onKeyDown={(e) => e.preventDefault()}
                 className="end-date"
               ></input>
             </div>

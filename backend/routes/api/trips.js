@@ -105,23 +105,24 @@ router.post("/", requireUser, async function (req, res, next) {
 
   const tripName = req.body.trip.name;
   const count = 0;
-
-  charArr = tripName.split(" ");
+  const charArr = tripName.split(" ");
 
   if (charArr.every((char) => char === "")) {
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
-    errors.dates = "Trip name cannot be blank";
+    errors.name = "Trip name cannot be blank";
     err.errors = errors;
     return next(err);
   }
 
-  if (charArr < 3) {
+  const newCharArr = charArr.filter((char) => char !== "");
+
+  if (newCharArr.length < 3) {
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
-    errors.dates = "Trip name must have 3 characters";
+    errors.name = "Trip name must have 3 characters";
     err.errors = errors;
     return next(err);
   }
