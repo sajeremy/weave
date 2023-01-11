@@ -103,7 +103,7 @@ router.get("/:userId", async (req, res, next) => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
-    availableDates: user.availableDates,
+    invitedTrips: user.invitedTrips,
     trips: userTrips,
   });
 });

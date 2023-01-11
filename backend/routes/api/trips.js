@@ -137,7 +137,7 @@ router.post("/", requireUser, async function (req, res, next) {
   return res.json(trip);
 });
 
-//TRIP ADD MULTIPLE MEMBERS
+//TRIP INVITE MULTIPLE MEMBERS
 router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   let users = req.body.members;
   let weaveUsers = [];
@@ -146,9 +146,9 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   let trip = await Trip.findById(req.params.tripId);
   let tripOwner = await User.findById(trip.owner);
   let tripMemberEmails = [];
+  let tripInvitedUserEmails = [];
 
   //Filter emails that are not Weave Users
-
   for (let i = 0; i < users.length; i++) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
@@ -161,15 +161,24 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   for (let i = 0; i < trip.members.length; i++) {
     tripMemberEmails.push(trip.members[i].email);
   }
-  //Filter Weave Users that are not in Trip
+  //Accumulate array of emails of invited users in Trip
+  for (let i = 0; i < trip.invitedUsers.length; i++) {
+    tripInvitedUserEmails.push(trip.members[i].email);
+  }
+  //Filter Weave Users that are not in members or invited to Trip
   weaveUsers.forEach((user) => {
-    if (!tripMemberEmails.includes(user.email)) {
+    if (
+      !tripMemberEmails.includes(user.email) &&
+      !tripInvitedUserEmails.includes(user.email)
+    ) {
       newTripMembers.push(user);
     }
   });
-  //Send Email to new trip members
+
+  //Send Email, update Trip, & User for each User
   let tripDetails;
   newTripMembers.forEach((newMember) => {
+    //Compile member and trip details for email
     tripDetails = {
       newMemberId: newMember._id,
       newMemberEmail: newMember.email,
@@ -178,7 +187,13 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
       tripName: trip.name,
       tripId: trip._id,
     };
+
+    //Send Email to new trip members & update invite arrays in User & Trip
     sendEmail(tripDetails);
+    newMember.invitedTrips.push(trip._id);
+    newMember.save();
+    trip.invitedUsers.push(newMember._id);
+    trip.save();
   });
 
   return res.json(`${newTripMembers.length} email invitations have sent`);
