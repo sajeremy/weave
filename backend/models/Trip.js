@@ -10,6 +10,9 @@ const tripSchema = Schema(
       ref: "User",
       required: true,
     },
+    invitedUsers: {
+      type: Array,
+    },
     members: {
       type: Array,
     },

@@ -22,6 +22,7 @@ const userSchema = Schema(
     },
     availableDates: [Date],
     trips: Array,
+    invitedTrips: Array,
   },
   {
     timestamps: true,
