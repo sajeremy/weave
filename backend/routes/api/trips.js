@@ -153,8 +153,16 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
     });
+    console.log(checkUser);
     if (checkUser) {
       weaveUsers.push(checkUser);
+    } else {
+      const err = new Error("Validation Error");
+      err.statusCode = 400;
+      const errors = {};
+      errors.email = "The email you entered is not a registered Weave User";
+      err.errors = errors;
+      return next(err);
     }
   }
   //Accumulate array of emails in Trip
@@ -163,17 +171,26 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
   }
   //Accumulate array of emails of invited users in Trip
   for (let i = 0; i < trip.invitedUsers.length; i++) {
-    tripInvitedUserEmails.push(trip.members[i].email);
+    tripInvitedUserEmails.push(trip.invitedUsers[i].email);
   }
   //Filter Weave Users that are not in members or invited to Trip
-  weaveUsers.forEach((user) => {
+  for (let i = 0; i < weaveUsers.length; i++) {
+    let user = weaveUsers[i];
     if (
       !tripMemberEmails.includes(user.email) &&
       !tripInvitedUserEmails.includes(user.email)
     ) {
       newTripMembers.push(user);
+    } else {
+      console.log("it hit here line 184");
+      const err = new Error("Validation Error");
+      err.statusCode = 400;
+      const errors = {};
+      errors.email = "This email is already a trip member";
+      err.errors = errors;
+      return next(err);
     }
-  });
+  }
 
   //Send Email, update Trip, & User for each User
   let tripDetails;
@@ -190,9 +207,9 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
 
     //Send Email to new trip members & update invite arrays in User & Trip
     sendEmail(tripDetails);
-    newMember.invitedTrips.push(trip._id);
-    newMember.save();
-    trip.invitedUsers.push(newMember._id);
+    // newMember.invitedTrips.push(trip._id);
+    // newMember.save();
+    trip.invitedUsers.push(newMember);
     trip.save();
   });
 
