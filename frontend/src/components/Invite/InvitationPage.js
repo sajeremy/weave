@@ -18,11 +18,21 @@ function InvitationPage() {
     state.users.user ? state.users.user : {}
   );
 
-  console.log(parseInt(currentUser._id));
+  const removeUser = () => {
+    trip.invitedUsers.forEach((user, index) => {
+      if (user._id === currentUser._id) {
+        trip.invitedUsers.splice(index, 1);
+      }
+    });
+  };
+
   const handleAccept = () => {
     trip.members.push(currentUser);
     const members = trip.members;
-    const invitedUsers = delete trip.invitedUsers.currentUser._id;
+
+    removeUser();
+    const invitedUsers = trip.invitedUsers;
+
     const data = {
       ...trip,
       members,
@@ -33,6 +43,7 @@ function InvitationPage() {
   };
 
   const handleDecline = () => {
+    removeUser();
     history.replace(`/profile`);
   };
   useEffect(() => {
