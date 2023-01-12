@@ -15,12 +15,15 @@ const PlaceIndex = () => {
       month: "long",
       day: "numeric",
     };
-    return setDate.toLocaleDateString("default", options);
+    const timeDiff = setDate.getTimezoneOffset() * 60000;
+    const adjustedDate = new Date(setDate.valueOf() + timeDiff);
+    return adjustedDate.toLocaleDateString("default", options);
   };
 
   const createDateRange = (startDate, end) => {
     let dateRangeArray = ["none"];
     let currentDate = new Date(startDate);
+    // debugger
     let endDate = new Date(end);
     while(currentDate <= endDate) {
       dateRangeArray.push(formatDate(new Date(currentDate)));
@@ -28,7 +31,7 @@ const PlaceIndex = () => {
     }
     return dateRangeArray;
   }
-
+  
   const daySection = (dateRangeArray) => dateRangeArray.map((day) => {
     // let filterDay = dateRangeArray.includes(day) ? day : "Places to Go";
     return (

@@ -40,7 +40,6 @@ function PlaceIndexItem({ place, index, dateRange }) {
             value={place.date} 
             onChange={handleDateSelect} 
           >
-            <option value="None">Select day</option>
             {dateRange.map((day) => {
               // debugger
               return <option key={day} value={day}>{day}</option>

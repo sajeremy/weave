@@ -39,7 +39,9 @@ const TripShowPage = () => {
       month: "long",
       day: "numeric",
     };
-    return setDate.toLocaleDateString("default", options);
+    const timeDiff = setDate.getTimezoneOffset() * 60000;
+    const adjustedDate = new Date(setDate.valueOf() + timeDiff);
+    return adjustedDate.toLocaleDateString("default", options);
   };
 
   return (
