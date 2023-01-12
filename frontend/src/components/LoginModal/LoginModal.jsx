@@ -30,6 +30,11 @@ function LoginModal({close, modalFunctions}) {
     close(false);
   };
 
+  const handleSwitchSignup = () => {
+    close(false);
+    modalFunctions.setShowSignupModal(true);
+  }
+
   return (
     <>
       <form className="session-form" onSubmit={handleSubmit}>
@@ -58,6 +63,10 @@ function LoginModal({close, modalFunctions}) {
         <button onClick={handleClick} className="demo-button">
           Demo User
         </button>
+        <div className="login-switch-container">
+            <span>Don't have an account yet?</span>
+            <button onClick={handleSwitchSignup} className="switch-loginmodal-button">Sign up</button>
+        </div>
       </form>
     </>
   );

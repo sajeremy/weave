@@ -36,15 +36,17 @@ const NavBar = () =>  {
           {/* <Link to={"/trips"}>All Trips</Link>
           <Link to={"/profile"}>Profile</Link>
           <Link to={"/trips/new"}>Make a Trip</Link> */}
-          <Link className="trips-button" to={"/profile"}>My Trips</Link>
-          <button className="nav-logout-button" onClick={logoutUser}>Logout</button>
+          <Link to="/about" className="nav-left-button">About</Link>
+          <Link className="nav-middle-button" to={"/profile"}>My Trips</Link>
+          <button className="nav-right-button" onClick={logoutUser}>Logout</button>
         </div>
       ); 
     } else {
       return (
         <div className="links-auth">
-          <button className="nav-signup-button" onClick={() => setShowSignupModal(true)}>Signup</button>
-          <button className="nav-login-button" onClick={() => setShowLoginModal(true)}>Login</button>
+          <Link to="/about" className="nav-left-button">About</Link>
+          <button className="nav-middle-button" onClick={() => setShowLoginModal(true)}>Login</button>
+          <button className="nav-right-button" onClick={() => setShowSignupModal(true)}>Signup</button>
         </div>
       );
     }
@@ -57,7 +59,7 @@ const NavBar = () =>  {
         <Link to="/" className="home-logo-link"><h1>weave</h1></Link>
       </div>
       <div className="right-nav">
-      {getLinks()}
+        {getLinks()}
       </div>
     </div>
     {showLoginModal && <Modal component={LoginModal} close={(shown) => setShowLoginModal(shown)} modalFunctions={modalFunctions} />}
