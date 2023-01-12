@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import CreateTripModal from '../CreateTripModal/CreateTripModal';
+import Modal from '../Modal/Modal';
 import { fetchUserTrips, clearTripErrors, deleteTrip } from "../../store/trips";
 import TripsItem from "../Trips/TripsItem";
 import './Profile.scss';
@@ -8,6 +10,7 @@ import './Profile.scss';
 function Profile() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const userTrips = useSelector((state) =>
     state.trips.trips ? Object.values(state.trips.trips) : []
   );
@@ -33,7 +36,7 @@ function Profile() {
   // } else {
 
   return (
-    
+    <>
     <div className="trips-page-container">
       {/* {userTrips.map((trip) => (
         <>
@@ -50,6 +53,11 @@ function Profile() {
                 <TripsItem key={filteredTrip._id} trip={filteredTrip} />
               </>
             ))}
+        {userTrips && userTrips.length === 0 && <h1>You have no upcoming trips, start planning?</h1>}
+        <button onClick={() => setShowCreateModal(true)} className="create-trip-button">
+          <img className="map-icon" src={require('../../assets/mapicon.png')}></img>
+          <span className="create-trip-text">Create New Trip</span>
+        </button>
         <h1>Past Trips</h1>
         {userTrips &&
           userTrips
@@ -65,6 +73,8 @@ function Profile() {
         {/* <button>Edit Profile </button> */}
       </div>
     </div>
+    {showCreateModal && <Modal component={CreateTripModal} close={() => setShowCreateModal(false)} />}
+    </>
     
   );
 }

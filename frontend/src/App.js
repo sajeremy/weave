@@ -32,7 +32,7 @@ function App() {
 
           <ProtectedRoute exact path="/profile" component={Profile} />
           {/* <ProtectedRoute exact path="/bonnie" component={Places} /> */}
-          <AuthRoute exact path="/bonnie" component={AboutPage} />
+          <AuthRoute exact path="/about" component={AboutPage} />
           <ProtectedRoute exact path="/trips/new" component={NewTripForm} />
           <ProtectedRoute
             exact
