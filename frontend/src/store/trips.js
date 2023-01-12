@@ -162,20 +162,22 @@ const tripsReducer = (
   state = { all: {}, user: {}, new: undefined },
   action
 ) => {
+  Object.freeze(state);
+  let newState = {...state};
   switch (action.type) {
     case RECEIVE_TRIPS:
-      return { ...state, ...action.trips, new: undefined };
+      return { ...newState, ...action.trips, new: undefined };
     case RECEIVE_TRIP:
-      return { ...state, ...action.trip, new: undefined };
+      return { ...newState, ...action.trip, new: undefined };
     case RECEIVE_USER_TRIPS:
-      return { ...state, ...action.trips, new: undefined };
+      return { ...newState, ...action.trips, new: undefined };
     case RECEIVE_NEW_TRIP:
-      return { ...state, new: action.trip };
+      return { ...newState, new: action.trip };
     //   case RECEIVE_USER_LOGOUT:
     //     return { ...state, user: {}, new: undefined };
     case REMOVE_TRIP:
-      delete { ...state, all: action.tripId };
-      return state;
+      delete { ...newState, all: action.tripId };
+      return newState;
     default:
       return state;
   }
