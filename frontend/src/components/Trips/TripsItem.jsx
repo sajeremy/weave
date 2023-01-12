@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { deleteTrip } from "../../store/trips";
 import './TripsItem.scss';
-import moment from "moment";
 
 function TripsItem({ trip }) {
   const dispatch = useDispatch();
@@ -28,7 +27,9 @@ function TripsItem({ trip }) {
       month: "long",
       day: "numeric",
     };
-    return setDate.toLocaleDateString("default", options);
+    const timeDiff = setDate.getTimezoneOffset() * 60000;
+    const adjustedDate = new Date(setDate.valueOf() + timeDiff);
+    return adjustedDate.toLocaleDateString("default", options);
   };
 
   return (

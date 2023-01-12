@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTrip } from "../../store/trips";
 import "@reach/combobox/styles.css";
 import mapStyles from "./MapStyles";
@@ -36,11 +36,17 @@ export default function Places({ trip }) {
   return <Map trip={trip} />;
 }
 
-function Map({ trip }) {
-  // console.log("test", trip);
-  let center;
+const selectTrips = state => state.trips;
 
-  if (trip && trip.locations?.length) {
+function Map() {
+  // console.log("test", trip);
+  const trips = useSelector(selectTrips);
+  let center;
+  let trip;
+  if(trips.trip) {
+    trip = trips.trip;
+  }
+  if (trip && trip.locations && trip.locations?.length) {
     center = trip.locations[trip.locations.length - 1]?.coordinates;
   } else {
     center = { lat: 40.7128, lng: -74.006 };
@@ -80,7 +86,7 @@ function Map({ trip }) {
         onLoad={setMapRef}
         options={options}
       >
-        {trip.locations &&
+        {trip && trip.locations &&
           trip.locations.map((location, i) => {
             return (
               <Marker
@@ -182,6 +188,7 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
         hours: details.opening_hours.weekday_text,
         rating: details.rating,
         website: details.website,
+        date: "none",
         photo: details.photos[0].getUrl(),
       });
     } else {
@@ -190,18 +197,21 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
         coordinates: { lat, lng },
         rating: details.rating,
         website: details.website,
+        date: "none",
         photo: details.photos[0].getUrl(),
       });
     }
     console.log(trip);
+    setValue("");
     setSelected({ lat, lng });
+    dispatch(updateTrip(trip));
   };
 
-  const handleSaveLocations = (e) => {
-    e.preventDefault();
-    dispatch(updateTrip(trip));
-    history.go(0);
-  };
+  // const handleSaveLocations = (e) => {
+  //   e.preventDefault();
+  //   dispatch(updateTrip(trip));
+  //   history.go(0);
+  // };
 
   return (
     <div className="combo-search-bar-container">
@@ -221,9 +231,9 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
               ))}
           </ComboboxList>
         </ComboboxPopover>
-        <button className="save-button" onClick={handleSaveLocations}>
+        {/* <button className="save-button" onClick={handleSaveLocations}>
           Save
-        </button>
+        </button> */}
       </Combobox>
     </div>
   );
