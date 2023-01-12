@@ -42,7 +42,7 @@
 
 .links-auth {
     // position: absolute;
-    left: 500px;
+    left: 570px;
 }
 
 .links-nav {
@@ -50,58 +50,7 @@
     left: 570px;
 }
 
-.trips-button {
-    width: 89px;
-    padding: 12px 21px;
-    height: 48px;
-    background-color: $GREEN;
-    border-radius: 74px;
-    margin-left: 22px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.trips-button:hover {
-    background-color: $HOVERGREEN;
-}
-
-.nav-signup-button {
-    font-size: 19px;
-    line-height: 24px;
-    text-decoration: none;
-    color: $GREEN;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.nav-signup-button:hover {
-    color: $HOVERGREEN;
-}
-
-.nav-login-button {
-    width: 89px;
-    padding: 12px 21px;
-    height: 48px;
-    background-color: $GREEN;
-    border-radius: 74px;
-    margin-left: 22px;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.nav-login-button {
-    background-color: $GREEN;
-}
-
-.nav-login-button:hover {
-    background-color: $HOVERGREEN;
-}
-
-.nav-logout-button {
+.nav-right-button {
     font-size: 19px;
     line-height: 24px;
     text-decoration: none;
@@ -112,7 +61,43 @@
     padding-left: 24px;
 }
 
-.nav-logout-button:hover {
+.nav-right-button:hover {
+    color: $HOVERGREEN;
+}
+
+.nav-middle-button {
+    width: 89px;
+    padding: 12px 21px;
+    height: 48px;
+    background-color: $GREEN;
+    border-radius: 74px;
+    margin-left: 22px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-middle-button {
+    background-color: $GREEN;
+}
+
+.nav-middle-button:hover {
+    background-color: $HOVERGREEN;
+}
+
+.nav-left-button {
+    font-size: 19px;
+    line-height: 24px;
+    text-decoration: none;
+    color: $GREEN;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding-left: 24px;
+}
+
+.nav-left-button:hover {
     color: $HOVERGREEN;
 }
 

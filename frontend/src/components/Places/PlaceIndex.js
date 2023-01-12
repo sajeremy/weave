@@ -36,7 +36,8 @@ const PlaceIndex = () => {
     // let filterDay = dateRangeArray.includes(day) ? day : "Places to Go";
     return (
       <div key={day}>
-        <h1>{day === "none" ? "Places to Go" : day}</h1>
+        <h1 className="section-header">{day === "none" ? "Places to Go" : day}</h1>
+        <h1 className="section-header">{day==="none" && trips.trip && trips.trip.locations && trips.trip.locations.length === 0 ? "No places added yet. Add your next destination using the map on the right!" : ""}</h1>
         <div className="place-index-container">
           {trips.trip && trips.trip.locations &&
             trips.trip.locations.map((place, index) => {
