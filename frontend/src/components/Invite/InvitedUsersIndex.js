@@ -45,6 +45,7 @@ function InvitedUsersIndex({ trip }) {
 
   return (
     <>
+      <div className="invitedusers-heading">Invited Users</div>
       <div className="invitedusers-container">
         {trips.trip &&
           trips.trip.invitedUsers &&

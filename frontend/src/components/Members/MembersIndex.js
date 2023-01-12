@@ -36,6 +36,7 @@ function MemberIndex({ trip }) {
 
   return (
     <>
+      <div className="member-heading">Tripmates Who are Going</div>
       <div className="member-container">
         {trip.members &&
           trip.members.map((member, index) => {
