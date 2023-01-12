@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { inviteTripMember } from "../../store/trips";
 import InvitedUsersIndexItem from "./InvitedUsersIndexItem";
+import "./InvitedUsersIndex.scss";
 
 function InvitedUsersIndex({ trip }) {
   const invitedUsers = Object.values(invitedUsers);
@@ -11,10 +12,15 @@ function InvitedUsersIndex({ trip }) {
   const [emailError, setEmailError] = useState("");
 
   const trips = useSelector((state) => state.trips);
+  const errors = useSelector((state) => state.errors.trips);
+
+  useEffect(() => {
+    return () => dispatch(clearTripErrors());
+  });
 
   const handleInvite = (e) => {
     e.preventDefault();
-    const members = membersInput.split(", ");
+    const members = membersInput.split();
 
     if (members.every(validateEmail)) {
       const tripId = trip._id;
@@ -25,7 +31,7 @@ function InvitedUsersIndex({ trip }) {
       dispatch(inviteTripMember(data));
       setMembersInput("");
     } else {
-      setEmailError("Invalid Email(s)");
+      setEmailError("This is not an Email");
     }
   };
 
@@ -52,7 +58,7 @@ function InvitedUsersIndex({ trip }) {
             type="text"
             onChange={(e) => setMembersInput(e.target.value)}
             value={membersInput}
-            placeholder="Enter email to invite"
+            placeholder="Enter an email to invite more"
           ></input>
         </label>
         <button
@@ -62,7 +68,8 @@ function InvitedUsersIndex({ trip }) {
         >
           +
         </button>
-        <div className="errors">{emailError && emailError}</div>
+        <div className="errors">{emailError}</div>
+        <div className="errors">{errors?.emails}</div>
       </form>
     </>
   );
