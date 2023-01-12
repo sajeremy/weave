@@ -1,20 +1,25 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useState } from "react";
 import { updateTrip } from "../../store/trips";
 import './PlaceIndexItem.scss';
 
-function PlaceIndexItem({ place, index }) {
+function PlaceIndexItem({ place, index, dateRange }) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const trip = useSelector((state) => state.trips.trip);
+  const [selectedDate, setSelectedDate] = useState('');
 
   const handleDelete = (e) => {
     e.preventDefault();
     trip.locations.splice(index, 1);
     dispatch(updateTrip(trip));
-    history.go(0);
-    // this.setstate
+  };
+
+  const handleDateSelect = (e) => {
+    trip.locations[index].date = e.target.value;
+    dispatch(updateTrip(trip));
+    console.log("date selected", e.target.value);
+    console.log(trip.startDate);
+    console.log(trip.endDate);
   };
 
   return (
@@ -31,7 +36,18 @@ function PlaceIndexItem({ place, index }) {
         </a> }
           { place.rating  && <div className="place-rating">Rating: { place.rating } stars</div> }
           { place.hours && <div>Hours:  { place.hours[4]}</div> }
-        
+          <select 
+            value={place.date} 
+            onChange={handleDateSelect} 
+          >
+            {dateRange.map((day) => {
+              // debugger
+              return <option key={day} value={day}>{day}</option>
+            })}
+            {/* <option value="Orange">Orange</option>
+            <option value="Radish">Radish</option>
+            <option value="Cherry">Cherry</option> */}
+          </select>
       
       {/* <div>{startDateTime}</div>
       <div>{endDateTime}</div> */}

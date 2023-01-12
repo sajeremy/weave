@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTrip, clearTripErrors, updateTrip } from "../../store/trips";
 import './EditTripModal.scss';
@@ -13,12 +12,22 @@ function EditTripModal({close, modalFunctions}) {
   console.log("modalfunctions", modalFunctions);
   const tripId = modalFunctions.tripId;
 
+  const formatDate = (dateString) => {
+    let setDate = new Date(dateString);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return setDate.toLocaleDateString("default", options);
+  };
+
   const [name, setName] = useState(trip.name);
   const [startDate, setStartDate] = useState(
-    moment(trip.startDate).utc().format("YYYY-MM-DD")
+    formatDate(trip.startDate)
   );
   const [endDate, setEndDate] = useState(
-    moment(trip.endDate).utc().format("YYYY-MM-DD")
+    formatDate(trip.endDate)
   );
 
   useEffect(() => {
@@ -85,7 +94,6 @@ function EditTripModal({close, modalFunctions}) {
                 type="date"
                 onChange={update("startDate")}
                 value={startDate}
-                min={moment().format("YYYY-MM-DD")}
                 max={"2099-12-31"}
                 onKeyDown={(e) => e.preventDefault()}
                 className="start-date"

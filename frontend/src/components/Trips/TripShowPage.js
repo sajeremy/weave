@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchTrip, clearTripErrors } from "../../store/trips";
@@ -10,9 +9,8 @@ import MemberIndex from "../Members/MembersIndex";
 import Modal from "../Modal/Modal";
 import EditTripModal from "../EditTripModal/EditTripModal";
 
-function TripShowPage() {
+const TripShowPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { tripId } = useParams();
   const [showEditModal, setShowEditModal] = useState(false);
   const [updateTrip, setUpdateTrip] = useState(false);
@@ -41,7 +39,9 @@ function TripShowPage() {
       month: "long",
       day: "numeric",
     };
-    return setDate.toLocaleDateString("default", options);
+    const timeDiff = setDate.getTimezoneOffset() * 60000;
+    const adjustedDate = new Date(setDate.valueOf() + timeDiff);
+    return adjustedDate.toLocaleDateString("default", options);
   };
 
   return (
