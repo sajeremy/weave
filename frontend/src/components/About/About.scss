@@ -17,10 +17,12 @@
 .about-container {
     display: flex;
     position: relative;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 6%;
     width: 50%;
+    margin-left: 50px;
 }
 
 .developer-container {
@@ -29,17 +31,17 @@
     border: 1px solid  hsl(179, 40%, 23%);
     align-items: center;
     margin-top: 20px;
-    margin-left: 75px;
+    // margin-left: 20px;
     padding: 15px;
-    width: 75%;
+    width: 300px;
 }
 
 .developer-container-middle {
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    margin-left: 25px;
     padding-right: 1rem;
 }
 
@@ -50,13 +52,10 @@
 }
 
 .about-name {
-    font-size: 1.10rem;
+    font-size: 16px;
     padding-top: 5px;
     padding-bottom: 5px;
-}
-
-.about-description {
-
+    font-weight: bold;
 }
 
 .social-container {
@@ -65,7 +64,7 @@
 }
 
 .social-container a{
-    padding: 5px;
+    padding: 5px 5px 5px 0;
     font-size: 1.75rem;
 }
 
