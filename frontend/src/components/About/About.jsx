@@ -12,8 +12,12 @@ const AboutPage = () => {
           ></img>
           <div className="developer-container-middle">
             <h2 className="about-name"> Bonnie Li</h2>
+            <p className="about-description">Flex Developer</p>
             <div className="social-container">
-              <a className="social-media-links">
+              <a className="social-media-links"
+              href="https://www.linkedin.com/in/bonnie-li-100464232/"
+              target="_blank"
+              >
                 <i class="fa-brands fa-linkedin"></i>
               </a>
               <a
@@ -24,7 +28,6 @@ const AboutPage = () => {
                 <i class="fa-brands fa-square-github"></i>
               </a>
             </div>
-            <p className="about-description">Flex Developer</p>
           </div>
           
         </div>
@@ -36,6 +39,7 @@ const AboutPage = () => {
           ></img>
           <div className="developer-container-middle">
             <h2 className="about-name"> Gleb Mirzayev </h2>
+            <p className="about-description">Frontend Lead</p>
             <div className="social-container">
               <a
                 className="social-media-links"
@@ -53,7 +57,6 @@ const AboutPage = () => {
               </a>
             </div>
           </div>
-          <p className="about-description">Frontend Lead</p>
         </div>
 
         <div className="developer-container">
@@ -66,6 +69,7 @@ const AboutPage = () => {
             <div>
               <h2 className="about-name"> Jeremy Santiago </h2>
             </div>
+            <p className="about-description">Backend Lead</p>
             <div className="social-container">
               <a
                 className="social-media-links"
@@ -83,7 +87,6 @@ const AboutPage = () => {
               </a>
             </div>
           </div>
-          <p className="about-description">Backend Lead</p>
         </div>
 
         <div className="developer-container">
@@ -94,6 +97,7 @@ const AboutPage = () => {
           ></img>
           <div className="developer-container-middle">
             <h2 className="about-name"> Justin Hwang </h2>
+            <p className="about-description">Team Lead - Flex Developer</p>
             <div className="social-container">
               <a
                 className="social-media-links"
@@ -111,7 +115,6 @@ const AboutPage = () => {
               </a>  
             </div>
           </div>
-          <p className="about-description">Team Lead - Flex Developer</p>
         </div>
       </div>
       <div>

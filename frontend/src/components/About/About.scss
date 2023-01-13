@@ -22,6 +22,7 @@
     justify-content: space-between;
     margin-top: 6%;
     width: 50%;
+    margin-left: 50px;
 }
 
 .developer-container {
@@ -30,13 +31,13 @@
     border: 1px solid  hsl(179, 40%, 23%);
     align-items: center;
     margin-top: 20px;
-    margin-left: 10px;
+    // margin-left: 20px;
     padding: 15px;
     width: 300px;
 }
 
 .developer-container-middle {
-    width: 100px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,9 +52,10 @@
 }
 
 .about-name {
-    font-size: 1.10rem;
+    font-size: 16px;
     padding-top: 5px;
     padding-bottom: 5px;
+    font-weight: bold;
 }
 
 .social-container {
@@ -62,7 +64,7 @@
 }
 
 .social-container a{
-    padding: 5px;
+    padding: 5px 5px 5px 0;
     font-size: 1.75rem;
 }
 
