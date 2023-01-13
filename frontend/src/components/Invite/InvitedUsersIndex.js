@@ -11,7 +11,7 @@ function InvitedUsersIndex({ trip }) {
 
   const trips = useSelector((state) => state.trips);
   const errors = useSelector((state) => state.errors.trips);
-  console.log(errors);
+
   useEffect(() => {
     return () => dispatch(clearTripErrors());
   }, [dispatch]);

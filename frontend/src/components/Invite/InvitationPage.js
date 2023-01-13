@@ -23,7 +23,6 @@ function InvitationPage() {
       if (user._id === currentUser._id) {
         trip.invitedUsers.splice(index, 1);
       }
-      console.log("removed");
     });
   };
 
