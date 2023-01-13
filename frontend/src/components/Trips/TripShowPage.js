@@ -8,6 +8,7 @@ import PlaceIndex from "../Places/PlaceIndex";
 import MemberIndex from "../Members/MembersIndex";
 import Modal from "../Modal/Modal";
 import EditTripModal from "../EditTripModal/EditTripModal";
+import InvitedUsersIndex from "../Invite/InvitedUsersIndex";
 
 const TripShowPage = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ const TripShowPage = () => {
           </div>
 
           <MemberIndex trip={trip} />
+          <InvitedUsersIndex trip={trip} />
           <PlaceIndex trip={trip} />
         </div>
         <div className="right-map">
@@ -83,6 +85,6 @@ const TripShowPage = () => {
       )}
     </>
   );
-}
+};
 
 export default TripShowPage;

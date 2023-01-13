@@ -18,31 +18,50 @@ function InvitationPage() {
     state.users.user ? state.users.user : {}
   );
 
+  const removeUser = () => {
+    trip.invitedUsers.forEach((user, index) => {
+      if (user._id === currentUser._id) {
+        trip.invitedUsers.splice(index, 1);
+      }
+    });
+  };
+
   const handleAccept = () => {
     trip.members.push(currentUser);
     const members = trip.members;
+
+    removeUser();
+    const invitedUsers = trip.invitedUsers;
+
     const data = {
       ...trip,
       members,
+      invitedUsers,
     };
     dispatch(updateTrip(data));
     history.replace(`/trips/${tripId}`);
   };
 
   const handleDecline = () => {
+    removeUser();
+
+    const invitedUsers = trip.invitedUsers;
+    const data = {
+      ...trip,
+      invitedUsers,
+    };
+
+    dispatch(updateTrip(data));
     history.replace(`/profile`);
   };
+
   useEffect(() => {
     dispatch(fetchTrip(tripId));
-    if (trip) dispatch(fetchUser(trip.owner));
   }, [dispatch]);
 
   return (
     <div id="Invitation-Page">
       <div>You're Invited to A Trip</div>
-      {/* <div>
-        {owner && owner.firstName} {owner && owner.lastName}'s Trip
-      </div> */}
       <div>{trip.name}</div>
       <div> From {moment(trip.startDate).utc().format("MM-DD-YYYY")}</div>
       <div> To {moment(trip.endDate).utc().format("MM-DD-YYYY")}</div>
