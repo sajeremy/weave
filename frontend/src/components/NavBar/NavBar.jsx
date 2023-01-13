@@ -20,7 +20,7 @@ const NavBar = () =>  {
 
   const modalFunctions = {
     setShowLoginModal: (shown) => setShowLoginModal(shown),
-    setShowSignupModal: (shown) => setShowLoginModal(shown)
+    setShowSignupModal: (shown) => setShowSignupModal(shown)
   }
 
   const getLinks = () => {
@@ -45,8 +45,8 @@ const NavBar = () =>  {
       return (
         <div className="links-auth">
           <Link to="/about" className="nav-left-button">About</Link>
-          <button className="nav-middle-button" onClick={() => setShowLoginModal(true)}>Login</button>
-          <button className="nav-right-button" onClick={() => setShowSignupModal(true)}>Signup</button>
+          <button className="nav-middle-button" onClick={(shown) => setShowLoginModal(shown)}>Login</button>
+          <button className="nav-right-button" onClick={(shown) => setShowSignupModal(shown)}>Signup</button>
         </div>
       );
     }
@@ -62,7 +62,7 @@ const NavBar = () =>  {
         {getLinks()}
       </div>
     </div>
-    {showLoginModal && <Modal component={LoginModal} close={(shown) => setShowLoginModal(shown)} modalFunctions={modalFunctions} />}
+    {showLoginModal && <Modal component={LoginModal} close={() => setShowLoginModal(false)} modalFunctions={modalFunctions} />}
     {showSignupModal && <Modal component={SignupModal} close={(shown) => setShowSignupModal(shown)} modalFunctions={modalFunctions} />}
     </>
   );

@@ -63,11 +63,11 @@ function LoginModal({close, modalFunctions}) {
         <button onClick={handleClick} className="demo-button">
           Demo User
         </button>
-        <div className="login-switch-container">
+      </form>
+      <div className="login-switch-container">
             <span>Don't have an account yet?</span>
             <button onClick={handleSwitchSignup} className="switch-loginmodal-button">Sign up</button>
-        </div>
-      </form>
+      </div>
     </>
   );
 }

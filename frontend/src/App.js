@@ -39,7 +39,7 @@ function App() {
             path="/trips/:tripId/edit"
             component={EditTripForm}
           />
-          <ProtectedRoute
+          <AuthRoute
             exact
             path="/trips/:tripId/invite"
             component={InvitationPage}

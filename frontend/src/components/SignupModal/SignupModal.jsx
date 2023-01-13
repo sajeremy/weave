@@ -57,6 +57,7 @@ function SignupModal({close, modalFunctions}) {
   }
 
   return (
+    <>
     <form className="session-form" onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
         <div className="errors">{errors?.email}</div>
@@ -111,11 +112,12 @@ function SignupModal({close, modalFunctions}) {
             !password
             }
         />
-        <div className="login-switch-container">
-            <span>Already have an account?</span>
-            <button onClick={handleSwitchLogin} className="switch-loginmodal-button">Log In</button>
-        </div>
     </form>
+    <div className="login-switch-container">
+      <span>Already have an account?</span>
+      <button onClick={handleSwitchLogin} className="switch-loginmodal-button">Log In</button>
+    </div>
+    </>
   );
 }
 
