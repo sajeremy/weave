@@ -17,7 +17,8 @@
 .about-container {
     display: flex;
     position: relative;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 6%;
     width: 50%;
@@ -29,17 +30,17 @@
     border: 1px solid  hsl(179, 40%, 23%);
     align-items: center;
     margin-top: 20px;
-    margin-left: 75px;
+    margin-left: 10px;
     padding: 15px;
-    width: 75%;
+    width: 300px;
 }
 
 .developer-container-middle {
+    width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    margin-left: 25px;
     padding-right: 1rem;
 }
 
@@ -53,10 +54,6 @@
     font-size: 1.10rem;
     padding-top: 5px;
     padding-bottom: 5px;
-}
-
-.about-description {
-
 }
 
 .social-container {
