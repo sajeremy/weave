@@ -153,7 +153,7 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     checkUser = await User.findOne({
       $or: [{ email: req.body.members[i] }],
     });
-    console.log(checkUser);
+    // console.log(checkUser);
     if (checkUser) {
       weaveUsers.push(checkUser);
     } else {
@@ -182,11 +182,11 @@ router.post("/:tripId/invite", requireUser, async function (req, res, next) {
     ) {
       newTripMembers.push(user);
     } else {
-      console.log("it hit here line 184");
+      // console.log("it hit here line 184");
       const err = new Error("Validation Error");
       err.statusCode = 400;
       const errors = {};
-      errors.email = "This email is already a trip member";
+      errors.email = "This email had already been invited";
       err.errors = errors;
       return next(err);
     }
