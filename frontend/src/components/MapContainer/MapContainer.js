@@ -159,6 +159,7 @@ function Map() {
 
 const SearchBar = ({ changeCenter, trip, setSelected }) => {
   const dispatch = useDispatch();
+  const [showAddPlaces, setShowAddPlaces] = useState(true);
   const history = useHistory();
   const {
     ready,
@@ -215,16 +216,18 @@ const SearchBar = ({ changeCenter, trip, setSelected }) => {
 
   return (
     <div className="combo-search-bar-container">
-      <Combobox onSelect={handleSelect}>
+      {trip && trip.locations && trip.locations.length === 0 && showAddPlaces && <div className="add-place-bubble">Add a place by using the searchbox above.</div>}
+      <Combobox className="combobox-container" onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={(e) => setValue(e.target.value)}
           disabled={!ready}
+          onFocus={() => setShowAddPlaces(false)}
           className="combo-search-bar"
           placeholder="search a destination"
         />
         <ComboboxPopover>
-          <ComboboxList>
+          <ComboboxList className="combobox-container">
             {status === "OK" &&
               data.map(({ place_id, description }) => (
                 <ComboboxOption key={place_id} value={description} />

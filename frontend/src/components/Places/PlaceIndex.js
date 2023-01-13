@@ -60,7 +60,8 @@ const PlaceIndex = () => {
   })
 
   return (
-    <>
+    <div>
+      <div className="top-border"></div>
       {trips.trip && daySection(createDateRange(trips.trip.startDate, trips.trip.endDate))}
       {/* <h1 className="places-header">Places to Go</h1>
       <div className="place-index-container"> */}
@@ -75,7 +76,7 @@ const PlaceIndex = () => {
         ))} */}
       {/* </div> */}
       {/* {trips.trip && daySection(createDateRange(trips.trip.startDate, trips.trip.endDate))} */}
-    </>
+    </div>
   );
 }
 
