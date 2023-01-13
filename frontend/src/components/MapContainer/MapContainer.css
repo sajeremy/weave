@@ -28,11 +28,31 @@
   border-radius: 4%;
 }
 
-/* .combo-search-bar-container {
-    position: absolute;
-    top: 1rem;
-    z-index: 10;
-} */
+.combo-search-bar-container {
+  position: relative;
+}
+
+.combobox-container {
+  z-index: 11;
+}
+
+.add-place-bubble {
+  position: absolute;
+  z-index: 1;
+  top: 50px;
+  left: 10px;
+  background-color: grey;
+  opacity: 0.8;
+  border-radius: 4%;
+  width: 400px;
+  height: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+}
 
 .combo-search-bar-container input {
   padding: 0.5rem;

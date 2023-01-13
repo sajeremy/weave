@@ -3,6 +3,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import CreateTripModal from '../CreateTripModal/CreateTripModal';
 import Modal from '../Modal/Modal';
+import { fetchUser } from "../../store/users";
 import { fetchUserTrips, clearTripErrors, deleteTrip } from "../../store/trips";
 import TripsItem from "../Trips/TripsItem";
 import './Profile.scss';
@@ -10,6 +11,7 @@ import './Profile.scss';
 function Profile() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
+  const currentUsers = useSelector((state) => state.users);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userTrips = useSelector((state) =>
     state.trips.trips ? Object.values(state.trips.trips) : []
@@ -22,9 +24,10 @@ function Profile() {
   const now = moment();
 
   useEffect(() => {
+    dispatch(fetchUser(currentUser._id));
     dispatch(fetchUserTrips(currentUser._id));
     return () => dispatch(clearTripErrors());
-  }, []);
+  }, [dispatch]);
 
   // if (userTrips.length === 0) {
   //   return (
@@ -48,6 +51,9 @@ function Profile() {
         {userTrips &&
           userTrips
             .filter((trip) => now.isBefore(trip.endDate))
+            .sort((tripa,tripb) => {
+              return new Date(tripa.startDate) - new Date(tripb.startDate)
+            })
             .map((filteredTrip) => (
               <>
                 <TripsItem key={filteredTrip._id} trip={filteredTrip} />
@@ -62,12 +68,15 @@ function Profile() {
         {userTrips &&
           userTrips
             .filter((trip) => now.isAfter(trip.endDate))
+            .sort((tripa,tripb) => {
+              return new Date(tripa.endDate) - new Date(tripb.endDate)
+            })
             .map((filteredTrips) => (
               <TripsItem key={filteredTrips._id} trip={filteredTrips} />
             ))}
       </div>
       <div className="user-profile-info">
-        {currentUser && currentUser.firstName && <div className="letter-portrait"><span>{currentUser.firstName.split('')[0]}</span></div>}
+        {currentUsers && currentUsers.user && <div className="letter-portrait"><span>{currentUsers.user.firstName.split('')[0]}</span></div>}
         <div className="name-wrapper">{currentUser.firstName} {currentUser.lastName}</div>
         <div>{currentUser.email}</div>
         {/* <button>Edit Profile </button> */}
