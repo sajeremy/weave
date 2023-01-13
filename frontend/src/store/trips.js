@@ -129,11 +129,18 @@ export const deleteTrip = (tripId) => async (dispatch) => {
 };
 
 export const inviteTripMember = (data) => async (dispatch) => {
-  console.log("email sent");
-  const res = await jwtFetch(`/api/trips/${data.tripId}/invite`, {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
+  try {
+    const res = await jwtFetch(`/api/trips/${data.tripId}/invite`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+
   //   const trip = await res.json();
   //   dispatch(receiveNewTrip(trip));
   // } catch (err) {
@@ -163,7 +170,7 @@ const tripsReducer = (
   action
 ) => {
   Object.freeze(state);
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case RECEIVE_TRIPS:
       return { ...newState, ...action.trips, new: undefined };

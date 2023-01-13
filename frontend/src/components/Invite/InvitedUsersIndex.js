@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { inviteTripMember } from "../../store/trips";
+import { inviteTripMember, clearTripErrors } from "../../store/trips";
 import InvitedUsersIndexItem from "./InvitedUsersIndexItem";
 import "./InvitedUsersIndex.scss";
 
 function InvitedUsersIndex({ trip }) {
-  const invitedUsers = Object.values(invitedUsers);
-
   const dispatch = useDispatch();
   const [membersInput, setMembersInput] = useState("");
   const [emailError, setEmailError] = useState("");
 
   const trips = useSelector((state) => state.trips);
   const errors = useSelector((state) => state.errors.trips);
-
+  console.log(errors);
   useEffect(() => {
     return () => dispatch(clearTripErrors());
-  });
+  }, [dispatch]);
 
   const handleInvite = (e) => {
     e.preventDefault();
+    dispatch(clearTripErrors());
+    setEmailError("");
     const members = membersInput.split();
 
     if (members.every(validateEmail)) {
@@ -49,8 +49,8 @@ function InvitedUsersIndex({ trip }) {
       <div className="invitedusers-container">
         {trips.trip &&
           trips.trip.invitedUsers &&
-          trips.trip.invitedUsers.map((user) => {
-            return <InvitedUsersIndexItem user={user} />;
+          trips.trip.invitedUsers.map((user, index) => {
+            return <InvitedUsersIndexItem key={user._id} user={user} />;
           })}
       </div>
       <form>
@@ -70,7 +70,7 @@ function InvitedUsersIndex({ trip }) {
           +
         </button>
         <div className="errors">{emailError}</div>
-        <div className="errors">{errors?.emails}</div>
+        <div className="errors">{errors?.email}</div>
       </form>
     </>
   );

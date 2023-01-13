@@ -4,7 +4,7 @@ function InvitedUsersIndexItem({ user }) {
       <div className="name-wrapper">
         {user.firstName} {user.lastName}
       </div>
-      <div> user.email</div>
+      <div> {user.email}</div>
     </>
   );
 }
