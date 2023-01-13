@@ -13,7 +13,7 @@ Create a trip and add busineses and POI's to your itinerary:
 - Backend: Express, Node.js
 - Database: MongoDB/Mongoose
 - Hosting: Render
-- Misc: Google Maps, Google Places / Autocomplete, Google Geocoding API's
+- Misc: Google Maps, Google Places / Autocomplete, Google Geocoding API's, Nodemailer Module
 
 ## Google Maps, Places / Autocomplete, Geocoding API's
 
