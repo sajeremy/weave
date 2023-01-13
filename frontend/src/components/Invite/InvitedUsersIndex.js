@@ -49,7 +49,7 @@ function InvitedUsersIndex({ trip }) {
       <div className="invitedusers-container">
         {trips.trip &&
           trips.trip.invitedUsers &&
-          trips.trip.invitedUsers.map((user, index) => {
+          trips.trip.invitedUsers.map((user) => {
             return <InvitedUsersIndexItem key={user._id} user={user} />;
           })}
       </div>
