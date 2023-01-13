@@ -73,7 +73,7 @@ const CreateTripModal = ({close, modalFunctions}) => {
         tripId, 
         members,
       }
-      dispatch(inviteTripMember(data))
+      if(membersInput.length > 0) {dispatch(inviteTripMember(data))};
       history.push(`/trips/${newTrip._id}`)
     }
 
